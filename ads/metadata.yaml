@@ -1,0 +1,49 @@
+---
+title: Technical and organizational challenges when adopting DevOps principles for the integration of Artificial Intelligence into classical Software Engineering
+author:
+  - Pascal Schroeder
+supervisor:
+  - Prof. Dr. Holger Hofmann
+reviewer:
+  - Steffen Krause
+company: IBM Deutschland GmbH
+companylocation: Ehningen
+institute: 
+  - Duale Hochschule Baden-Württemberg
+studentID: 5501463
+course: TINF16AI-BC
+timeproject: 01/07/2019 - 23/09/2019
+handindate: 23rd September, 2019
+handinlocation: Mannheim
+papertype: Bachelor Thesis
+courseofstudy: Applied Computer Science
+finalversion: true
+declaration: true
+toc: true
+toc-depth: 2
+titlepage: true
+titlepage-color: c1bcbb
+titlepage-text-color: FFFFFF
+titlepage-rule-color: 1f70c1
+titlepage-rule-height: 1
+bibliography: ads/literature.bib
+biblio-title: Literature
+csl: templates/iso690-numeric-en.csl
+reference-section-title: Literature
+top-level-division: chapter
+lang: en
+codeBlockCaptions: true
+linkReferences: true
+listings: true
+subfigGrid: true
+link-citations: true
+numbersections: true
+secnumdepth: 3
+fontfamily: helvet
+fontsize: 12pt
+linestretch: 1.5
+keywords: [AI, ML, DevOps, AIOps, Kubernetes, Kubeflow]
+logo: images/dhbw.png
+logoIBM: images/logo.png
+acs: true
+...

@@ -1,0 +1,912 @@
+%%
+% Copyright (c) 2017, Pascal Wagler;  
+% Copyright (c) 2014--2017, John MacFarlane
+% Modifications by Paul Bauriegel 2018 and Lars Dittert 2019
+% 
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without 
+% modification, are permitted provided that the following conditions 
+% are met:
+% 
+% - Redistributions of source code must retain the above copyright 
+% notice, this list of conditions and the following disclaimer.
+% 
+% - Redistributions in binary form must reproduce the above copyright 
+% notice, this list of conditions and the following disclaimer in the 
+% documentation and/or other materials provided with the distribution.
+% 
+% - Neither the name of John MacFarlane nor the names of other 
+% contributors may be used to endorse or promote products derived 
+% from this software without specific prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN 
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% For usage information and examples visit the GitHub page of this template:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[12pt,ngerman,a4paper,oneside,,tablecaptionabove]{scrbook}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{setspace}
+\setstretch{1.5}
+\usepackage{acronym}
+\usepackage{graphicx}
+\usepackage{subfig}
+
+\usepackage{longtable}
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{floatrow}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Entwicklung einer Software für die Identifizierung charakteristischer Merkmale von Personen mittels Object Detection und Face Recognition},
+            pdfauthor={Lars Dittert},
+            pdfkeywords={AI, ML, Face Recognition, Object Detection},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=2.5cm,headsep=.2cm,footskip=0.8cm,includehead=true,includefoot=true,centering]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% Make use of float-package and set default placement for figures to H
+\usepackage{float}
+\floatplacement{figure}{H}
+
+\makeatletter
+\@ifpackageloaded{subfig}{}{\usepackage{subfig}}
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\captionsetup[subfloat]{margin=0.5em}
+\AtBeginDocument{%
+\renewcommand*\figurename{Figure}
+\renewcommand*\tablename{Table}
+}
+\AtBeginDocument{%
+\renewcommand*\listfigurename{List of Figures}
+\renewcommand*\listtablename{List of Tables}
+}
+\newcommand*\listoflistings\lstlistoflistings
+\AtBeginDocument{%
+\renewcommand*{\lstlistlistingname}{List of Listings}
+}
+\makeatother
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=ngerman]{babel}
+\else
+    % See issue https://github.com/reutenauer/polyglossia/issues/127
+  \renewcommand*\familydefault{\sfdefault}
+    % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{german}
+\fi
+
+\title{Entwicklung einer Software für die Identifizierung charakteristischer
+Merkmale von Personen mittels Object Detection und Face Recognition}
+\author{Lars Dittert}
+\providecommand{\institute}[1]{}
+\institute{Duale Hochschule Baden-Württemberg}
+\date{}
+
+
+
+
+
+%%
+%% added
+%%
+
+%
+% No language specified? take American English.
+%
+
+
+%
+% colors
+%
+\usepackage[dvipsnames,svgnames*,x11names*,table]{xcolor}
+
+%
+% listing colors
+%
+\definecolor{listing-background}{HTML}{F7F7F7}
+\definecolor{listing-rule}{HTML}{B3B2B3}
+\definecolor{listing-numbers}{HTML}{B3B2B3}
+\definecolor{listing-text-color}{HTML}{000000}
+\definecolor{listing-keyword}{HTML}{435489}
+\definecolor{listing-identifier}{HTML}{435489}
+\definecolor{listing-string}{HTML}{00999A}
+\definecolor{listing-comment}{HTML}{8E8E8E}
+\definecolor{listing-javadoc-comment}{HTML}{006CA9}
+
+%\definecolor{listing-background}{rgb}{0.97,0.97,0.97}
+%\definecolor{listing-rule}{HTML}{B3B2B3}
+%\definecolor{listing-numbers}{HTML}{B3B2B3}
+%\definecolor{listing-text-color}{HTML}{000000}
+%\definecolor{listing-keyword}{HTML}{D8006B}
+%\definecolor{listing-identifier}{HTML}{000000}
+%\definecolor{listing-string}{HTML}{006CA9}
+%\definecolor{listing-comment}{rgb}{0.25,0.5,0.35}
+%\definecolor{listing-javadoc-comment}{HTML}{006CA9}
+
+%
+% for the background color of the title page
+%
+\usepackage{pagecolor}
+\usepackage{afterpage}
+
+%
+% TOC depth and 
+% section numbering depth
+%
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+%
+% line spacing
+%
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended 
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+\captionsetup[longtable]{position=above}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the de­fault font fam­ily
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default 
+% font family to Source Sans Pro, not \sfdefault.
+%
+\usepackage[default]{sourcesanspro}
+\usepackage{sourcecodepro}
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book, 
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title and author
+%
+\usepackage{titling}
+\title{Entwicklung einer Software für die Identifizierung charakteristischer
+Merkmale von Personen mittels Object Detection und Face Recognition}
+\author{Lars Dittert}
+
+%
+% tables
+%
+
+%
+% remove paragraph indention
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+\lstdefinestyle{eisvogel_listing_style}{
+  language         = java,
+  numbers          = left,
+  backgroundcolor  = \color{listing-background},
+  basicstyle       = \color{listing-text-color}\small\ttfamily{}\linespread{1.15}, % print whole listing small
+  xleftmargin      = 2.7em,
+  breaklines       = true,
+  frame            = single,
+  framesep         = 0.6mm,
+  rulecolor        = \color{listing-rule},
+  frameround       = ffff,
+  framexleftmargin = 2.5em,
+  tabsize          = 4,
+  numberstyle      = \color{listing-numbers},
+  aboveskip        = 1.0em,
+  keywordstyle     = \color{listing-keyword}\bfseries,
+  classoffset      = 0,
+  sensitive        = true,
+  identifierstyle  = \color{listing-identifier},
+  commentstyle     = \color{listing-comment},
+  morecomment      = [s][\color{listing-javadoc-comment}]{/**}{*/},
+  stringstyle      = \color{listing-string},
+  showstringspaces = false,
+  escapeinside     = {/*@}{@*/}, % Allow LaTeX inside these special comments
+  literate         =
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  {…}{{\ldots}}1 {≥}{{>=}}1 {≤}{{<=}}1 {„}{{\glqq}}1 {“}{{\grqq}}1
+  {”}{{''}}1
+}
+\lstset{style=eisvogel_listing_style}
+
+\lstdefinelanguage{XML}{
+  morestring      = [b]",
+  moredelim       = [s][\bfseries\color{listing-keyword}]{<}{\ },
+  moredelim       = [s][\bfseries\color{listing-keyword}]{</}{>},
+  moredelim       = [l][\bfseries\color{listing-keyword}]{/>},
+  moredelim       = [l][\bfseries\color{listing-keyword}]{>},
+  morecomment     = [s]{<?}{?>},
+  morecomment     = [s]{<!--}{-->},
+  commentstyle    = \color{listing-comment},
+  stringstyle     = \color{listing-string},
+  identifierstyle = \color{listing-identifier}
+}
+
+%
+% header and footer
+%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\lhead{Lars Dittert - Bachelor Thesis}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%%
+%% end added
+%%
+
+\begin{document}
+
+%%
+%% begin titlepage
+%%
+
+\begin{titlepage}
+\newgeometry{left=6cm}
+\definecolor{titlepage-color}{HTML}{c1bcbb}
+\newpagecolor{titlepage-color}\afterpage{\restorepagecolor}
+\begin{longtable}{p{8.2cm} p{5.4cm}}
+\includegraphics[height=1.5cm]{images/dhbw.png}&
+\includegraphics[height=1.5cm]{images/logo.png}
+\end{longtable}
+\newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
+\begin{flushleft}
+\noindent
+\\[-1em]
+\color[HTML]{FFFFFF}
+\makebox[0pt][l]{\colorRule[1f70c1]{1.3\textwidth}{1pt}}
+\par
+\noindent
+
+{ \setstretch{1.4}
+\vfill
+\noindent {\huge \textbf{\textsf{Entwicklung einer Software für die Identifizierung charakteristischer
+Merkmale von Personen mittels Object Detection und Face Recognition}}}
+\vskip 2em
+{\Large \textsf{Bachelor Thesis - Lars Dittert}}
+\vskip 2em
+{\Large \textsf{Abgabedatum: 23. September 2019}}
+\vskip 8em
+\vskip 2em
+{\textsf{\textbf{Bearbeitungszeitraum}:  12 Wochen}}
+
+{\textsf{\textbf{Matrikelnummer, Kurs}:  5388171, TINF16AI-BC}}
+
+{\textsf{\textbf{Ausbildungsfirma}:  IBM Deutschland GmbH, Mannheim}}
+
+{\textsf{\textbf{Betreuer der Ausbildungsfirma}:  Britta Daffner}}
+
+{\textsf{\textbf{Gutachter der Dualen Hochschule}:  Andreas Sommer}}
+\noindent
+%%{\textsf{Lars Dittert}
+%%\vfill
+%%}
+
+\textsf{}}
+\end{flushleft}
+\end{titlepage}
+\restoregeometry
+
+
+%%
+%% end titlepage
+%%
+
+
+
+
+ % Erklärung
+\thispagestyle{empty}
+\pagenumbering{gobble}
+\addchap*{Erklärung der akademischen Aufrichtigkeit}
+
+Ich versichere hiermit, dass ich meine \MakeLowercase{Bachelor Thesis}, mit dem Thema: \textit{Entwicklung einer Software für die Identifizierung charakteristischer
+Merkmale von Personen mittels Object Detection und Face Recognition} selbstst\"andig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.\vspace{0.5em}\\
+Ich versichere zudem, dass die eingereichte elektronische Fassung mit der gedruckten Fassung \"ubereinstimmt.
+
+\vspace{3em}
+Mannheim, 23. September 2019
+\vspace{4em}
+
+\rule{6cm}{0.4pt}\\
+Lars Dittert
+\newpage
+
+
+
+\newpage
+\pagestyle{plain}
+\setcounter{page}{1}
+\pagenumbering{Roman}
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+% Abbildungsverzeichnis
+
+%Tabellenverzeichnis
+
+% Quellcodeverzeichnis
+	\cleardoublepage
+	\lstlistoflistings
+\addchap*{Abkürzungsverzeichnis}
+\begin{acronym}
+	\acro{API}[API]{Application Programming Interface}
+	\acro{HTML}[HTML]{Hyper Text Markup Language}
+	\acro{IBM}[IBM]{International Business Machines Corporation}
+	\acro{JS}[JS]{JavaScript}
+	\acro{JSON}[JSON]{JavaScript Object Notation}
+	\acro{UI}[UI]{User Interface}
+\end{acronym}
+
+\newpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\hypertarget{sec:Einleitung}{%
+\chapter{Einleitung}\label{sec:Einleitung}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Eget nulla facilisi
+etiam dignissim diam quis enim lobortis. Orci dapibus ultrices in
+iaculis nunc. Nisl vel pretium lectus quam id. Tincidunt dui ut ornare
+lectus. Laoreet non curabitur gravida arcu. Tincidunt vitae semper quis
+lectus nulla at volutpat diam. Elit eget gravida cum sociis natoque
+penatibus. Integer vitae justo eget magna fermentum. Accumsan lacus vel
+facilisis volutpat est velit egestas dui. Nulla posuere sollicitudin
+aliquam ultrices sagittis orci a scelerisque. Nisl pretium fusce id
+velit ut tortor. Ultrices in iaculis nunc sed augue lacus viverra.
+Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin.
+Quis auctor elit sed vulputate mi sit amet.
+
+Mattis nunc sed blandit libero volutpat sed. Euismod quis viverra nibh
+cras pulvinar. Aliquam eleifend mi in nulla posuere sollicitudin aliquam
+ultrices. Nunc eget lorem dolor sed viverra ipsum nunc. Nisl pretium
+fusce id velit ut. Leo integer malesuada nunc vel risus commodo viverra.
+Elementum nibh tellus molestie nunc non blandit massa enim nec. Morbi
+non arcu risus quis. Nunc pulvinar sapien et ligula ullamcorper
+malesuada proin libero. Leo vel fringilla est ullamcorper. Sociis
+natoque penatibus et magnis dis parturient montes. Dolor magna eget est
+lorem ipsum dolor sit. Fames ac turpis egestas integer eget. Vestibulum
+morbi blandit cursus risus at ultrices mi tempus. Augue ut lectus arcu
+bibendum at varius vel pharetra vel. Faucibus scelerisque eleifend donec
+pretium. Fermentum odio eu feugiat pretium nibh. Consectetur a erat nam
+at lectus urna. Turpis in eu mi bibendum neque egestas congue.
+
+Adipiscing tristique risus nec feugiat in fermentum. Vulputate odio ut
+enim blandit volutpat maecenas volutpat. Lacinia quis vel eros donec ac
+odio tempor orci dapibus. Dolor magna eget est lorem ipsum dolor.
+Dignissim sodales ut eu sem integer vitae justo eget magna. Viverra
+ipsum nunc aliquet bibendum enim. Sit amet aliquam id diam. In ante
+metus dictum at. Egestas tellus rutrum tellus pellentesque eu tincidunt
+tortor. Vivamus at augue eget arcu dictum varius. Lacus viverra vitae
+congue eu consequat ac felis donec. Ut etiam sit amet nisl purus in
+mollis nunc. Ornare suspendisse sed nisi lacus sed viverra tellus in.
+Donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum
+arcu. Orci a scelerisque purus semper eget. Vitae suscipit tellus mauris
+a. Sit amet est placerat in. Tristique senectus et netus et malesuada
+fames. Adipiscing vitae proin sagittis nisl. Ut enim blandit volutpat
+maecenas volutpat blandit aliquam etiam erat.
+
+Pharetra convallis posuere morbi leo urna. Pellentesque habitant morbi
+tristique senectus et netus et malesuada. Duis at tellus at urna
+condimentum mattis pellentesque. Enim tortor at auctor urna nunc id
+cursus metus aliquam. Mi tempus imperdiet nulla malesuada. Id nibh
+tortor id aliquet lectus proin nibh nisl. Pharetra sit amet aliquam id
+diam. Aliquam eleifend mi in nulla posuere sollicitudin aliquam. Integer
+quis auctor elit sed vulputate. Sit amet luctus venenatis lectus magna
+fringilla. Eget dolor morbi non arcu risus quis. Porta nibh venenatis
+cras sed felis eget. Sagittis vitae et leo duis ut diam quam nulla
+porttitor.
+
+Porta nibh venenatis cras sed felis eget. Arcu risus quis varius quam
+quisque id diam vel quam. Aliquam ultrices sagittis orci a scelerisque
+purus semper eget duis. Nibh venenatis cras sed felis eget velit aliquet
+sagittis id. Ultricies tristique nulla aliquet enim. Feugiat in ante
+metus dictum at. Aliquam vestibulum morbi blandit cursus. Porta nibh
+venenatis cras sed felis eget velit. Habitasse platea dictumst
+vestibulum rhoncus est pellentesque elit ullamcorper. Magna eget est
+lorem ipsum. Blandit libero volutpat sed cras ornare arcu dui vivamus
+arcu. Vitae nunc sed velit dignissim sodales ut eu sem integer. Quis
+hendrerit dolor magna eget. Ut lectus arcu bibendum at varius. Mauris in
+aliquam sem fringilla ut morbi tincidunt. Nunc mi ipsum faucibus vitae
+aliquet nec ullamcorper sit. Dictum fusce ut placerat orci nulla. Diam
+quam nulla porttitor massa. Neque viverra justo nec ultrices dui. Congue
+quisque egestas diam in arcu cursus euismod quis.
+
+Orci sagittis eu volutpat odio facilisis mauris sit amet. Sit amet
+porttitor eget dolor morbi. Nibh cras pulvinar mattis nunc sed blandit
+libero volutpat sed. Diam vulputate ut pharetra sit amet aliquam id diam
+maecenas. Non tellus orci ac auctor. Viverra accumsan in nisl nisi
+scelerisque eu ultrices vitae auctor. Lacus sed viverra tellus in hac
+habitasse. Eget velit aliquet sagittis id consectetur purus ut.
+Fermentum iaculis eu non diam phasellus. Tincidunt arcu non sodales
+neque sodales. Integer quis auctor elit sed vulputate mi. Velit egestas
+dui id ornare. Laoreet id donec ultrices tincidunt.
+
+In hendrerit gravida rutrum quisque. Sagittis eu volutpat odio facilisis
+mauris sit amet. Fermentum iaculis eu non diam phasellus vestibulum
+lorem sed. Magna sit amet purus gravida quis blandit turpis cursus in.
+Sit amet massa vitae tortor. Sit amet venenatis urna cursus eget nunc
+scelerisque. Morbi blandit cursus risus at ultrices mi tempus. Duis at
+consectetur lorem donec massa sapien faucibus et. Sit amet consectetur
+adipiscing elit ut aliquam purus sit. Elit pellentesque habitant morbi
+tristique senectus et netus et. Diam maecenas sed enim ut sem viverra
+aliquet eget. Fermentum iaculis eu non diam phasellus vestibulum lorem
+sed risus. Molestie ac feugiat sed lectus vestibulum. Sed viverra ipsum
+nunc aliquet bibendum enim facilisis gravida neque. Eu sem integer vitae
+justo eget magna.
+
+Posuere urna nec tincidunt praesent. Pulvinar sapien et ligula
+ullamcorper malesuada. Ac feugiat sed lectus vestibulum mattis
+ullamcorper velit. Ac turpis egestas integer eget aliquet nibh praesent
+tristique magna. Vivamus arcu felis bibendum ut tristique. Massa id
+neque aliquam vestibulum morbi. Et magnis dis parturient montes nascetur
+ridiculus mus. Elit scelerisque mauris pellentesque pulvinar
+pellentesque habitant. Vulputate mi sit amet mauris commodo. Morbi quis
+commodo odio aenean sed adipiscing diam. Vitae semper quis lectus nulla
+at volutpat diam. Sit amet facilisis magna etiam tempor orci. Aliquam
+eleifend mi in nulla posuere sollicitudin aliquam. Tincidunt lobortis
+feugiat vivamus at augue eget arcu dictum. Tellus molestie nunc non
+blandit. Amet consectetur adipiscing elit duis tristique sollicitudin
+nibh. Ut morbi tincidunt augue interdum velit euismod in pellentesque.
+
+Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. In
+mollis nunc sed id semper. Orci eu lobortis elementum nibh tellus
+molestie. Consectetur adipiscing elit pellentesque habitant. Arcu ac
+tortor dignissim convallis aenean et. Augue lacus viverra vitae congue
+eu consequat ac. Massa tincidunt nunc pulvinar sapien et ligula
+ullamcorper. Congue eu consequat ac felis donec et. Eget duis at tellus
+at urna condimentum mattis pellentesque id. Quam id leo in vitae turpis.
+Magna eget est lorem ipsum dolor sit amet. Fames ac turpis egestas
+maecenas pharetra convallis posuere. At elementum eu facilisis sed odio.
+Cursus risus at ultrices mi tempus imperdiet nulla malesuada.
+
+Volutpat ac tincidunt vitae semper quis lectus nulla at. Hac habitasse
+platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper.
+Tortor condimentum lacinia quis vel. Aenean pharetra magna ac placerat
+vestibulum lectus mauris ultrices. Rhoncus aenean vel elit scelerisque.
+Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Non
+curabitur gravida arcu ac tortor dignissim convallis. Vivamus at augue
+eget arcu dictum varius duis at consectetur. Sem fringilla ut morbi
+tincidunt augue interdum. Nisl rhoncus mattis rhoncus urna neque viverra
+justo nec. Turpis massa sed elementum tempus. Feugiat vivamus at augue
+eget. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Sit
+amet nulla facilisi morbi tempus iaculis urna id. Lacus vel facilisis
+volutpat est velit egestas dui. Magna fermentum iaculis eu non diam.
+
+Viverra orci sagittis eu volutpat odio facilisis mauris. Id aliquet
+lectus proin nibh nisl condimentum id venenatis. Quis risus sed
+vulputate odio ut enim blandit volutpat. In nisl nisi scelerisque eu
+ultrices vitae auctor. Diam in arcu cursus euismod. Aliquam ut porttitor
+leo a diam sollicitudin tempor id. Lacus vel facilisis volutpat est
+velit egestas. Eleifend mi in nulla posuere sollicitudin aliquam
+ultrices. Etiam sit amet nisl purus in. At consectetur lorem donec massa
+sapien faucibus. Faucibus vitae aliquet nec ullamcorper sit amet risus
+nullam eget. Aenean et tortor at risus viverra adipiscing at in.
+
+Risus quis varius quam quisque id diam vel quam elementum. Arcu risus
+quis varius quam quisque id diam vel quam. Morbi leo urna molestie at
+elementum eu facilisis sed. Et magnis dis parturient montes nascetur.
+Facilisis volutpat est velit egestas dui id ornare. Ullamcorper a lacus
+vestibulum sed arcu. Arcu non sodales neque sodales ut. Turpis in eu mi
+bibendum neque egestas. Quis hendrerit dolor magna eget est lorem ipsum
+dolor. Fermentum iaculis eu non diam phasellus vestibulum lorem. Enim
+diam vulputate ut pharetra. Nibh nisl condimentum id venenatis a
+condimentum vitae sapien. Nunc aliquet bibendum enim facilisis gravida
+neque convallis. Sit amet consectetur adipiscing elit pellentesque
+habitant. Viverra orci sagittis eu volutpat odio facilisis mauris sit.
+Morbi blandit cursus risus at ultrices. Et egestas quis ipsum
+suspendisse. Orci sagittis eu volutpat odio facilisis mauris sit.
+Habitant morbi tristique senectus et netus et. Placerat orci nulla
+pellentesque dignissim enim.
+
+In mollis nunc sed id. Id venenatis a condimentum vitae sapien
+pellentesque. Suspendisse faucibus interdum posuere lorem ipsum. Ac odio
+tempor orci dapibus ultrices in iaculis nunc sed. Lectus mauris ultrices
+eros in. Bibendum at varius vel pharetra. Mi tempus imperdiet nulla
+malesuada. Ultricies mi eget mauris pharetra et ultrices neque ornare
+aenean. Turpis tincidunt id aliquet risus feugiat in ante metus. Montes
+nascetur ridiculus mus mauris vitae ultricies. Eleifend donec pretium
+vulputate sapien nec. Risus viverra adipiscing at in tellus integer
+feugiat scelerisque varius. Vestibulum sed arcu non odio euismod lacinia
+at. Leo urna molestie at elementum eu facilisis sed. Pulvinar sapien et
+ligula ullamcorper malesuada proin libero nunc consequat. Quam lacus
+suspendisse faucibus interdum posuere lorem. Auctor urna nunc id cursus
+metus aliquam eleifend mi. Congue eu consequat ac felis donec et odio
+pellentesque. Netus et malesuada fames ac turpis egestas maecenas
+pharetra. Cursus mattis molestie a iaculis at erat pellentesque.
+
+Sem integer vitae justo eget magna fermentum iaculis eu non. Bibendum
+neque egestas congue quisque egestas diam in arcu. Malesuada
+pellentesque elit eget gravida. Commodo sed egestas egestas fringilla
+phasellus faucibus scelerisque eleifend donec. Eleifend quam adipiscing
+vitae proin sagittis nisl rhoncus. Ac odio tempor orci dapibus ultrices.
+Justo laoreet sit amet cursus. Faucibus nisl tincidunt eget nullam.
+Egestas sed sed risus pretium quam vulputate dignissim. Nunc sed augue
+lacus viverra vitae congue. Blandit cursus risus at ultrices mi tempus
+imperdiet nulla. Tempus imperdiet nulla malesuada pellentesque elit eget
+gravida cum. Rhoncus urna neque viverra justo nec ultrices dui.
+
+Pellentesque habitant morbi tristique senectus et. Tristique senectus et
+netus et malesuada fames ac turpis. Mollis aliquam ut porttitor leo a
+diam sollicitudin tempor id. Urna nec tincidunt praesent semper feugiat
+nibh sed pulvinar proin. Sit amet mauris commodo quis imperdiet massa.
+Purus viverra accumsan in nisl. Senectus et netus et malesuada fames ac
+turpis egestas sed. Non quam lacus suspendisse faucibus interdum posuere
+lorem ipsum dolor. Libero volutpat sed cras ornare arcu dui vivamus. Sit
+amet risus nullam eget felis. Id donec ultrices tincidunt arcu non
+sodales.
+
+Ornare quam viverra orci sagittis eu. Aliquam id diam maecenas ultricies
+mi eget mauris. Vel risus commodo viverra maecenas accumsan lacus vel.
+At consectetur lorem donec massa sapien faucibus et molestie ac.
+Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum
+odio. At imperdiet dui accumsan sit amet nulla. Libero volutpat sed cras
+ornare. Pharetra pharetra massa massa ultricies. Dolor magna eget est
+lorem ipsum dolor sit amet consectetur. At augue eget arcu dictum varius
+duis at. Arcu non odio euismod lacinia at. Leo urna molestie at
+elementum eu facilisis sed odio.
+
+Tempor orci dapibus ultrices in iaculis nunc. Aliquam etiam erat velit
+scelerisque. Viverra adipiscing at in tellus integer. Phasellus
+vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Augue
+mauris augue neque gravida. Pharetra vel turpis nunc eget lorem dolor
+sed. Pulvinar elementum integer enim neque volutpat ac. Sit amet mauris
+commodo quis imperdiet. Tortor pretium viverra suspendisse potenti
+nullam ac tortor vitae. Sollicitudin aliquam ultrices sagittis orci a
+scelerisque purus semper. Sit amet nulla facilisi morbi tempus iaculis
+urna id volutpat. Faucibus et molestie ac feugiat sed lectus vestibulum
+mattis ullamcorper. Nunc congue nisi vitae suscipit tellus. Et
+sollicitudin ac orci phasellus egestas tellus rutrum. Lacus vestibulum
+sed arcu non. Ipsum dolor sit amet consectetur adipiscing. Id velit ut
+tortor pretium. Morbi tristique senectus et netus et. Arcu ac tortor
+dignissim convallis aenean et.
+
+In arcu cursus euismod quis. Eget arcu dictum varius duis at consectetur
+lorem. Id semper risus in hendrerit gravida rutrum. Leo in vitae turpis
+massa. Eget velit aliquet sagittis id consectetur purus ut faucibus.
+Tempus urna et pharetra pharetra. Nulla at volutpat diam ut. Egestas
+fringilla phasellus faucibus scelerisque eleifend donec pretium
+vulputate. Gravida quis blandit turpis cursus in. Sem integer vitae
+justo eget magna fermentum iaculis eu. Nibh sit amet commodo nulla
+facilisi. In fermentum posuere urna nec. Magna fermentum iaculis eu non
+diam phasellus vestibulum lorem. Eu facilisis sed odio morbi quis.
+Congue eu consequat ac felis donec et odio pellentesque diam. Cras
+tincidunt lobortis feugiat vivamus. Turpis nunc eget lorem dolor sed
+viverra ipsum nunc aliquet. Maecenas volutpat blandit aliquam etiam erat
+velit scelerisque in dictum. Eu turpis egestas pretium aenean pharetra
+magna.
+
+Mi in nulla posuere sollicitudin aliquam ultrices. Varius duis at
+consectetur lorem donec massa sapien. Metus dictum at tempor commodo.
+Ultrices tincidunt arcu non sodales neque sodales. Nulla facilisi morbi
+tempus iaculis urna. Habitasse platea dictumst quisque sagittis. Lectus
+nulla at volutpat diam ut venenatis tellus. Penatibus et magnis dis
+parturient montes. Congue eu consequat ac felis. Cras fermentum odio eu
+feugiat pretium. Fringilla phasellus faucibus scelerisque eleifend donec
+pretium vulputate. Aliquet lectus proin nibh nisl condimentum id
+venenatis. Et egestas quis ipsum suspendisse. Sit amet nulla facilisi
+morbi tempus iaculis. Eleifend mi in nulla posuere sollicitudin aliquam
+ultrices sagittis. Porta nibh venenatis cras sed felis eget velit
+aliquet sagittis. Quis risus sed vulputate odio ut. Amet massa vitae
+tortor condimentum lacinia quis vel eros. Scelerisque felis imperdiet
+proin fermentum leo vel.
+
+Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit.
+Lectus sit amet est placerat in egestas. Fringilla ut morbi tincidunt
+augue. Cum sociis natoque penatibus et magnis dis parturient montes. Sed
+viverra ipsum nunc aliquet bibendum. Non arcu risus quis varius.
+Tristique et egestas quis ipsum suspendisse ultrices gravida dictum
+fusce. Mollis aliquam ut porttitor leo a diam sollicitudin tempor id. Eu
+non diam phasellus vestibulum. Maecenas ultricies mi eget mauris. Dui ut
+ornare lectus sit amet est placerat in egestas. Rhoncus aenean vel elit
+scelerisque mauris pellentesque pulvinar pellentesque habitant. Justo
+donec enim diam vulputate ut pharetra sit. Imperdiet proin fermentum leo
+vel orci. Sit amet aliquam id diam maecenas ultricies. Scelerisque purus
+semper eget duis at.
+
+Odio morbi quis commodo odio aenean sed adipiscing. Tempor nec feugiat
+nisl pretium fusce. Dictumst quisque sagittis purus sit amet volutpat
+consequat mauris nunc. Nam libero justo laoreet sit amet cursus sit
+amet. Dictumst quisque sagittis purus sit amet volutpat. Tempor commodo
+ullamcorper a lacus vestibulum sed. Rutrum tellus pellentesque eu
+tincidunt tortor aliquam nulla facilisi cras. Fames ac turpis egestas
+integer eget aliquet. Egestas fringilla phasellus faucibus scelerisque
+eleifend donec pretium vulputate sapien. Eleifend mi in nulla posuere
+sollicitudin aliquam. Vitae congue eu consequat ac felis.
+
+Arcu bibendum at varius vel pharetra. Orci ac auctor augue mauris augue.
+Ut eu sem integer vitae justo eget magna fermentum. Non nisi est sit
+amet facilisis magna etiam tempor orci. A cras semper auctor neque
+vitae. Vitae et leo duis ut. Suscipit adipiscing bibendum est ultricies.
+Ac tincidunt vitae semper quis lectus. Facilisis mauris sit amet massa.
+Mi proin sed libero enim sed faucibus turpis in. Urna molestie at
+elementum eu facilisis sed odio. Nulla facilisi cras fermentum odio.
+Lectus quam id leo in vitae. Urna cursus eget nunc scelerisque viverra
+mauris in. Tortor condimentum lacinia quis vel eros.
+
+Eget lorem dolor sed viverra ipsum. Integer eget aliquet nibh praesent.
+Varius quam quisque id diam vel quam elementum pulvinar etiam.
+Pellentesque massa placerat duis ultricies. Dui ut ornare lectus sit
+amet est placerat. Sapien nec sagittis aliquam malesuada bibendum arcu
+vitae. Ut placerat orci nulla pellentesque dignissim enim sit. Quis
+lectus nulla at volutpat diam ut venenatis. Mauris in aliquam sem
+fringilla. Amet est placerat in egestas erat imperdiet. Ut faucibus
+pulvinar elementum integer enim neque volutpat ac. Accumsan tortor
+posuere ac ut consequat. Cursus sit amet dictum sit amet justo donec
+enim diam. Non sodales neque sodales ut etiam.
+
+Natoque penatibus et magnis dis. Dis parturient montes nascetur
+ridiculus. Proin sagittis nisl rhoncus mattis rhoncus urna neque
+viverra. Suspendisse faucibus interdum posuere lorem ipsum dolor sit.
+Feugiat in fermentum posuere urna nec tincidunt praesent semper feugiat.
+Habitant morbi tristique senectus et netus et malesuada fames. Sed
+ullamcorper morbi tincidunt ornare massa eget. Et tortor consequat id
+porta nibh venenatis cras sed. Dolor sit amet consectetur adipiscing
+elit. Ut pharetra sit amet aliquam id diam. Diam quam nulla porttitor
+massa id neque aliquam vestibulum. Accumsan in nisl nisi scelerisque eu
+ultrices vitae auctor eu. Est ultricies integer quis auctor elit sed
+vulputate mi sit. Scelerisque fermentum dui faucibus in ornare. Netus et
+malesuada fames ac. Facilisis leo vel fringilla est. Aliquam faucibus
+purus in massa tempor nec feugiat nisl pretium.
+
+Vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci.
+Enim ut tellus elementum sagittis vitae et leo duis. Lacus suspendisse
+faucibus interdum posuere lorem ipsum dolor sit amet. Phasellus faucibus
+scelerisque eleifend donec pretium vulputate. In eu mi bibendum neque
+egestas. Vitae tempus quam pellentesque nec nam aliquam sem. Mattis enim
+ut tellus elementum. Phasellus faucibus scelerisque eleifend donec
+pretium. Aenean vel elit scelerisque mauris pellentesque pulvinar
+pellentesque habitant. Ac turpis egestas sed tempus urna et. Diam quis
+enim lobortis scelerisque fermentum dui faucibus in.
+
+\hypertarget{sec:Methoden}{%
+\section{Verwendete Methoden}\label{sec:Methoden}}
+
+\hypertarget{sec:Struktur}{%
+\section{Struktur und Abgrenzung}\label{sec:Struktur}}
+
+\hypertarget{sec:Theorie}{%
+\chapter{Theoretische Hintergründe}\label{sec:Theorie}}
+
+\hypertarget{sec:KIuML}{%
+\section{Künstliche Intelligenz und Machine Learning}\label{sec:KIuML}}
+
+\hypertarget{sec:NN}{%
+\section{Künstliche Neuronale Netze}\label{sec:NN}}
+
+\hypertarget{definition-und-anwendungsgebiet}{%
+\subsection{Definition und
+Anwendungsgebiet}\label{definition-und-anwendungsgebiet}}
+
+\hypertarget{perceptron}{%
+\subsection{Perceptron}\label{perceptron}}
+
+\hypertarget{convolutional-neural-network-cnn}{%
+\subsection{Convolutional Neural Network
+(CNN)}\label{convolutional-neural-network-cnn}}
+
+\hypertarget{sec:FaceRecognition}{%
+\section{Face Recognition}\label{sec:FaceRecognition}}
+
+\hypertarget{vorgehen-zur-gesichtserkennung}{%
+\subsection{Vorgehen zur
+Gesichtserkennung}\label{vorgehen-zur-gesichtserkennung}}
+
+\hypertarget{histogram-of-oriented-gradients}{%
+\subsection{Histogram of Oriented
+Gradients}\label{histogram-of-oriented-gradients}}
+
+\hypertarget{face-landmarks}{%
+\subsection{Face Landmarks}\label{face-landmarks}}
+
+\hypertarget{modifikation-von-bildern-unter-der-zuhilfenahme-von-face-landmarks}{%
+\subsection{Modifikation von Bildern unter der Zuhilfenahme von Face
+Landmarks}\label{modifikation-von-bildern-unter-der-zuhilfenahme-von-face-landmarks}}
+
+\hypertarget{sec:ObjectDetection}{%
+\section{Object Detection}\label{sec:ObjectDetection}}
+
+\hypertarget{sec:TechnischeGrundlagen}{%
+\chapter{Technische Grundlagen}\label{sec:TechnischeGrundlagen}}
+
+The field of Computer Vision (CV) represents the technologies used for
+processing medical images. Computer Vision is \enquote{a broad term for
+the processing of image data}\\
+The described application requires \emph{segmentation} and
+\emph{recognition} algorithms from this field of computer science. This
+chapter introduces the reader in the basic concepts of these two
+algorithm areas and presents the current state of research. The focus
+lies only on algorithms the can be used for medical images.
+
+\hypertarget{sec:Kriterienformulierung}{%
+\section{Kriterienformulierung}\label{sec:Kriterienformulierung}}
+
+\hypertarget{sec:LibraryEvaluierung}{%
+\section{Library Evaluierung}\label{sec:LibraryEvaluierung}}
+
+\hypertarget{opencv}{%
+\subsection{OpenCV}\label{opencv}}
+
+\hypertarget{yolov3}{%
+\subsection{YOLOv3}\label{yolov3}}
+
+\hypertarget{sec:Architektur}{%
+\section{Architektur}\label{sec:Architektur}}
+
+\hypertarget{sec:TechnischeUmsetzung}{%
+\chapter{Technische Umsetzung}\label{sec:TechnischeUmsetzung}}
+
+After the academic introduction into state-of-the-art object detection
+algorithms, this chapter provides the technical project description form
+a engineering point of view. The goal of this thesis is to show the
+capabilities of object detection algorithms for medical use cases.
+Chapter 2 presented three different possible datasets in different
+medical exchange formats. An object detection system should provide
+accurate predictions on different kinds of datasets, like microscopy
+cell photographs, digital pathology slides or MRI scans. This chapter
+describes the framework used to evaluate different kinds of datasets
+with different algorithms.
+
+\hypertarget{opt-benutzerhandbuch}{%
+\section{(opt) Benutzerhandbuch}\label{opt-benutzerhandbuch}}
+
+\hypertarget{opt-verzeichnisstruktur}{%
+\section{(opt) Verzeichnisstruktur}\label{opt-verzeichnisstruktur}}
+
+\hypertarget{sec:TechnischeUmsetzungFR}{%
+\section{Face Recognition}\label{sec:TechnischeUmsetzungFR}}
+
+\hypertarget{sec:TechnischeUmsetzungOD}{%
+\section{Object Detection}\label{sec:TechnischeUmsetzungOD}}
+
+\hypertarget{sec:FRuOD}{%
+\section{Zusammenspiel von Face Rec. und Object Det.}\label{sec:FRuOD}}
+
+\hypertarget{sec:Diskussion}{%
+\chapter{Diskussion}\label{sec:Diskussion}}
+
+\hypertarget{sec:Evaluation}{%
+\section{Evaluation}\label{sec:Evaluation}}
+
+\hypertarget{sec:Kriterienerfuellung}{%
+\section{Kriterienerfüllung}\label{sec:Kriterienerfuellung}}
+
+\hypertarget{sec:Zukunft}{%
+\section{Erkenntnisgewinn und Zukunft}\label{sec:Zukunft}}
+
+\hypertarget{appendix}{%
+\chapter{Appendix}\label{appendix}}
+
+\hypertarget{learn-even-more}{%
+\section{Learn (even) more}\label{learn-even-more}}
+
+\hypertarget{books}{%
+\subsection{Books}\label{books}}
+
+\hypertarget{examples}{%
+\subsection{Examples}\label{examples}}
+
+test
+
+\hypertarget{forms-and-templates}{%
+\section{Forms and Templates}\label{forms-and-templates}}
+
+test
+
+
+\end{document}
