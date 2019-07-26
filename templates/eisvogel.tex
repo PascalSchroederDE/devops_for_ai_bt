@@ -210,9 +210,9 @@ $if(verbatim-in-note)$
 \VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
 $if(geometry)$
-\usepackage[margin=2.5cm,bottom=2.5cm,headsep=.2cm,footskip=0.8cm,includehead=true,includefoot=true,centering,$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+\usepackage[margin=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,includehead=true,includefoot=true,centering,$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $else$
-\usepackage[margin=2.5cm,bottom=2.5cm,headsep=.2cm,footskip=0.8cm,includehead=true,includefoot=true,centering]{geometry}
+\usepackage[margin=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,includehead=true,includefoot=true,centering]{geometry}
 $endif$
 $if(beamer)$
 \newif\ifbibliography
@@ -667,7 +667,7 @@ $endif$
 $if(titlepage)$
 \begin{titlepage}
 $if(logo)$
-\newgeometry{margin=2.5cm,bottom=1cm,headsep=.0cm,footskip=0.5cm,includehead=true,includefoot=true,centering}
+\newgeometry{margin=2.5cm,bottom=1cm,headsep=0.5cm,footskip=0.5cm,includehead=true,includefoot=true,centering}
 \begin{longtable}{p{0.5\textwidth} p{0.5\textwidth}}
 \includegraphics[height=1.5cm, left]{$logoIBM$}&
 \includegraphics[height=1.5cm, right]{$logo$}
@@ -807,12 +807,14 @@ $endif$
 $if(acs)$
 \addchap*{Abkürzungsverzeichnis}
 \begin{acronym}
-	\acro{API}[API]{Application Programming Interface}
-	\acro{HTML}[HTML]{Hyper Text Markup Language}
-	\acro{IBM}[IBM]{International Business Machines Corporation}
-	\acro{JS}[JS]{JavaScript}
-	\acro{JSON}[JSON]{JavaScript Object Notation}
-	\acro{UI}[UI]{User Interface}
+	\acro{AI}[AI]{Artificial Intelligence}
+	\acro{IT}[IT]{Information Technology}
+	\acro{DevOps}[DevOps]{Development and Operations}
+	\acro{SaaS}[SaaS]{Software as a Service}
+	\acro{ML}[ML]{Machine Learning}
+	\acro{VM}[VM]{Virtual Machine}
+	\acro{CPU}[CPU]{Central Processing Unit}
+	\acro{GPU}[GPU]{Graphics Processing Unit}
 \end{acronym}
 $endif$
 
