@@ -62,7 +62,7 @@ IaaC
 
 The most important technology for DevOps may be a Delivery pipeline. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage and production. 
 
-For every stage there is usually one specific environment. In the development environment all the code updates are being done. There are tools provided like !!IDEs!! to write the code as well as tools that enable collaborative development like source control management or project planning.
+For every stage there is usually one specific environment. In the development environment all the code updates are being done. There are tools provided like \acs{IDE}s (\acl{IDE}) to write the code as well as tools that enable collaborative development like source control management or project planning.
 
 Source control management is typically combined with version control. This enables the developer to also store previous versions of his application and reduces the risk of issues in new updates, because it can roll them back in case of an error.[@overops]
 
