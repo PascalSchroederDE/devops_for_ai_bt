@@ -8,7 +8,7 @@
 
 ### Tensorflow
 
-### Mask R-CNN
+### R-CNN
 
 ## Creating the necessary environment{#sec:environment}
 

@@ -1,13 +1,7 @@
 # Result {#sec:result}
 
-## Creation of pipeline {#sec:pipeline}
+## Kubeflow pipeline {#sec:kubeflowpip}
 
-## Data preparation {#sec:dataprep}
+## Azure pipeline {#sec:azurepip}
 
-## Model Building {#sec:buildingmodel}
-
-## Deployment {#sec:deployment}
-
-## Resulting model {#sec:resmodel}
-
-## Continuous learning {#sec:continuouslearning}
+## Other framework? {#sec:pip3}
