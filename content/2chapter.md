@@ -114,6 +114,129 @@ With such technologies most of the defined practices can be performed with the h
 
 ## Microservices and 12 factor apps {#sec:ms12}
 
+As described in chapter \ref{sec:cloud} Cloud opened new possibilities of deploying and maintaining software. This eases the deployment itself as well as rolling updates without any downtime. Additionally it enables high scalability as well as high availability.
+
+One model of Cloud Computing is \acl{SaaS} (\acs{SaaS}). In this model an application is deployed on the providers platform and is accessible via the internet on demand. This way the end user can access the software from anywhere anytime without the need to deploy, install or maintain anything by himself.
+
+However, the development and deployment of portable, resilient applicatons that will thrive in cloud environments is different from traditional development. Because monolithic applications need to be completly rebuilt as soon as one component is being changed, the development is unflexible. Additionally the scaling of a single component needs a scaling of the whole application. Both are disadvantages which are opposed to the new possibilities a Cloud deployment offers. The solution was to built those applications not as one monolithic software but as a suits of services.
+
+### Microservice Architecture
+
+For that the term Microservice Architecture has sprung up over the last few years. There is no unique definition for it, but when talking about Microservice Architecture mostly it is referred to Martin Fowler's characteristics described in [@fowler].
+
+Following Fowler, the first characteristic is, that componentization is realized via services. In monolithic software different components are linked together via libraries. Services on the other side are out-of-process components. The communication is realized with web service requests or remote procedure calls. The advantage of this approach is, that they are independently deployable, which is the reason why this is the usual approach in Microservice Architecture.
+
+A second characteristic is, that Microservices are organized around business capabilities. This means, that the services take a broad-stack implementation of Software for that business era. This also leads to cross functional teams, which are working together on building the Microservice. 
+
+Additionally Microservices are handled as products instead of projects. The difference is, that while products are supported and owned by the product team over its full life time, projects are completed as soon as a specified set of functionalities is implemented. After that projects would be supported by a operation team. The approach to treat Microservices as products has the advantage, that the development team has full responsibility for it and are probably more interested in a clean, well functioning long-term solution.
+
+Another characteristic are smart endpoints and dumb pipes, which means, that the services are as decoupled as possible. The only way they stick together is, that they receive requests of each other and produce responses after applying the defined logic. This communication is handled via simple \acs{REST}ish (\acl{REST} protocols.
+
+Also the governance of Microservices is usually decentralized, so that every service can be built on different technology platforms and there is a different approach to standards. This leads to a more flexible environment.
+
+The same applies to the data management, which is decentralized as well. Each service can manage an own database, which avoids problems through different conceptual models. While in centralized data management changes are usually made via transactions, in a decentralized data mangement system there is a transactionless coordination between the services. This does not necessarily results in a consistency, but this cost is less than the cost, that would come up, if a consistency would be forced to Microservices by distributed transactions. Instead with the problems this eventual consistency could cause are dealt with by compensating operations.
+
+The next characteristic is an automation of the infrastructure. This includes automated testing and deployment. It is important to test every single Microservice intensively, because the operational landsacpe for each can be strikingly different. Also the deployment could differ from service to service.
+
+Important for Microservices is, that they are designed for failure. This means, that it detects failured quickly and automatically restore it in case an error happens. This demands a real time monitoring. To ensure this functionality, some companies are even executin tests in production by purpose to observe the behavior of the system if one service fails.
+
+The last characteristic defined by Fowler is the evolutionary design. This enables a more granular release planning, because every change can be handled as a single and only modified services needs to be redeployed. These changes should not affect the communication with other services, which is the reason why they should always be designed as tolerant as possible. 
+
+The advantage of those Microservices for Cloud applications are mainly caused by the possibility to treat every component as a single. This improves the scalability of the application as well as the productivity and speed of the development, because those independent services are faster to develop. Additionally it is easier to maintian services instead of a monolith application and it gives more flexibility in technologies. Still the development of Microservices should follow some guidelines to support the concept of independently managed and iterated services.
+
+### 12 factor apps
+
+One common set of guidelines and best practices for the development of Cloud based software and especially Microservices are the 12 factors drafted by developers at Heroku. These factors are
+
+- Codebase - For every deployed service there should be exactly one codebase, for example an IT repository
+- Dependency - Services should explicitly declare and isolate all dependencies 
+- Config - Configurations for the deployments should be stored in the environment
+- Backing services - All backing services should be treated as attached resources
+- Build, release, run - The delivery pipeline should be strictly seperated into building, releasing and running
+- Processes - Apps should be executed in one or more statless processes
+- Port binding - Services should be exposes by listening on a specifeid port
+- Concurrency - Concurrency is achieved by horizontal scaling
+- Disposability - The objective should be a robust and resilient system with fast startup and graceful shutdown
+- Dev/prod parity - The development, staging, production and every other environment should be as similar as possible
+- Logs - Applications should produce logs as event streams
+- Admin processes - Admin tasks should be packaged alongside the application to ensure that it is run with the same environment
+
+Following these guidelines stable and performant Microservices can be built. In the last years some technologies has emerged as particularly suitable for developing such services.
+
+### Container - Docker
+
+One of them is containerization of applications. This can be understood as a package for the isolation of application within a closed environent, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light weighted. This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
+
+An industry leading container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
+
+![Comparison between Docker and VM[@13]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
+
+On the left side the infrastructure of a VM can be seen, on the right side the infrastructure of a Docker container. Both need the infrastructure of a physical device and its host operating system. On top of a VM on this Host Operating System there is a Hypervisor and on this Hypervisor several Guest OS can be running. On those again the apps itself can be executed and the necessary libraries and binaries are running in the background.
+
+In case of a docker container those binaries and libraries are directly running in a container on the operating system without the need of a hypervisor or a complete version of a Guest OS. This also enables the app to be running on top of that. The containers are isolated from each other in different namespaces and own network stacks. This means, that processes running within a container cannot see or interact with processes of other containers and they don’t get privileged access to sockets or interfaces of other containers.
+
+Additionally there is a Docker Daemon running in another process. The Docker Daemon has three main tasks - listening and processing API requests from the Docker client to run Docker commands, managing Docker objects (images, containers, volumes and networks) and parsing Dockerfiles for building Docker images.
+
+With this technology several of the 12 factors described above are fullfilled. One are the explicitily declared and isolated dependencies. Within the Dockerfile every dependency needs to be explicitly declared to fullfill all the requirements of the application.
+
+Also Docker containers can't communicate with each other directly, but needs to communicate externally over with backing services over the network
+
+Additionally Docker containers are executed as stateless processes with ephemeral storage only. 
+
+The development and production parity is given, because containers standardize how an application being delivered as well as its dependencies. [@medium]
+
+Even admin processes can be run as one-off processes inside the Docker container through jumping inside the container and executing all necessary commands.
+
+Still in a local environment not every of the 12 factors are fullfilled. Instead an enabler is needed, which scalable and failure safe way to deploy those containers.
+
+### Kubernetes as enabler
+
+Kubernetes can serve as such an enabler. It can host Microservices as Docker containers and ensure all of the 12 factors to be met.
+
+In general, Kubernetes enables an automated deployment, scaling and management of these containers within a cluster of nodes. Thereby a cluster consists of at least one master node and any number of worker nodes. Figure \ref{fig:kubernetes_services} shows the different services owned by master and worker nodes.
+
+![Kubernetes service allocation[@19]](images/chapter2/kubernetes.png){ width=500px #fig:kubernetes_services}
+
+First there are several pods on each worker node. Pods are the smallest unit in Kubernetes. They contain one or more containers, which are deployed together on the same host. There they can work together to perform a set of tasks.\textsuperscript{cmp.\cite{21}}
+
+On the master node there are an \acs{API} (\acl{API}) Server, a Controller Manager, a Scheduler and a key-value store called etcd.\textsuperscript{cmp.\cite{19}, \cite{22}}
+
+The API Server is for clients to run their requests against. That means the API Server is responsible for the communication between Master and Worker nodes and for updating corresponding objects in the etcd. 
+
+The Controller Manager is a daemon, which embeds all of the Kubernetes controller. Examples for them are the Replication Controller or the Endpoint Controller. Those controllers are watching the state of the cluster through the API Server. Whenever a specific action happens, it performs the necessary actions to hold the current state or to move the cluster towards the desired state. {cmp.\cite{19}, \cite{22}}
+
+The scheduler manages the binding of pods to nodes. Therefore it watches for new deployments as well as for old ones to create new pods if a new deployment is created or recreating a pod whenever a pod gets destroyed. The scheduler organizes the allocation of the pods within the cluster on the basis of available resources of the pods. \textsuperscript{cmp.\cite{19}, \cite{22}}%??
+
+The etcd is a key-value store, which stores the configuration data and the condition of the Kubernetes cluster.\textsuperscript{cmp.\cite{19}, \cite{22}}
+
+The worker node consists of a Kubelet, a cAdvisor, a Kube-Proxy and - as mentioned before - several Pods. 
+
+The Kubelet needs to be used if a new pod should be deployed. Then it gets the action to create all needed containers. For that it uses Docker to create them. Afterwards it combines some containers into one pod. Containers in one pod are always started and stopped together. This pod will then be deployed on the node, on which the Kubelet is located.\textsuperscript{cmp.\cite{19}, \cite{22}}
+
+The cAdvisor measures the usage of CPU-resources as well as demanded memory on the node, on which it is located, and notifies the master about it. Based on those measurements the scheduler allocates the pods within the cluster to ensure the best possible allocation of resources.\textsuperscript{cmp.\cite{19}, \cite{22}}
+
+The kube-proxy is a daemon, that runs as a simple network proxy to provide the possibility of communicating to that node within the cluster. \textsuperscript{cmp.\cite{19}, \cite{22}}
+
+With this architecture Kubernetes enables all the factors, that are missing in a local deployment of Docker containers.
+
+First the codebase of the deployment is given as yaml or json file and the container in Dockerfile. This way a source control of all the necessary code can be done easily using git for example.
+
+Also the dependencies for one Microservice can be checked easily with the functions *readinessProbe* and *livenessProbe*. While the *readinessProbe* tests whether you have backing services, the *livenessProbe* tests if the backing services are all healthy. In case of a missing or failed Microservice the appropriate pod pod is automatically restarted.
+
+For storing all the necessary configurations in the process environment table, Kubernetes provides ConfigMaps. With these the containers can retrieve the config details at runtime.
+
+The stage seperation is achieved through artifact management. Once the code is commited, a build occurs and the container image is built and punlished to an image registry. These releases are then deployed across multiple environments.
+
+The port binding is guaranteed through Kubernetes services. These are object to declare the network endpoints of a service and resolve endpoints of other services specified to a port of the cluster.
+
+The concurrency is a factor, which is handled especially good. It allows the services to scale at runtime dependent on the replica sets defined in the declarative model. Also Kubernetes has introduced autoscaling based on compute resource thresholds.
+
+Also the disposability is fullfilled, because every pod can be destroyed or started in a simple and quick way. Additionally Kubernetes will automatically destroy unhealthy pods.
+
+Last, logs are written to *stdout* and *stderr*  and can be easily accessed. They are not stored and managed as internal files.
+
+This way Docker and Kubernetes are fullfilling every of the 12-factors, which shows, that it is a very good way to provide Microservices. This is the reason why many big companies decided to use Kubernetes as enabler for big platforms like Google Cloud to give just one example.
+
 ## Machine Learning {#sec:ml}
 
 Another eminent movement in IT is Machine Learning which helped AI to a new hype and opened several new possibilities and improvements to software development. In the meantime Machine Learning has become one of the most important tools when it comes to Artifical Intelligence.
@@ -236,7 +359,7 @@ y = f((x_1 * w_1) + (x_2 * w_2) + b)
 A typical activation function is the sigmoid function, which outputs numbers in the range (0,1). The higher the input, the closer the result gets to 1. The lower the input, the closer it gets to 0. The sigmoid function can be seen in \ref{eq:sigmoid}
 
 \begin{equation}
-y = \frac{1}{1 + e^-x}
+y = \frac{1}{1 + e^{-x}}
 \end{equation}
 
 In figure \ref{fig:neuron} this whole process that happens within the artificial neuron can be seen in a simplified way. It takes the inputs $x_1$ and $x_2$, multiplies them with their belonging weights, sums up the results and add a bias. Last it takes the result of this calculation as input for the activation function. The result of this is the output $y$.
@@ -261,5 +384,84 @@ Still the Developer does not only have to give some input data, train the neural
 [//]: # "Stroetmann Skript"
 
 ## Artificial Intelligence lifecycle {#sec:aicycle}
+
+The new possibilities opened by Machine Learning as described in chapter \ref{sec:ml} forces developers to change their development lifecycle in a drastic way if they want to develop a Machine Learning based Artificial Intelligence. This lifecycle will be described and explained in the following chapter.
+
+Important to mention is, that instead of code the developers has to produce for a specified objective, in Machine Learning the developers get some data as input and must train a model with this data to meet the objective. To simplify the process described in this chapter an example data set will be given and in the process of explaining the single steps this data will be used to exemplify these. This dataset can be seen below.
+
+\begin{table}[htb]
+\centering
+\small
+\rowcolors{2}{gray!25}{white}
+\caption{Example dataset to predict the price of real estate}
+\begin{tabular}{ c | c | c | c | c | c | c  }
+\rowcolor{gray!50}
+\textbf{square meters} &\textbf{year built} &\textbf{year bought} &\textbf{age of buyer} &\textbf{type} &\textbf{\# of rooms} &\textbf{price} \\ \hline
+50 & 2000 & 2005  & 33 & Appartm. & 3 & 250.000€ \\
+20 &  & 2010 & 26 & Appartm. & 1 & 100.000€ \\
+160 & 2004 & 2004 & 38 & House & 5 & 500.000€ \\
+300 & 2010 & 2016 & 41 & House & 7 & 680.000€ \\
+80 & 2018 & 2018 & 29 & Appartm. & 3 & 290.000€ \\
+48 & 1999 & 2008 & 24 & Appartm. & & 220.000€ 
+\end{tabular}
+\end{table}
+
+With this data the developer has to go through several steps to build a useful system based on them. These steps are defined in an open standard process model called \acl{CRISP-DM} or \acs{CRISP-DM}. This model can be seen in figure \ref{fig:crisp_dm}.
+
+![CRISP-DM standard[@statistik-dresden]](images/chapter2/crisp_dm.png){ width=400px #fig:crisp_dm}
+
+Following this standard model the first step is Business Understanding. During this step the project team has to determine overall goals and tasks for what to do with these data. For that the team has to access the situation, which means that the team has to include possible risks, costs, benefits and requirements for every possible objective in their evaluation process. After the overall objective is defined this can be partitioned into several data mining goals what to do specifically with this data. Also success criteria should be defined and a project plan should be established, which will be followed in the next steps.
+
+For the example above such an objective could be to predict the price of real estate by the given features. The criteria could be, that in 90% of the tested data after the creation of the model the predicted price should lie in between a range of 10% of the real price.
+
+Next the data need to be understood. For that, first as much data as possible should be collected and analyzed to get a first insight. This data should then be evaluated by its quality to estimate the necessary effort to prepare and clean the data for building a model. Also possible problems should be detected early to fix them as soon as possible. 
+
+In the example there are far too little data for a real model and much more would be needed in a real project. But even in this small dataset some problems can be detected. The first one is the missing entry for the second object in the column "year built" as well as for the last object in the column "# of rooms". Also the type of the estate is categorical instead of numerical, which could cause problems when training the model.
+
+The next step is probably the most costly one - data preparation. First the project team needs to select the data, which it will use for building the model. Then the data need to be preprocessed.
+
+This preprocessing step includes detecting and removing noisy and redundant data. Noisy data means data, that are irrelevant for the chosen business objective. In the given example the age of the buyer is an unnecessary information, because it doesn't change the price of the estate. That's why this column can be removed. Also wrongly labeled data should be removed. 
+Additionally in the preprocessing step unbalanced datasets should be balanced. This means, that if one specific class of data is overrepresented and another one underrepresented, the dataset should be balanced so that the distribution of the different data classes are representative. In the example appartments could be overrepresented, because there are twice as much appartments in the selected data than houses. The solution would be to add some more houses in the dataset or remove some appartments.
+Next missing values have to be handled, because null values could influence the model in a negative way. A better way would be to fill the missing cells with average values for this type of data. But to choose the average value is not always the right way - it could be better to choose the minimum for example. To decide the method of handling missing values is one challenging task for the developer. 
+Lastly, there can be features in a dataset that are not numerical but categorical. This data need to be encoded before training the model. The encoding technique depends on the context of the categorical data.  One simple technique is label encoding, with which for every different category tha column gets a different number. For example every 'Appartment' gets a 1 and every 'House' a 2 in the 'type' column. However, this could cause trouble, because the learning algorithm could interprete the numbers as sequence. That's why another technique is One-Hot-Encoding. In this technique every possible category gets an own column and for every entry in the dataset the value is set to either 1 or 0 for all of the columns. In the example this would mean, that the column 'type' would be replaced with the columns 'appartment' and 'house'. For every appartment the column 'appartment' would then be set to 1 and the column 'house' to 0. For every house it would be exactly the other way round.[@mediumsunny]
+
+After the preprocessing the dataset could be improved by feature engineering. The objective of this task is to improve the features such that the model better understand the coherences and improves its production function. For example new features could be created based on the knowledge of the data. A condition for that is to have a really good understanding of the data. In the example above the developers could combine the column 'year built' and 'year bought' to 'age at date of purchase' with a simple subtraction, which could give an important insight of the payed price. Another meaningful feature could be some relation between the size of the real estate and the number of rooms.
+
+In the next step all collected and cleaned data should be integrated and merged. After that the feature values should be normalized, because there is usually a significant difference between the minimum and the maximum value of a feature. To increase the performance of a model it could be helpful to scale the values down to, for exaple, a range from 0 to 1. 
+
+In the end the example above could look like this:
+
+\begin{table}[htb]
+\centering
+\small
+\rowcolors{2}{gray!25}{white}
+\caption{Example dataset to predict the price of real estate}
+\begin{tabular}{ c | c | c | c | c | c | c  }
+\rowcolor{gray!50}
+\textbf{square meters} &\textbf{year built} &\textbf{year bought} &\textbf{age at purchause} &\textbf{type} &\textbf{\# of rooms} &\textbf{price} \\ \hline
+0.11 & 0.05 & 0.07  & 0.56 & 0.00 & 0.33 & 0.26 \\
+0.00 & 0.50 & 0.43 & 0.22 & 0.00 & 0.00 & 0.00 \\
+0.50 & 0.26 & 0.00 & 0.00 & 1.00 & 0.67 & 0.69 \\
+1.00 & 0.58 & 0.86 & 0.67 & 1.00 & 1.00 & 1.00 \\
+0.21 & 1.00 & 1.00 & 0.00 & 0.00 & 0.33 & 0.33 \\
+0.10 & 0.00 & 0.29 & 1.00 & 0.00 & 0.50 & 0.21
+\end{tabular}
+\end{table}
+
+This data set has then to be splitted into three different sets - training, validation and testing. This is done to ensure that the model does not overfit to the training data. The model will be trained with the training set. Then the hyperparameters, which are used to improve the model with some different parameters dependent on the used model, are tuned with the help of the validation set. The test set is used to test the models actual performance at the end.
+
+After this, the next step is the modelling. For this, first, a training technique as well as a basic model has to be selected. Usually different models are tested several times, so that the best model can be choosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents for example over- and underfitting the model with the training data.
+
+Then the model has to be evaluated with the test set. Also the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders the steps can be repeated starting from the Business Understanding with a deeper knowledge. This is how a model can be continuosly improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features or applying different training methods.
+
+![Iterative Machine Learning lifecycle](images/chapter2/training_cycle.png){ width=500px #fig:ml_cycle}
+
+This process from preparing the data and adjusting the parameters can be seen in figure \ref{fig:ml_cycle} from a more technical perspective. First the developer gets the raw dataset, then he preprocesses this dataset and applies feature engineering to improve it. After it the dataset is splitted into different sets and the parameters get tuned. At the same time a model is getting selected and trained with the training set and the given parameters. This step is repeatable until the developer is satisfied with the created model. In the end the models predictions will be evaluated against the test data.
+
+Last the model needs to be deployed. For that also the monitoring and maintenance of the product needs to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process.
+
+ASUM?
+
+With this standardized process of Artificial Intelligence development the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
 
 ## DevOps for Artificial Intelligence {#sec:devopsai}
