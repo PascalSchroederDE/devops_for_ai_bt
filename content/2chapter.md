@@ -34,7 +34,7 @@ The last principle is to *amplify feedback loops* with the goal to enable a quic
 
 The DevOps practices, that have become commonplace, can be splitted in four different sets based on the different periods of a product lifecycle. To each set there are several pracices, standards and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{devops_architecture}. 
 
-![DevOps reference architecture[@devopsdummies]](images/chapter2/delivery_pipeline.png){ width=400px #fig:devops_architecture}
+![DevOps reference architecture[@devopsdummies]](images/chapter2/devops_architecture.png){ width=400px #fig:devops_architecture}
 
 The first set is called **Steer**, which is about managing and planning the development and lifecycle of a product. This includes establishing and continuously adjusting business goals. The process resolving this issue is called *Continuous Business Planning*. 
 
@@ -76,7 +76,7 @@ One technology to allow developers to follow above practies is **Infrastructure 
 
 The most important technology for DevOps may be a **delivery pipeline**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage and production. This can be seen in figure \ref{fig:del_pipeline}.
 
-![Delivery pipeline[@devopsdum]](images/chapter2/devops_architecture.png){ width=400px #fig:del_pipeline}
+![Delivery pipeline[@devopsdum]](images/chapter2/delivery_pipeline.png){ width=400px #fig:del_pipeline}
 
 For every stage there is usually one specific environment. Those are represented as box. The dark boxes represent a production like environment.
 
@@ -465,3 +465,46 @@ ASUM?
 With this standardized process of Artificial Intelligence development the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
 
 ## DevOps for Artificial Intelligence {#sec:devopsai}
+
+The new steps described in chapter \ref{sec:aicycle} forces developers not only to change their development cycle, but also the operation. Additionally, new architectural models like micrsoservices, cloud technologies like containerization or Kubernetes as well as \acs{SaaS} as a new Software model as described in chapter \ref{sec:ms12} opens new possibilities of a scalable, flexible and reliable deployment of products. All this changes the way of DevOps for Machine Learning / AI and not all of the existing principles and practices are applicable any more or better approaches are imaginable. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
+
+First, DevOps for Machine Learning has to follow the principles named in chapter \ref{devops}. To repeat, these are following:
+
+- Develop and test against production like systems
+- Deploy with repeatable processes
+- Amplify a feedback loop
+
+Additionally, the four stages - steer, develop, deploy and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through and necessary adoptions or additions will be made.
+
+The first set - steer - was about managment and planning, which includes Continuous Business Planning, Continuous Improvement and Release Planning. All this includes tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quick as possible. 
+
+All this also applies for the development of AI and overlaps with the CRISP-DM process described in chapter \ref{aicycle}. This defines as first stage the *Business Understanding*, in which business goals and objectives should be defined. During this step the same practices and tools can help as in traditional software development as there is no difference in planning and managing the objectives and release plan of a Machine Learning or a tradtitional software project. 
+
+The difference in the steer phase is, that there is an additional step, which includes understanding the data. This needs a deeper insight in the business correlations, necessary information and context of the data. This leads to two major differences -
+
+The first is in the roles of the people, who handle these steps. This deep insight of the business data needs experts on this field instead of programmers with a lack of understanding all the correlations and meanings. Instead, usually, data scientists or data analysts are needed for defining the needed data, evaluating the quality and detecting problems, so that a clear way to clean and prepare the data can be determined.
+
+A second difference is the need of a tool to visualize these data. For that the data scientists or analysts need skills for creating visualized data as quickly as possible. A very common tool for that are *Jupyter Notebooks* as can be seen in figure \ref{jupyter_nb}.
+
+First the data need to be CODE STUFF with python, then it can be visualized easily. This leads to a better understanding of the data, which helps finding issues, evaluate the quality, defining the way how to prepare and the objectives of what to do with the data. 
+
+However, the most differences are in the development and testing stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is splitted in two stages - data preperation and the building of the model. Also the Code is not the only input the developers have to deal with, but there is data as a second, important input. This leads to several differences for the practices and tools defined for this stage.
+
+Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators, but also the data. Usual source control software like git sets limitations to the file size and are no designed for handling other data than code. This results in the need of another tool to handle big datasamples when developing an AI product, so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
+
+A solution for this problem could be Git \acl{LFS} (\acs{LFS}), which is desinged for storing audio samples, graphics, datasets and videos. 
+
+IDEs - jupyter notebook?
+
+Continuous testing
+
+delivery	
+
+operation - monotir, feedback, refitting => more flexible deployment
+
+Another eminent difference are the roles of the developing people. While in traditional development the developers are IT specialists, who can handle the operation cycle as well as the development. In ML development, usually Data Scientists take over the main part of the work as already mentioned above. They got a special skillset when it comes to the preparation of data and feature engineering, but sometimes they are lacking in experience with operation tools like delivery pipelines. That's why an easier way to build and operate a pipeline is necessary, which can be easily handled and reused, so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
+
+evaluate principles - production like (k8s); repeatable and reliable (pipeline); monitor and validate (harder; get user feedback; can be reused)
+
+pipeline
+
