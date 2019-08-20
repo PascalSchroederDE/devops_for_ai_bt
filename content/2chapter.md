@@ -476,7 +476,7 @@ First, DevOps for Machine Learning has to follow the principles named in chapter
 
 Additionally, the four stages - steer, develop, deploy and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through and necessary adoptions or additions will be made.
 
-The first set - steer - was about managment and planning, which includes Continuous Business Planning, Continuous Improvement and Release Planning. All this includes tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quick as possible. 
+The first set - **steer** - was about managment and planning, which includes Continuous Business Planning, Continuous Improvement and Release Planning. All this includes tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quick as possible. 
 
 All this also applies for the development of AI and overlaps with the CRISP-DM process described in chapter \ref{aicycle}. This defines as first stage the *Business Understanding*, in which business goals and objectives should be defined. During this step the same practices and tools can help as in traditional software development as there is no difference in planning and managing the objectives and release plan of a Machine Learning or a tradtitional software project. 
 
@@ -488,23 +488,52 @@ A second difference is the need of a tool to visualize these data. For that the 
 
 First the data need to be CODE STUFF with python, then it can be visualized easily. This leads to a better understanding of the data, which helps finding issues, evaluate the quality, defining the way how to prepare and the objectives of what to do with the data. 
 
-However, the most differences are in the development and testing stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is splitted in two stages - data preperation and the building of the model. Also the Code is not the only input the developers have to deal with, but there is data as a second, important input. This leads to several differences for the practices and tools defined for this stage.
+However, the most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is splitted in two stages - data preperation and the building of the model. Also the Code is not the only input the developers have to deal with, but there is data as a second, important input. This leads to several differences for the practices and tools defined for this stage.
 
 Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators, but also the data. Usual source control software like git sets limitations to the file size and are no designed for handling other data than code. This results in the need of another tool to handle big datasamples when developing an AI product, so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
 
 A solution for this problem could be Git \acl{LFS} (\acs{LFS}), which is desinged for storing audio samples, graphics, datasets and videos. 
 
-IDEs - jupyter notebook?
+Another common tool for developing software are IDEs, which are supporting the developer in coding, collaborating with your team and integrating the workflow in an efficient way. For Machine Learning such tools have to be extended or new tools need to be created to visualize and especially prepare data. This includes for example possibilities to label images or videos. Currently for this different tools has to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
 
-Continuous testing
+However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox to name just one, which offers simple data labeling and management, collaboration and even some automation features.
 
-delivery	
+Another practice in traditional Software development is called *Continuous testing*. This includes automatically build the software and run unit tests on every single component as well as automated integration tests of the application as a whole. In AI development a completly different form of testing is necessary: 
 
-operation - monotir, feedback, refitting => more flexible deployment
+First, a Machine Learning model can only be tested as a whole instead of its single components. Machine Learning models work more as a black box, because it is difficult to look at how the inner components are working and evaluate its actions. This means, that only an input can be given and the output can be classified as true or false without a valuation of the single components.
+
+Additionally, if the output is correct for one input that doesn't give any information about another input, because usually ML models are too complex to predict its outcome. Both of it leads to another form of testing.
+
+For this approach the data needs to be splitted automatically into a training and a test set before training the model. After the training step is done, the test set is used to compare the predicted outcome with the real value. Applying this approach can give valuable insights about the model, which can be expressed as different indicators.
+
+The easiest one is the accuracy, which divides the correct classified results by all tested samples:
+
+Another indicator is a confusion matrix. A confusion matrix shows the number of *True Positives* and *True Negatives*, which states correctly predictes positive or negative values, as well as *False Positives* and *False Negatives*, which states falsely predicted values. An example can be seen below in figure \ref{fig:confusion_matrix}.
+
+A third indicator is the F1 score, which first calculates the precision as well as the recall of a model. Precision is the number of correctly predicted positive results divided by the number of predicted positive results. Recall on the other hand is the number of correctly predicted positive results divided by the number of all samples. The F1 scores combines those two values to find a balance between them. The greater the F1 score, the better the performance of the model:
+
+Last, also the mean squared error can be used as a measure for the performance of a model. The mean squared error calculates the average of the differences between the real value and the predicted value:
+
+However, there are still several other indicators that can be used for measuring the performance of a model. The developer should decide which indicators to use, so that they will be seen to evaluate the performance of a model after the automated tests have been driven.
+
+During the modelling stage another important difference occurs: The heavy need of ressources, especially of computing units and memory. In opposite to traditional Software development this use doesn't equal the need of ressources while running the application in production, but it needs far more ressources to train the model. Usually \acs{GPU}s are used to build models, because their design fits the need of model training better. However, \acs{GPU}s are not very common in traditional Software development, so teams would have to purchase one just for this purpose. Additionally these ressources are only needed during the modelling stage and the rest of the time they would be unused, which is a waste of ressources. This is where the advantages of Cloud Computing can be utilized. With its capability of flexible ressource allocation the ressources can be used more efficient and money can be saved because of the pay-per-use model of Cloud Computing. This approach of saving cost and ressources through training your model within a Cloud can be called *Dynamical ressource demand*.
+
+The next stage is the **delivery**, in which the practice *Continuous delivery* applies. This practice deals with the automation of the deployment of the Software to different environments. This demand also applies for Machine Learning development, only the implementation differs slightly. In common Software development the trigger for starting the building and deployment process is usually a newly committed code in the master repository. In Machine Learning it could also be necessary or recommended to rebuilt and deploy the model when new or changed data occurs, which forces a second trigger. Additionally the built of the project requires more steps than just compiling the code like training the model, which takes some time. This is described in more detail below, when it comes to delivery pipelines.
+
+An important practice during the delivery stage to guarantee the principle of developing and testing against production like systems is to containerize the ML applications and its contents. This guarantees a consistent environment during all stages, because the containers provide their environemnts on their own. The containers can then be deployed in any system, whether local or Cloud, and the results should stay the same. This is already pretty common for traditional Software, but is often avoided with Machine Learning applications because of missing Cloud computing options. This is why Cloud providers are forced to build Cloud platforms, that enable the use of \acs{GPU}s on a cluster, so that containerized ML applications can become reality. This would speed up the development of ML applications as well as it would increase its efficiency and reduce to costs due to easier ways of building, testing and deploying these applications.
+
+Last there is the **operation** stage. During this stage the use of the application should be monitored and feedback should be collected. Those information should then be used to improve future products and support the current version with updates and bugfixes. 
+
+For ML applications this monitoring and feedback gets one more, significant role - through the collection of more data the model can be continuosly improved through *Refitting of the model*. This is an exclusive feature for ML applications, because in the opposite of traditional Software these are adaptive. This demands a clean collection of the data as well as automated processing of these. Then this data can be used to periodically retrain the model and redeploy it after. This offers the users to experience a significant improvement of the app's performance and that way increases the User experience due to better results.
 
 Another eminent difference are the roles of the developing people. While in traditional development the developers are IT specialists, who can handle the operation cycle as well as the development. In ML development, usually Data Scientists take over the main part of the work as already mentioned above. They got a special skillset when it comes to the preparation of data and feature engineering, but sometimes they are lacking in experience with operation tools like delivery pipelines. That's why an easier way to build and operate a pipeline is necessary, which can be easily handled and reused, so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
 
+pipeline
+
 evaluate principles - production like (k8s); repeatable and reliable (pipeline); monitor and validate (harder; get user feedback; can be reused)
 
-pipeline
+
+UNIT TESTS & INTEGRATION TESTS!!!
+WHITE BOX VS BLACK BOX?
+pay per use?
 
