@@ -1,104 +1,104 @@
 # Theory {#sec:theory}
 
-In this chapter the theoretical basics, that are needed for creating DevOps principles for AI, will be given. For that it will be started with an explanation of what DevOps is in general. Then it will be shown, which new possibilites came with Cloud and 12-factor-apps in chapter \ref{sec:ms12}. After that the basics of Machine Learning and AI will be given in chapter \ref{sec:ml}, specializing on the lifecycle of AI development in chapter \ref{sec:aicycle}. Last in chapter \ref{sec:devopsai} all these knowledges will be combined to adopt the DevOps principles explained in chapter \ref{sec:devops} to the new world of AI with the help of new Cloud technologies.
+In this chapter, the theoretical basis, that is needed for creating DevOps principles for AI, will be given. For that, it will be started with an explanation of what DevOps is in general. Then it will be shown, which new possibilities came with Cloud and 12-factor-apps in chapter \ref{sec:ms12}. After that, the basics of Machine Learning and AI will be given in chapter \ref{sec:ml}, specializing on the lifecycle of AI development in chapter \ref{sec:aicycle}. Last in chapter \ref{sec:devopsai}, all these knowledge will be combined to adopt the DevOps principles explained in chapter \ref{sec:devops} to the new world of AI with the help of Cloud technologies.
 
 ## Development Operations {#sec:devops}
 
 Since people started manufacturing products on a mass scale, the goal is to increase the efficiency of this manufacturing process and reduce waste of time and material. 
 
-One early set of best pracitces for manufacturing was the concept of "Lean manufacturing", which tries to reduce the waste of ressources and time of a production cycle as much as possible. With the upcoming use of Software as commercial product in the 1970s [@wikipedia] a desire came on to create best practices for developing and operating products the same way as it was already usual in common manufacturing. [@leanmanufacturing]
+One early set of best practices for manufacturing was the concept of *Lean manufacturing*, which tries to reduce the waste of resources and time of a production cycle as much as possible. With the upcoming use of software as a commercial product in the 1970s [@Pugh:2002:OSB:513126.513131] a desire came on to create best practices for developing and operating products the same way as it was already usual in conventional manufacturing. [@leanmanufacturing]
 
-In 2009 two Flickr employees - John Allspaw and Paul Hammond, presented their way of combining Development and Operations. Inspired by this presentation a belgian consultant named Patrick Debois formed a new conference - the "Devopsday" in Ghent. This is how the term "DevOps" has been created and prevailed. [@devops.com]
+In 2009 two Flickr employees - John Allspaw and Paul Hammond - presented their way of combining Development and Operations. Inspired by this presentation, a Belgian consultant named Patrick Debois formed a new conference - the "Devopsday" in Ghent. This naming is how the term "DevOps" has been created and prevailed. [@SteveMezak]
 
-Since then DevOps has been established or at least planned in 91% of all companies as an important way to increase their efficiency of Software development. [@statista] For almost every stage of development there are principles and practices defined and continiuously improved. But before those practices will be explained, a further insight in the business need will be given.
+Since then, DevOps has been established or at least planned in 91% of all companies as an essential way to increase their efficiency of software development. [@SauceLabs] For almost every stage of development, there are principles and practices defined and continuously improved. However, before those practices are explained, further insight into the business need will be given. All this will be oriented to the book "DevOps for Dummies" by Sanjeev Sharma and Bernie Coyne. [@Sharma2017]
 
-Every process or product need a business value that cover the costs caused by it. For that there must be either an outcome for the customer or reduced producing costs.
+Every process or product need a business value that covers the costs caused by it. For that, there must be either an outcome for the customer or reduced producing costs.
 
-For DevOps it is usually even both - on the one hand an enhanced customer experience can be guaranteed and on the other hand the efficiency of the production cycle can be increased.
+For DevOps, it is usually even both - on the one hand, enhanced customer experience can be guaranteed, and on the other hand, the efficiency of the production cycle can be increased.
 
-One example for an enhanced customer experience are practices to get fast feedback from all stakeholders. This feedback can then be used to improve the designed product. One of such practices is the so called "A-B testing". There two different sets of features are enrolled to two groups of randomly chosen users. Both can give their feedback to the producer and the set with the better feedback will then later be enrolled for every user. 
+One example of enhanced customer experience are practices to get fast feedback from all stakeholders. This feedback can then be used to improve the designed product. One of such practices is the so-called "A-B testing". There, two different sets of features are enrolled in two groups of randomly chosen users. Both can give their feedback to the producer, and the set with better feedback will then later be enrolled for every user. 
 
-The efficiency can be increased through reduced waste and rework because of practices to write reusable components. Another example are tools for planning a product or fast ways to deliver a product without the need to redeploy everything step by step. In this chapter the advantages of DevOps will be delighted in more detail and some of the practices will be described and explained.
+The efficiency can be increased through reduced waste and rework with practices to write reusable components. Other examples are tools for planning a product or fast ways to deliver a product without the need to redeploy everything step by step. In this chapter, the advantages of DevOps will be delighted in more detail, and some of the practices will be described and explained.
 
 ### Principles
 
-The DevOps movement is generally based on four principles. The first one is to *develop and test against production like systems* to move operations concerns earlier in the life cycle. The purpose of this is to see how th esystem behaves and performs before it gets deployed. This is also advantageous from an operations perspective, because it can be seen, how the system behaves when it supports the application. 
+The DevOps movement is generally based on four principles. The first one is to *develop and test against production-like systems* to move operations concerns earlier in the life cycle. The purpose of this is to see how the system behaves and performs before it gets deployed. This is also advantageous from an operations perspective, because it can be seen, how the system behaves when it supports the application. 
 
 The second principle is to *deploy with repeatable and reliable processes*. The objective is to create a delivery pipeline, that enables continuous, automated deployment and testing of the product.
 
-Third, it is important to *monitor and validate operational quality.* This means, that applications and systems should not only be monitored in production, but already earlier. This forces automated testing to be done early and often to monitor the application. Metrics should alwways be captured and analyzed to provide an early warning system about potential issues and risks.
+Third, it is crucial to *monitor and validate operational quality.* This means that applications and systems should not only be monitored in production, but already earlier. This forces automated testing to be done early and often to monitor the application. Metrics should always be captured and analyzed to provide an early warning system about potential issues and risks.
 
-The last principle is to *amplify feedback loops* with the goal to enable a quick reaction to issues. For this organizations need to create a communication channel to its users, so that they can give feedback and the developers can react to it accordingly.
+The last principle is to *amplify feedback loops* intending to enable a quick reaction to issues. For this, organizations need to create a communication channel to their users, so that they can give feedback, and the developers can react to it accordingly.
 
 ### Practices
 
-The DevOps practices, that have become commonplace, can be splitted in four different sets based on the different periods of a product lifecycle. To each set there are several pracices, standards and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{devops_architecture}. 
+The DevOps practices that have become commonplace can be split into four different sets based on the different periods of a product lifecycle. To each set, there are several practices, standards, and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{devops_architecture}. 
 
-![DevOps reference architecture[@devopsdummies]](images/chapter2/devops_architecture.png){ width=400px #fig:devops_architecture}
+![DevOps reference architecture[@Sharma2017]](images/chapter2/devops_architecture.png){ width=400px #fig:devops_architecture}
 
-The first set is called **Steer**, which is about managing and planning the development and lifecycle of a product. This includes establishing and continuously adjusting business goals. The process resolving this issue is called *Continuous Business Planning*. 
+The first set is called **Steer**, which is about managing and planning the development and lifecycle of a product. This set includes establishing and continuously adjusting business goals. The process of resolving this issue is called *Continuous Business Planning*. 
 
-This includes three major points - the acceleration of software delivery, a good balance between speed, cost, quality and risk and the reduction of the time it needs to get customer feedback. [@ibmsummit] 
+This practice includes three major points - the acceleration of software delivery, a good balance between speed, cost, quality and risk, and the reduction of the time it needs to get customer feedback. [@IBM2013] 
 
-This is mainly done via tools and practices to track the status, feedback and needs of a project in an efficient way. First, a vision of the projects overall objective should be created and every action should be guided by it. [@ibmsummit]
+These points are mainly fulfilled via tools and practices to track the status, feedback, and needs of a project efficiently. First, a vision of the projects overall objective should be created, and every action should be guided by it. [@IBM2013]
 
-The strategy, which should lead to this vision, has to be monitored and agjusted continiuously based on new information and feedbacks. This is called *continuous improvment*. For that a good dialog between a Business and IT is necessary for defining good scopes and priorities. [@ibmsummit]
+The strategy, which should lead to this vision, has to be monitored and adjusted continuously based on new information and feedback. This procedure is called *continuous improvement*. For that, a good dialog between a Business and IT is necessary for defining good scopes and priorities. [@IBM2013]
 
-Then a good plan can be built,for example with a release roadmap, which determines which feature should be completed at what time. This is called *release planning* and helps to track the progress of the project and makes it easier to react on new trends, feedback or issues and adjust the single steps based on this. The status of each release as well as each single feature has to be continuously tracked, so that risks will be recognized as early as possible to increase the available time to react. [@ibmsummit]
+Then a good plan can be built, for example with a release roadmap, which determines which feature should be completed at what time. This approach is called *release planning* and helps to track the progress of the project and makes it easier to react on new trends, feedback or issues and adjust the single steps based on this. The status of each release, as well as every single feature, has to be continuously tracked so that risks will be recognized as early as possible to increase the available time to react. [@IBM2013]
 
 The second set of practices is for the time of **development and testing**. Two eminent practices for this are *collaborative development* and *continuous testing*.
 
-*Collaborative development* enables different practictioners - architects as well as analysts, developers, specialists etc. - to work together on one project. For that it provides a common set of practices and a common platform to create and deliver the software. 
+*Collaborative development* enables different practitioners - architects as well as analysts, developers, specialists, and other participants - to work together on one project. For that, it provides a standard set of practices and a common platform to create and deliver the software. 
 
-One core capability is a practice called *continuous integration*, in which developers continuously or frequently integrate their work with the other developers. For that a shared platform or repository is necessary, on which the developers can frequently commit their changes in the code. Usually this is done using a version control system like Git. How a Git workflow looks like can be seen in figure \ref{fig:git}.
+One core capability is a practice called *continuous integration*, in which developers continuously or frequently integrate their work with the other developers. For that, a shared platform or repository is necessary, on which the developers can frequently commit their changes in the code. Usually, this is done using a version control system like Git. What a Git workflow looks like can be seen in figure \ref{fig:git}.
 
 ![Git workflow](images/chapter2/git_flow.png){ width=600px #fig:git}
 
-There the project is splitted into several branches, which are represented by a rectangular box. The circles represent single commits of new code. Arrows are representing the push of a new version and dashed arrows are representing the base version, on which the new commit was built and to which it will be merged.
+There the project is split into several branches, which are represented by a rectangular box. The circles represent single commits of new code. Arrows are representing the push of a new version and dashed arrows are representing the base version, on which the new commit was built and to which it will be merged.
 
-The most important branch is the master branch. On the master branch every finished version is pushed and from this branch it can be released.  The development branch is for ongoing changes. Small changes can be done directly on the development branch. Bigger changes like added features should get an own branch. Every developer can create an own branch for a new version, so that the developers don't interfere with each other. When all code changes are done the new version will be merged to the development branch. Sometimes some conflicts in the code have to be fixed for a clean merge in case two different commits changed the same code piece. As soon as the new version is working on the development branch and everything is tested and ready it can be merged to the master branch, so that this new version can be rolled out. In case an error occurs it can be fixed in a hotfix branch directly descendend from the master branch.
+The most important branch is the master branch. On the master branch, every finished version is pushed, and from this branch, it can be released.  The development branch is for ongoing changes. Small changes can be done directly on the development branch. More significant changes, like added features, should get their branch. Every developer can create their branch for a new version so that the developers do not interfere with each other. When all code changes are done, the new version will be merged into the development branch. Sometimes some conflicts in the code have to be fixed for a clean merge in case two different commits changed the same code piece. As soon as the new version is working on the development branch and everything is tested and ready, it can be merged into the master branch, so that this new version can be rolled out. In case an error occurs, it can be fixed in a hotfix branch directly descending from the master branch.
 
-Additionally, the application should be tested and verified continuously. For that the developer can run local unit tests to verify their changes before integrating. But this doesn't verify that the integrated code performs as designed. [@AWSCI] A continous integration service linke Jenkins can relieve the developer of this task and automatically builds and runs unit tests on the newly commited and integrated code. [@Jenkins] This process is called *continuous testing*.
+Additionally, the application should be tested and verified continuously. For that, the developer can run local unit tests to verify their changes before integrating. Unit tests test a specific component with defined input and output and checks if the calculated output is the expected one. However, this does not verify that the integrated code performs as designed. [@AmazonDocumentation] A continuous integration service like Jenkins can relieve the developer of this task and automatically builds and runs unit tests on the newly committed and integrated code. In doing so, it runs not only unit tests, but also integration tests, which test the software as a whole. This process is called *continuous testing*.
 
-Another important point is to shorten the delivery cycles through an end-to-end integration, so that it needs less time to enroll a new feature or similar. This leads to quickly given feedback and enables a faster reaction to this. [@ibmsummit] This is done in the **Deployment** stage of a product lifecycle and one of the root capabilities of DevOps. It deals with the automation of the deployment of the software to the different environments, which is called *continuous delivery*. 
+Another critical point is to shorten the delivery cycles through an end-to-end integration so that it needs less time to enroll a new feature or similar. This method leads to quickly given feedback and enables a faster reaction to this. [@IBM2013] This approach takes place in the **Deployment** stage of a product lifecycle and one of the root capabilities of DevOps. It deals with the automation of the deployment of the software to the different environments, which is called *continuous delivery*. 
 
-After the deployment follows the **Operation**. During this stage the performance of an application should be montoried and feedback should be collected. The results of this should be used to improve the product as well as other products, that will be developed in the future. For this there are two practices defined - *continuous monitoring* and *continuous feedback and optimization*. 
+After the deployment follows the **Operation**. During this stage, the performance of an application should be monitored, and feedback should be collected. The results of this should be used to improve the product as well as other products, that will be developed in the future. For this, there are two practices defined - *continuous monitoring* and *continuous feedback and optimization*. 
 
-*Continuous monitoring* provides data and metrics to the performance of an application as well as its running server, the development cycle, the production and other stakeholders.
+*Continuous monitoring* provides data and metrics to the performance of an application as well as its running server, the development cycle, the production, and other stakeholders.
 
-*Continuous feedback* on the other hand provides data coming directly from the customer. This includes the behavior how they are using the system as well as feedback that the users provide.
+*Continuous feedback*, on the other hand, provides data coming directly from the customer. This data includes the behavior of the users as well as feedback provided by them.
 
-Based on those retrieved data businesses may adjust their plans and priorities, improve the development cycle and features and enhance the environment in which the application is deployed in a more agile and responsive way. The objective of this is to improve the product and satisfy the users as well as use this knowledge for new products, that will be developed in the future.
+Based on those retrieved data, businesses may adjust their plans and priorities, improve the development cycle and features, and enhance the environment in which the application is deployed in a more agile and responsive way. The objective of this is to improve the product and satisfy the users. Additionally, this knowledge should be used for new products, that will be developed in the future.
 
 ### Technologies
 
-One technology to allow developers to follow above practies is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a higher scale. This is done with machine readable definitions and configurations. Based on them the machine can provide the necessary environment automatically to enable continuous delivery.
+One technology to allow developers to follow above practices is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a larger scale. This technology is implemented with machine-readable definitions and configurations. Based on them, the machine can provide the necessary environment automatically to enable continuous delivery.
 
-The most important technology for DevOps may be a **delivery pipeline**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage and production. This can be seen in figure \ref{fig:del_pipeline}.
+The most important technology for DevOps may be a **delivery pipeline**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage, and production. This can be seen in figure \ref{fig:del_pipeline}.
 
-![Delivery pipeline[@devopsdum]](images/chapter2/delivery_pipeline.png){ width=400px #fig:del_pipeline}
+![Delivery pipeline[@Sharma2017]](images/chapter2/delivery_pipeline.png){ width=400px #fig:del_pipeline}
 
-For every stage there is usually one specific environment. Those are represented as box. The dark boxes represent a production like environment.
+For every stage, there is usually one specific environment. Those are represented as a box. The dark boxes represent a production like an environment.
 
-In the development environment all the code updates are being done. There are tools provided like \acs{IDE}s (\acl{IDE}) to write the code as well as tools that enable collaborative development like source control management or project planning.
+In the development environment, all the code updates are being done. There are tools provided like \acs{IDE}s (\acl{IDE}) to write the code as well as tools that enable collaborative development like source control management or project planning.
 
-Source control management is typically combined with version control. This enables the developer to also store previous versions of his application and reduces the risk of issues in new updates, because it can roll them back in case of an error.[@overops]
+Source control management is typically combined with version control. This enables the developer also to store previous versions of his application and reduces the risk of issues in new updates because it can roll them back in case of an error.[@TaliSoroker]
 
-After the development the delivery pipeline must care for the application to be built.
+After the development, the delivery pipeline must care for the application to be built.
 
-Second there is the testing environment, in which single components can be tested. For that it has to manage test data, scenarios, scripts and associated results. Similar to the development environment it must not look like the production environment. 
+Second, there is the testing environment, in which single components can be tested. For that, it has to manage test data, scenarios, scripts, and associated results. Similar to the development environment, it must not look like the production environment. 
 
-The next one is the staging environment, in which the system can be tested as a whole. The staging environment should be as much production like as possible, so that as many as possible required services, databases and configurations can be connected and applied without touching the production environment. The stage environment is for testing the application before rolling out a major update. 
+The next one is the staging environment, in which the system can be tested as a whole. The staging environment should be as much production-like as possible so that as many as possible required services, databases, and configurations can be connected and applied without touching the production environment. The stage environment is for testing the application before rolling out a major update. [@MileciaMcG][@Debbie]
 
-The last one is the production environment, in which the application will be running live and accessible for the users. [@devto][@plesk]
+The last one is the production environment, in which the application will be running live and accessible for the users.
 
-The delivery pipeline consists out of all those stages and manages an automated transition from one stage to the next one starting directly after the development.
+The delivery pipeline consists of all those stages and manages an automated transition from one stage to the next one starting directly after the development.
 
 For this deployment automation tools are necessary, which perform the deployments and track which version is deployed on which node. It also manages changes that need to be performed for the middleware components and configurations as well as database components or the environment. 
 
-Last there should also be a tool for **release management**, which provides a single collabiration portal for all stakeholders participating in a project to plan and track the releases of an application and its components across all stages. 
+Last, there should also be a tool for **release management**, which provides a single collaboration portal for all stakeholders participating in a project to plan and track the releases of an application and its components across all stages. 
 
-With such technologies most of the defined practices can be performed with the help of accordingly educated people and well thought-out processes. But DevOps is no static set of practices and tools, but it changes with the changes in the world IT, such as Cloud or AI. In the next chapters these technologies will be reflected and the impact those have on DevOps will be analyzed.
+With such technologies, most of the defined practices can be performed with the help of accordingly educated people and well-thought-out processes. However, DevOps is no static set of practices and tools, but it changes with the changes in the world IT, such as Cloud or AI. In the next chapters, these technologies will be reflected, and the impact those have on DevOps will be analyzed.
 
 [//]: # "Figures, sources?, abbreviations?"
 
@@ -110,132 +110,131 @@ With such technologies most of the defined practices can be performed with the h
 [//]: # "https://blog.overops.com/3-reasons-why-version-control-is-a-must-for-every-devops-team/"
 [//]: # "IBM Tech Summit"
 [//]: # "https://aws.amazon.com/devops/continuous-integration/"
-[//]: # "https://blog.overops.com/3-reasons-why-version-control-is-a-must-for-every-devops-team/"
 
 ## Microservices and 12 factor apps {#sec:ms12}
 
-As described in chapter \ref{sec:cloud} Cloud opened new possibilities of deploying and maintaining software. This eases the deployment itself as well as rolling updates without any downtime. Additionally it enables high scalability as well as high availability.
+As described in chapter \ref{sec:cloud} Cloud opened new possibilities of deploying and maintaining software. This eases the deployment itself as well as rolling updates without any downtime. Additionally, it enables high scalability as well as high availability.
 
-One model of Cloud Computing is \acl{SaaS} (\acs{SaaS}). In this model an application is deployed on the providers platform and is accessible via the internet on demand. This way the end user can access the software from anywhere anytime without the need to deploy, install or maintain anything by himself.
+One model of Cloud Computing is \acl{SaaS} (\acs{SaaS}). In this model, an application is deployed on the provider's platform and is accessible via the internet on demand. This way, the end-user can access the software from anywhere anytime. In doing so, there is no need to deploy, install, or maintain anything. The user has to pay-per-use, which means that he only pays for the resources, which he has claimed. [@Kumar2014]
 
-However, the development and deployment of portable, resilient applicatons that will thrive in cloud environments is different from traditional development. Because monolithic applications need to be completly rebuilt as soon as one component is being changed, the development is unflexible. Additionally the scaling of a single component needs a scaling of the whole application. Both are disadvantages which are opposed to the new possibilities a Cloud deployment offers. The solution was to built those applications not as one monolithic software but as a suits of services.
+However, the development and deployment of portable, resilient applications that will thrive in Cloud environments are different from traditional development. Because monolithic applications need to be rebuilt entirely as soon as one component is being changed, the development is unflexible. Additionally, the scaling of a single component needs a scaling of the whole application. Both are disadvantages which are opposed to the new possibilities a Cloud deployment offers. The solution was to build those applications not as one monolithic software but as a suit of services.
 
 ### Microservice Architecture
 
-For that the term Microservice Architecture has sprung up over the last few years. There is no unique definition for it, but when talking about Microservice Architecture mostly it is referred to Martin Fowler's characteristics described in [@fowler].
+For that, the term Microservice Architecture has sprung up over the last few years. There is no unique definition for it, but when talking about Microservice Architecture mostly, it is referred to Martin Fowler's characteristics described in [@MartinFowler].
 
-Following Fowler, the first characteristic is, that componentization is realized via services. In monolithic software different components are linked together via libraries. Services on the other side are out-of-process components. The communication is realized with web service requests or remote procedure calls. The advantage of this approach is, that they are independently deployable, which is the reason why this is the usual approach in Microservice Architecture.
+Following Fowler, the first characteristic is, that componentization is realized via services. In monolithic software, different components are linked together via libraries. Services on the other side are out-of-process components. The communication is realized with web service requests or remote procedure calls. The advantage of this approach is that they are independently deployable, which is the reason why this is the usual approach in Microservice Architecture.
 
-A second characteristic is, that Microservices are organized around business capabilities. This means, that the services take a broad-stack implementation of Software for that business era. This also leads to cross functional teams, which are working together on building the Microservice. 
+A second characteristic is that Microservices are organized around business capabilities. This means that the services take a broad-stack implementation of software for that business era. This also leads to cross-functional teams, which are working together on building the Microservice. 
 
-Additionally Microservices are handled as products instead of projects. The difference is, that while products are supported and owned by the product team over its full life time, projects are completed as soon as a specified set of functionalities is implemented. After that projects would be supported by a operation team. The approach to treat Microservices as products has the advantage, that the development team has full responsibility for it and are probably more interested in a clean, well functioning long-term solution.
+Additionally, Microservices are handled as products instead of projects. The difference is that while products are supported and owned by the product team over its full lifetime, projects are not. They are completed as soon as a specified set of functionalities is implemented. After an operation team would support those projects. The approach to treat Microservices as products has the advantage, that the development team has full responsibility for it and are probably more interested in a clean, well functioning long-term solution.
 
-Another characteristic are smart endpoints and dumb pipes, which means, that the services are as decoupled as possible. The only way they stick together is, that they receive requests of each other and produce responses after applying the defined logic. This communication is handled via simple \acs{REST}ish (\acl{REST} protocols.
+Another characteristic is the use of smart endpoints and dumb pipes, which means that the services are as decoupled as possible. The only way they stick together is that they receive requests of each other and produce responses after applying the defined logic. This communication is handled via simple \acs{REST}ish (\acl{REST} protocols.
 
-Also the governance of Microservices is usually decentralized, so that every service can be built on different technology platforms and there is a different approach to standards. This leads to a more flexible environment.
+Also, the governance of Microservices is usually decentralized so that every service can be built on different technology platforms, and there is a different approach to standards. This decentralization leads to a more flexible environment.
 
-The same applies to the data management, which is decentralized as well. Each service can manage an own database, which avoids problems through different conceptual models. While in centralized data management changes are usually made via transactions, in a decentralized data mangement system there is a transactionless coordination between the services. This does not necessarily results in a consistency, but this cost is less than the cost, that would come up, if a consistency would be forced to Microservices by distributed transactions. Instead with the problems this eventual consistency could cause are dealt with by compensating operations.
+The same applies to data management, which is decentralized as well. Each service can manage its database, which avoids problems through different conceptual models. While in centralized data management changes are usually made via transactions, in a decentralized data management system, there is transactionless coordination between the services. This does not necessarily result in consistency, but this cost is less than the cost, that would come up if a consistency would be forced to Microservices by distributed transactions. Instead, the problems this eventual consistency could cause are dealt with by compensating operations.
 
-The next characteristic is an automation of the infrastructure. This includes automated testing and deployment. It is important to test every single Microservice intensively, because the operational landsacpe for each can be strikingly different. Also the deployment could differ from service to service.
+The next characteristic is the automation of the infrastructure. This includes automated testing and deployment. It is essential to test every single Microservice intensively because the operational landscape for each can be strikingly different. Also, the deployment could differ from service to service.
 
-Important for Microservices is, that they are designed for failure. This means, that it detects failured quickly and automatically restore it in case an error happens. This demands a real time monitoring. To ensure this functionality, some companies are even executin tests in production by purpose to observe the behavior of the system if one service fails.
+Important for Microservices is that they are designed for failure. This means that it detects failures quickly and automatically restore it in case an error happens. This approach demands real-time monitoring. To ensure this functionality, some companies are even executing tests in production by purpose to observe the behavior of the system if one service fails.o
 
-The last characteristic defined by Fowler is the evolutionary design. This enables a more granular release planning, because every change can be handled as a single and only modified services needs to be redeployed. These changes should not affect the communication with other services, which is the reason why they should always be designed as tolerant as possible. 
+The last characteristic defined by Fowler is the evolutionary design. This design enables a more granular release planning because every change can be handled as a single and only modified services needs to be redeployed. These changes should not affect the communication with other services, which is the reason why they should always be designed as tolerant as possible. 
 
-The advantage of those Microservices for Cloud applications are mainly caused by the possibility to treat every component as a single. This improves the scalability of the application as well as the productivity and speed of the development, because those independent services are faster to develop. Additionally it is easier to maintian services instead of a monolith application and it gives more flexibility in technologies. Still the development of Microservices should follow some guidelines to support the concept of independently managed and iterated services.
+The advantage of those Microservices for Cloud applications is mainly caused by possibilities to treat every component as a single. This improves the scalability, productivity, and the speed of the application as well as the development. This is caused by the faster way of developing such independent services. Additionally, it is easier to maintain services instead of a monolith application, and it gives more flexibility in technologies. Still, the development of Microservices should follow some guidelines to support the concept of independently managed and iterated services.
 
 ### 12 factor apps
 
-One common set of guidelines and best practices for the development of Cloud based software and especially Microservices are the 12 factors drafted by developers at Heroku. These factors are
+One standard set of guidelines and best practices for the development of Cloud-based software and especially Microservices are the 12 factors drafted by developers at Heroku. These factors are
 
-- Codebase - For every deployed service there should be exactly one codebase, for example an IT repository
+- Codebase - For every deployed service there should be precisely one codebase, for example, an IT repository
 - Dependency - Services should explicitly declare and isolate all dependencies 
 - Config - Configurations for the deployments should be stored in the environment
 - Backing services - All backing services should be treated as attached resources
-- Build, release, run - The delivery pipeline should be strictly seperated into building, releasing and running
-- Processes - Apps should be executed in one or more statless processes
-- Port binding - Services should be exposes by listening on a specifeid port
+- Build, release, run - The delivery pipeline should be strictly separated into building, releasing and running
+- Processes - Apps should be executed in one or more stateless processes
+- Port binding - Services should be exposed by listening on a specific port
 - Concurrency - Concurrency is achieved by horizontal scaling
 - Disposability - The objective should be a robust and resilient system with fast startup and graceful shutdown
 - Dev/prod parity - The development, staging, production and every other environment should be as similar as possible
 - Logs - Applications should produce logs as event streams
-- Admin processes - Admin tasks should be packaged alongside the application to ensure that it is run with the same environment
+- Admin processes - Admin tasks should be packaged alongside the application to ensure that it is run with the same environment [@Wiggins]
 
-Following these guidelines stable and performant Microservices can be built. In the last years some technologies has emerged as particularly suitable for developing such services.
+Following these guidelines, stable and performant Microservices can be built. In the last years, some technologies have emerged as particularly suitable for developing such services.
 
 ### Container - Docker
 
-One of them is containerization of applications. This can be understood as a package for the isolation of application within a closed environent, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light weighted. This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
+One of them is containerization of applications. This can be understood as a package for the isolation of application within a closed environment, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light-weighted. [@Jerry2015] This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
 
-An industry leading container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
+An industry-leading container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
 
-![Comparison between Docker and VM[@13]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
+![Comparison between Docker and VM[@Mikesir87]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
 
-On the left side the infrastructure of a VM can be seen, on the right side the infrastructure of a Docker container. Both need the infrastructure of a physical device and its host operating system. On top of a VM on this Host Operating System there is a Hypervisor and on this Hypervisor several Guest OS can be running. On those again the apps itself can be executed and the necessary libraries and binaries are running in the background.
+On the left side, the infrastructure of a VM can be seen, on the right side, the infrastructure of a Docker container. Both need the infrastructure of a physical device and its host operating system. On top of a VM on this Host Operating System, there is a Hypervisor, and on this Hypervisor several Guest OS can be running. On those again, the apps itself can be executed, and the necessary libraries and binaries are running in the background.
 
-In case of a docker container those binaries and libraries are directly running in a container on the operating system without the need of a hypervisor or a complete version of a Guest OS. This also enables the app to be running on top of that. The containers are isolated from each other in different namespaces and own network stacks. This means, that processes running within a container cannot see or interact with processes of other containers and they don’t get privileged access to sockets or interfaces of other containers.
+In case of a docker container, those binaries and libraries are directly running inside of a container on the operating system. There is no need for a hypervisor or a complete version of a Guest OS. This approach also enables the app to be running on top of that. The containers are isolated from each other in different namespaces and own network stacks. This means that processes running within a container cannot see or interact with processes of other containers, and they do not get privileged access to sockets or interfaces of other containers. [@DockerDocumentation]
 
-Additionally there is a Docker Daemon running in another process. The Docker Daemon has three main tasks - listening and processing API requests from the Docker client to run Docker commands, managing Docker objects (images, containers, volumes and networks) and parsing Dockerfiles for building Docker images.
+Additionally, a Docker Daemon is running in another process. The Docker Daemon has three main tasks - listening and processing API requests from the Docker client to run Docker commands, managing Docker objects (images, containers, volumes, and networks) and parsing Dockerfiles for building Docker images. [@Lipke2017]
 
-With this technology several of the 12 factors described above are fullfilled. One are the explicitily declared and isolated dependencies. Within the Dockerfile every dependency needs to be explicitly declared to fullfill all the requirements of the application.
+With this technology, several of the 12 factors described above are fulfilled. One factor is the explicitly declared and isolated dependency management. Within the Dockerfile, every dependency needs to be explicitly declared to fulfill all the requirements of the application. [@NoahZoschke]
 
-Also Docker containers can't communicate with each other directly, but needs to communicate externally over with backing services over the network
+Also, Docker containers cannot communicate with each other directly but need to communicate externally over with backing services over the network [@NoahZoschke]
 
-Additionally Docker containers are executed as stateless processes with ephemeral storage only. 
+Additionally, Docker containers are executed as stateless processes with ephemeral storage only.  [@NoahZoschke]
 
-The development and production parity is given, because containers standardize how an application being delivered as well as its dependencies. [@medium]
+The development and production parity is given because containers standardize the way of delivering applications as well as its dependencies. [@NoahZoschke]
 
 Even admin processes can be run as one-off processes inside the Docker container through jumping inside the container and executing all necessary commands.
 
-Still in a local environment not every of the 12 factors are fullfilled. Instead an enabler is needed, which scalable and failure safe way to deploy those containers.
+Still, in a local environment, not each of the 12 factors is fulfilled. Instead, an enabler is needed, which scalable and failure safe way to deploy those containers.
 
-### Kubernetes as enabler
+### Kubernetes as an enabler
 
 Kubernetes can serve as such an enabler. It can host Microservices as Docker containers and ensure all of the 12 factors to be met.
 
-In general, Kubernetes enables an automated deployment, scaling and management of these containers within a cluster of nodes. Thereby a cluster consists of at least one master node and any number of worker nodes. Figure \ref{fig:kubernetes_services} shows the different services owned by master and worker nodes.
+In general, Kubernetes enables an automated deployment, scaling, and management of these containers within a cluster of nodes. Thereby a cluster consists of at least one master node and any number of worker nodes. Figure \ref{fig:kubernetes_services} shows the different services owned by master and worker nodes.
 
-![Kubernetes service allocation[@19]](images/chapter2/kubernetes.png){ width=500px #fig:kubernetes_services}
+![Kubernetes service allocation[@Fricke]](images/chapter2/kubernetes.png){ width=500px #fig:kubernetes_services}
 
-First there are several pods on each worker node. Pods are the smallest unit in Kubernetes. They contain one or more containers, which are deployed together on the same host. There they can work together to perform a set of tasks.\textsuperscript{cmp.\cite{21}}
+First, there are several pods on each worker node. Pods are the smallest unit in Kubernetes. They contain one or more containers, which are deployed together on the same host. There they can work together to perform a set of tasks. [@CoreOS]
 
-On the master node there are an \acs{API} (\acl{API}) Server, a Controller Manager, a Scheduler and a key-value store called etcd.\textsuperscript{cmp.\cite{19}, \cite{22}}
+On the master node, there are an \acs{API} (\acl{API}) Server, a Controller Manager, a Scheduler and a key-value store called etcd. [@Fricke][@JorgeAcetozi]
 
-The API Server is for clients to run their requests against. That means the API Server is responsible for the communication between Master and Worker nodes and for updating corresponding objects in the etcd. 
+The API Server is for clients to run their requests against it. That means the API Server is responsible for the communication between Master and Worker nodes and for updating corresponding objects in the etcd. [@Fricke][@JorgeAcetozi]
 
-The Controller Manager is a daemon, which embeds all of the Kubernetes controller. Examples for them are the Replication Controller or the Endpoint Controller. Those controllers are watching the state of the cluster through the API Server. Whenever a specific action happens, it performs the necessary actions to hold the current state or to move the cluster towards the desired state. {cmp.\cite{19}, \cite{22}}
+The Controller Manager is a daemon, which embeds all of the Kubernetes controllers. Examples for them are the Replication Controller or the Endpoint Controller. Those controllers are watching the state of the cluster through the API Server. Whenever a specific action happens, it performs the necessary actions to hold the current state or to move the cluster towards the desired state. [@Fricke][@JorgeAcetozi]
 
-The scheduler manages the binding of pods to nodes. Therefore it watches for new deployments as well as for old ones to create new pods if a new deployment is created or recreating a pod whenever a pod gets destroyed. The scheduler organizes the allocation of the pods within the cluster on the basis of available resources of the pods. \textsuperscript{cmp.\cite{19}, \cite{22}}%??
+The scheduler manages the binding of pods to nodes. Therefore it watches for new deployments as well as for old ones to create new pods if a new deployment is created or recreating a pod whenever a pod gets destroyed. The scheduler organizes the allocation of the pods within the cluster based on available resources. [@Fricke][@JorgeAcetozi]
 
-The etcd is a key-value store, which stores the configuration data and the condition of the Kubernetes cluster.\textsuperscript{cmp.\cite{19}, \cite{22}}
+The etcd is a key-value store, which stores the configuration data and the condition of the Kubernetes cluster. [@Fricke][@JorgeAcetozi]
 
 The worker node consists of a Kubelet, a cAdvisor, a Kube-Proxy and - as mentioned before - several Pods. 
 
-The Kubelet needs to be used if a new pod should be deployed. Then it gets the action to create all needed containers. For that it uses Docker to create them. Afterwards it combines some containers into one pod. Containers in one pod are always started and stopped together. This pod will then be deployed on the node, on which the Kubelet is located.\textsuperscript{cmp.\cite{19}, \cite{22}}
+The Kubelet needs to be used if a new pod should be deployed. Then it gets the action to create all needed containers. For that, it uses Docker to create them. Afterward, it combines some containers into one pod. Containers in one pod are always started and stopped together. This pod will then be deployed on the node, on which the Kubelet is located. [@Fricke][@JorgeAcetozi]
 
-The cAdvisor measures the usage of CPU-resources as well as demanded memory on the node, on which it is located, and notifies the master about it. Based on those measurements the scheduler allocates the pods within the cluster to ensure the best possible allocation of resources.\textsuperscript{cmp.\cite{19}, \cite{22}}
+The cAdvisor measures the usage of CPU-resources as well as demanded memory on its node. That information is forwarded to the master node. Based on those measurements, the scheduler allocates the pods within the cluster to ensure the best possible allocation of resources. [@Fricke][@JorgeAcetozi]
 
-The kube-proxy is a daemon, that runs as a simple network proxy to provide the possibility of communicating to that node within the cluster. \textsuperscript{cmp.\cite{19}, \cite{22}}
+The kube-proxy is a daemon that runs as a simple network proxy to provide the possibility of communicating to that node within the cluster.[@Fricke][@JorgeAcetozi]
 
-With this architecture Kubernetes enables all the factors, that are missing in a local deployment of Docker containers.
+With this architecture, Kubernetes enables all the factors that are missing in a local deployment of Docker containers.
 
-First the codebase of the deployment is given as yaml or json file and the container in Dockerfile. This way a source control of all the necessary code can be done easily using git for example.
+First, the codebase of the deployment is given as YAML or JSON file and the container in Dockerfile. This way, source control of all the necessary code can be done using git, for example. [@MichaelD.Elder]
 
-Also the dependencies for one Microservice can be checked easily with the functions *readinessProbe* and *livenessProbe*. While the *readinessProbe* tests whether you have backing services, the *livenessProbe* tests if the backing services are all healthy. In case of a missing or failed Microservice the appropriate pod pod is automatically restarted.
+Also, the dependencies for one Microservice can be checked easily with the functions *readinessProbe* and *livenessProbe*. While the *readinessProbe* tests whether there are backing services, the *livenessProbe* tests if the backing services are all healthy. In case of a missing or failed Microservice, the appropriate pod is automatically restarted. [@MichaelD.Elder]
 
-For storing all the necessary configurations in the process environment table, Kubernetes provides ConfigMaps. With these the containers can retrieve the config details at runtime.
+For storing all the necessary configurations in the process environment table, Kubernetes provides ConfigMaps. With these, the containers can retrieve the config details at runtime. [@MichaelD.Elder]
 
-The stage seperation is achieved through artifact management. Once the code is commited, a build occurs and the container image is built and punlished to an image registry. These releases are then deployed across multiple environments.
+Stage separation is achieved through artifact management. Once the code is committed, a build occurs, and the container image is built and published to an image registry. These releases are then deployed across multiple environments. [@MichaelD.Elder]
 
-The port binding is guaranteed through Kubernetes services. These are object to declare the network endpoints of a service and resolve endpoints of other services specified to a port of the cluster.
+The port binding is guaranteed through Kubernetes services. These are objects to declare the network endpoints of a service and resolve endpoints of other services specified to a port of the cluster. [@MichaelD.Elder]
 
-The concurrency is a factor, which is handled especially good. It allows the services to scale at runtime dependent on the replica sets defined in the declarative model. Also Kubernetes has introduced autoscaling based on compute resource thresholds.
+The concurrency is a factor, which is handled especially extensively. It allows the services to scale at runtime depending on the replica sets defined in the declarative model. Also, Kubernetes has introduced autoscaling based on compute resource thresholds. [@MichaelD.Elder]
 
-Also the disposability is fullfilled, because every pod can be destroyed or started in a simple and quick way. Additionally Kubernetes will automatically destroy unhealthy pods.
+Also, disposability is fulfilled because every pod can be destroyed or started quickly. Additionally, Kubernetes will automatically destroy unhealthy pods. [@MichaelD.Elder]
 
-Last, logs are written to *stdout* and *stderr*  and can be easily accessed. They are not stored and managed as internal files.
+Last, logs are written to *stdout* and *stderr*  and can be easily accessed. They are not stored and managed as internal files. [@MichaelD.Elder]
 
-This way Docker and Kubernetes are fullfilling every of the 12-factors, which shows, that it is a very good way to provide Microservices. This is the reason why many big companies decided to use Kubernetes as enabler for big platforms like Google Cloud to give just one example.
+This way, Docker and Kubernetes are fulfilling each of the 12-factors, which shows that it is an excellent way to provide Microservices. This is the reason why many big companies decided to use Kubernetes as an enabler for big platforms like Google Cloud to give just one example.
 
 ## Machine Learning {#sec:ml}
 
@@ -247,14 +246,18 @@ This results in a system, which continuosly improves the more data it is fed wit
 
 \newtheorem{definition}{Definition}
 \begin{definition}
-A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task in T, as measured by P, improves with experience E.
+A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task in T, as measured by P, improves with experience E. [@Mitchell:1997:ML:541177]
 \end{definition}
 
 This means, that a computer program learns if it is improving its performance at some task through experience. This experience could be input data like pictures of trees, with which it gets trained with the task to identiy those trees on that picture.
 
 ### Tasks
 
-For fullfilling such a task it is necessary to define this task before. In general tasks are described in terms of how the Machine Learning system should process an example. An example is a collection of quantitative measurements, called features. This set can be written as a vector $x \in \mathbb{R}^n$ with each $x_i$ being one of the features.
+For fullfilling such a task it is necessary to define this task before. This definition is oriented to the book "Deep Learning" by Ian Goodfellow, Yoshua Bengio and Aaron Courville. [@Goodfellow-et-al-2016]
+
+
+
+In general tasks are described in terms of how the Machine Learning system should process an example. An example is a collection of quantitative measurements, called features. This set can be written as a vector $x \in \mathbb{R}^n$ with each $x_i$ being one of the features.
 
 The most important and most common tasks in computer science are
 
@@ -296,7 +299,7 @@ An example for this is to predict a logical sequence of numbers without the need
 
 ### Training approaches
 
-As mentioned above, in Machine Learning all those tasks are not solved by explicitily coding algorithms and formulas, but with training a system with given input data. For training those systems there are different approaches existing, each used for different requirements.
+As mentioned above, in Machine Learning all those tasks are not solved by explicitily coding algorithms and formulas, but with training a system with given input data. For training those systems there are different approaches existing, each used for different requirements. This chapter will also be oriented to the book "Deep Learning". [@Goodfellow-et-al-2016]
 
 A first approach is called supervised learning. Supervised learning requires an additional value for each example representing the optimal solution for it. Formally the data set can be described as $\mathbb{D} \in 2^{\mathbb{R}^n}$. For every example vector $x \in \mathbb{D}$ there exists a $y \in \mathbb{R}$ such that $y=f(x)$ with $f:\mathbb{R}^n \rightarrow \mathbb{R}$ being the function that describes the task to be learned. This additional feature is mostly referred to as label or target. Usually the the tasks are accomplished by approximating the conditional probability distribution $p(x|y)$.
 
@@ -310,7 +313,7 @@ Common tasks for unsupervised learning are clustering or anomaly detection.
 
 In figure \ref{fig:training_comparison} a comparison between supervised and unsupervised data sets used for clustering and classification can be seen. The data shown is not of a particular use case and just for demonstration purposes. In both representations the examples of the data set have only two features, one corresponding to the x-axis and the other ont the the y-axis. The task is to identify clusters in the data.
 
-![Comparison of unsupervised and semi supervised data sets used for clustering[@khatun]](images/chapter2/training_comparison.png){ width=600px #fig:training_comparison}
+![Comparison of unsupervised and semi supervised data sets used for clustering[@AmnahKhatun]](images/chapter2/training_comparison.png){ width=600px #fig:training_comparison}
 
 The difference is, that some of the data points of the second data set are labeled with either 'Class 1' or 'Class 2'. In the figure this can be seen by the coloration of the data points. Even tough in this example there are only some data points labeled, which is the reason why the applied learning approach is called semi-supervised learning, it is still functioning as an example for supervised learning and demonstrates the differences to the unsupervised model.
 
@@ -326,9 +329,9 @@ Additionally there is another approach called reinforcement learning. In reinfor
 
 With the approaches mentioned above the objective is to create and train a model, with which the tasks can be fullfilled. In modern Machine Learning the most important type of such models are \acl{ANN}s (\acs{ANN}s).
 
-Neural Networks are inspired by biological neural networks like animal brains. According to that, \acs{ANN}s are based on a collection of nodes called artificial neurons. Each neuron has gets one or more input values and one output value. To generate the output value the neuron does some mathematical computations with the input values. 
+Neural Networks are inspired by biological neural networks like animal brains. According to that, \acs{ANN}s are based on a collection of nodes called artificial neurons. Each neuron has gets one or more input values and one output value. To generate the output value the neuron does some mathematical computations with the input values. [@Stroetmann2018]
 
-A network of such neurons usually persists out of at least three layers. The first layer is the input layer of the data, with which the neural network should be fed. Those values are then sent to every neuron of the hidden layer. Those are doing the necessary calculations described below and sending their output to the output layer. This can be seen in figure \ref{fig:neural_net}.
+A network of such neurons usually persists out of at least three layers. The first layer is the input layer of the data, with which the neural network should be fed. Those values are then sent to every neuron of the hidden layer. Those are doing the necessary calculations described below and sending their output to the output layer. [@Stroetmann2018] This can be seen in figure \ref{fig:neural_net}. 
 
 ![Simple neural network](images/chapter2/neural_net.png){ width=400px #fig:neural_net}
 
@@ -336,41 +339,41 @@ On the hidden layer the neurons are combining the inputs and calculating a new v
 
 - A weight vector $w$
 - A bias $b$
-- An activation function $f(x)$
+- An activation function $f(x)$ [@VictorZhou]
 
-The weight vector is used to weight the different inputs. This means, that each input is multiblied by a weight as can be seen in equation \ref{eq:weight}
+The weight vector is used to weight the different inputs. This means, that each input is multiblied by a weight as can be seen in equation [@VictorZhou] \ref{eq:weight}
 
 \begin{equation}
 x_1 \rightarrow x_1 * w_1
 \end{equation}
 
-After that, all the weighted inputs are added together. Additionally the bias $b$ is added to this formula:
+After that, all the weighted inputs are added together. Additionally the bias $b$ is added to this formula: [@VictorZhou]
 
 \begin{equation}
 (x_1 * w_1) + (x_2 * w_2) + b
 \end{equation}
 
-Finally, the activation function is being used to generate the output. For that it takes the sum calculated in \ref{eq:weighted_sum} as input:
+Finally, the activation function is being used to generate the output. For that it takes the sum calculated in \ref{eq:weighted_sum} as input: [@VictorZhou]
 
 \begin{equation}
 y = f((x_1 * w_1) + (x_2 * w_2) + b)
 \end{equation}
 
-A typical activation function is the sigmoid function, which outputs numbers in the range (0,1). The higher the input, the closer the result gets to 1. The lower the input, the closer it gets to 0. The sigmoid function can be seen in \ref{eq:sigmoid}
+A typical activation function is the sigmoid function, which outputs numbers in the range (0,1). The higher the input, the closer the result gets to 1. The lower the input, the closer it gets to 0. The sigmoid function can be seen in \ref{eq:sigmoid} [@VictorZhou]
 
 \begin{equation}
 y = \frac{1}{1 + e^{-x}}
 \end{equation}
 
-In figure \ref{fig:neuron} this whole process that happens within the artificial neuron can be seen in a simplified way. It takes the inputs $x_1$ and $x_2$, multiplies them with their belonging weights, sums up the results and add a bias. Last it takes the result of this calculation as input for the activation function. The result of this is the output $y$.
+In figure \ref{fig:neuron} this whole process, that happens within the artificial neuron, can be seen in a simplified way. It takes the inputs $x_1$ and $x_2$, multiplies them with their belonging weights, sums up the results and add a bias. Last it takes the result of this calculation as input for the activation function. The result of this is the output $y$. [@VictorZhou]
 
-![2 input Neuron[@towardsdatascienceNN]](images/chapter2/neuron.png){ width=400px #fig:neuron}
+![2 input Neuron[@VictorZhou]](images/chapter2/neuron.png){ width=400px #fig:neuron}
 
-A neural network can consist out of more than one hidden layer. In this case they are called deep neural network. In figure \ref{fig:deep_nn} such a deep neural network with three hidden layers and two output values can be seen.
+A neural network can consist out of more than one hidden layer. In this case they are called deep neural network. In figure \ref{fig:deep_nn} such a deep neural network with three hidden layers and two output values can be seen. [@Stroetmann2018]
 
 ![Deep neural network with 3 hidden layers](images/chapter2/deep_neural_net.png){ width=500px #fig:deep_nn}
 
-When training a network the objective is to minimize the loss. The loss is  a function, which provides information about how good the neural network is. One common loss function is the Mean Squared Error:
+When training a network the objective is to minimize the loss. The loss is  a function, which provides information about how good the neural network is. One common loss function is the Mean Squared Error: [@VictorZhou]
 
 \begin{equation}
 MSE = \frac{1}{n}\sum_{i=1}^{n}{(y_{true}-y_{pred})^2}
@@ -378,7 +381,7 @@ MSE = \frac{1}{n}\sum_{i=1}^{n}{(y_{true}-y_{pred})^2}
 
 with $n$ as the number of samples, $y_true$ as the true value of the variable and $y_pred$ as the predicted value of it. To minimize this loss the neural network uses the partial derivative to change the weights and biases accordingly. This is done over and over again for every sample until the network is well trained with the given inputs.
 
-Still the Developer does not only have to give some input data, train the neural network and think all his work is done. Instead other challenges has to be faced like preparing the data, choosing the right parameters and amount of input data to get the best results and avoid problems like over- or underfitting the network. Overfitting means, that a network is trained with too many irrelevant features, called noise. This leads to a perfect working system for the known data, which however doesn't work at all for unknown data, because it is too specialized on the data on which it was trained on. Underfitting on the other hand occurs if the neural network was informed by too few features or regularized too much, which prevents the neural network from learning from the dataset. How the developer handles this difficulties and what the necessary steps are in this new kind of development will be described in chapter \ref{sec:aicycle}.
+Still the Developer does not only have to give some input data, train the neural network and think all his work is done. Instead other challenges has to be faced like preparing the data, choosing the right parameters and amount of input data to get the best results and avoid problems like over- or underfitting the network. Overfitting means, that a network is trained with too many irrelevant features, called noise. This leads to a perfect working system for the known data, which however doesn't work at all for unknown data, because it is too specialized on the data on which it was trained on. Underfitting on the other hand occurs if the neural network was informed by too few features or regularized too much, which prevents the neural network from learning from the dataset. How the developer handles this difficulties and what the necessary steps are in this new kind of development will be described in chapter \ref{sec:aicycle}. [@Goodfellow-et-al-2016]
 
 [//]: # "https://towardsdatascience.com/machine-learning-for-beginners-an-introduction-to-neural-networks-d49f22d238f9"
 [//]: # "Stroetmann Skript"
@@ -387,7 +390,7 @@ Still the Developer does not only have to give some input data, train the neural
 
 The new possibilities opened by Machine Learning as described in chapter \ref{sec:ml} forces developers to change their development lifecycle in a drastic way if they want to develop a Machine Learning based Artificial Intelligence. This lifecycle will be described and explained in the following chapter.
 
-Important to mention is, that instead of code the developers has to produce for a specified objective, in Machine Learning the developers get some data as input and must train a model with this data to meet the objective. To simplify the process described in this chapter an example data set will be given and in the process of explaining the single steps this data will be used to exemplify these. This dataset can be seen below.
+Important to mention is, that instead of code the developers have to produce for a specified objective, in Machine Learning the developers get some data as input and must train a model with this data to meet the objective. To simplify the process described in this chapter an example data set will be given and in the process of explaining the single steps this data will be used to exemplify these. This dataset can be seen below.
 
 \begin{table}[htb]
 \centering
@@ -408,26 +411,26 @@ Important to mention is, that instead of code the developers has to produce for 
 
 With this data the developer has to go through several steps to build a useful system based on them. These steps are defined in an open standard process model called \acl{CRISP-DM} or \acs{CRISP-DM}. This model can be seen in figure \ref{fig:crisp_dm}.
 
-![CRISP-DM standard[@statistik-dresden]](images/chapter2/crisp_dm.png){ width=400px #fig:crisp_dm}
+![CRISP-DM standard[@WolfRiepl]](images/chapter2/crisp_dm.png){ width=400px #fig:crisp_dm}
 
-Following this standard model the first step is Business Understanding. During this step the project team has to determine overall goals and tasks for what to do with these data. For that the team has to access the situation, which means that the team has to include possible risks, costs, benefits and requirements for every possible objective in their evaluation process. After the overall objective is defined this can be partitioned into several data mining goals what to do specifically with this data. Also success criteria should be defined and a project plan should be established, which will be followed in the next steps.
+Following this standard model the first step is Business Understanding. During this step the project team has to determine overall goals and tasks for what to do with these data. For that the team has to access the situation, which means that the team has to include possible risks, costs, benefits and requirements for every possible objective in their evaluation process. After the overall objective is defined this can be partitioned into several data mining goals what to do specifically with this data. Also success criteria should be defined and a project plan should be established, which will be followed in the next steps. [@Wirth2000]
 
 For the example above such an objective could be to predict the price of real estate by the given features. The criteria could be, that in 90% of the tested data after the creation of the model the predicted price should lie in between a range of 10% of the real price.
 
-Next the data need to be understood. For that, first as much data as possible should be collected and analyzed to get a first insight. This data should then be evaluated by its quality to estimate the necessary effort to prepare and clean the data for building a model. Also possible problems should be detected early to fix them as soon as possible. 
+Next the data need to be understood. For that, first as much data as possible should be collected and analyzed to get a first insight. This data should then be evaluated by its quality to estimate the necessary effort to prepare and clean the data for building a model. Also possible problems should be detected early to fix them as soon as possible.  [@Wirth2000]
 
 In the example there are far too little data for a real model and much more would be needed in a real project. But even in this small dataset some problems can be detected. The first one is the missing entry for the second object in the column "year built" as well as for the last object in the column "# of rooms". Also the type of the estate is categorical instead of numerical, which could cause problems when training the model.
 
-The next step is probably the most costly one - data preparation. First the project team needs to select the data, which it will use for building the model. Then the data need to be preprocessed.
+The next step is probably the most costly one - data preparation. First the project team needs to select the data, which it will use for building the model. Then the data need to be preprocessed.  [@Wirth2000]
 
 This preprocessing step includes detecting and removing noisy and redundant data. Noisy data means data, that are irrelevant for the chosen business objective. In the given example the age of the buyer is an unnecessary information, because it doesn't change the price of the estate. That's why this column can be removed. Also wrongly labeled data should be removed. 
 Additionally in the preprocessing step unbalanced datasets should be balanced. This means, that if one specific class of data is overrepresented and another one underrepresented, the dataset should be balanced so that the distribution of the different data classes are representative. In the example appartments could be overrepresented, because there are twice as much appartments in the selected data than houses. The solution would be to add some more houses in the dataset or remove some appartments.
-Next missing values have to be handled, because null values could influence the model in a negative way. A better way would be to fill the missing cells with average values for this type of data. But to choose the average value is not always the right way - it could be better to choose the minimum for example. To decide the method of handling missing values is one challenging task for the developer. 
-Lastly, there can be features in a dataset that are not numerical but categorical. This data need to be encoded before training the model. The encoding technique depends on the context of the categorical data.  One simple technique is label encoding, with which for every different category tha column gets a different number. For example every 'Appartment' gets a 1 and every 'House' a 2 in the 'type' column. However, this could cause trouble, because the learning algorithm could interprete the numbers as sequence. That's why another technique is One-Hot-Encoding. In this technique every possible category gets an own column and for every entry in the dataset the value is set to either 1 or 0 for all of the columns. In the example this would mean, that the column 'type' would be replaced with the columns 'appartment' and 'house'. For every appartment the column 'appartment' would then be set to 1 and the column 'house' to 0. For every house it would be exactly the other way round.[@mediumsunny]
+Next missing values have to be handled, because null values could influence the model in a negative way. A better way would be to fill the missing cells with average values for this type of data. But to choose the average value is not always the right way - it could be better to choose the minimum for example. To decide the method of handling missing values is one challenging task for the developer. [@article]
+Lastly, there can be features in a dataset that are not numerical but categorical. This data need to be encoded before training the model. The encoding technique depends on the context of the categorical data.  One simple technique is label encoding, with which for every different category tha column gets a different number. For example every 'Appartment' gets a 1 and every 'House' a 2 in the 'type' column. However, this could cause trouble, because the learning algorithm could interprete the numbers as sequence. That's why another technique is One-Hot-Encoding. In this technique every possible category gets an own column and for every entry in the dataset the value is set to either 1 or 0 for all of the columns. In the example this would mean, that the column 'type' would be replaced with the columns 'appartment' and 'house'. For every appartment the column 'appartment' would then be set to 1 and the column 'house' to 0. For every house it would be exactly the other way round.[@SunnySrinidhi]
 
-After the preprocessing the dataset could be improved by feature engineering. The objective of this task is to improve the features such that the model better understand the coherences and improves its production function. For example new features could be created based on the knowledge of the data. A condition for that is to have a really good understanding of the data. In the example above the developers could combine the column 'year built' and 'year bought' to 'age at date of purchase' with a simple subtraction, which could give an important insight of the payed price. Another meaningful feature could be some relation between the size of the real estate and the number of rooms.
+After the preprocessing the dataset could be improved by feature engineering. The objective of this task is to improve the features such that the model better understand the coherences and improves its production function. [@article] For example new features could be created based on the knowledge of the data. A condition for that is to have a really good understanding of the data. In the example above the developers could combine the column 'year built' and 'year bought' to 'age at date of purchase' with a simple subtraction, which could give an important insight of the payed price. Another meaningful feature could be some relation between the size of the real estate and the number of rooms. 
 
-In the next step all collected and cleaned data should be integrated and merged. After that the feature values should be normalized, because there is usually a significant difference between the minimum and the maximum value of a feature. To increase the performance of a model it could be helpful to scale the values down to, for exaple, a range from 0 to 1. 
+In the next step all collected and cleaned data should be integrated and merged. After that the feature values should be normalized, because there is usually a significant difference between the minimum and the maximum value of a feature. To increase the performance of a model it could be helpful to scale the values down to, for exaple, a range from 0 to 1. [@article]
 
 In the end the example above could look like this:
 
@@ -450,17 +453,15 @@ In the end the example above could look like this:
 
 This data set has then to be splitted into three different sets - training, validation and testing. This is done to ensure that the model does not overfit to the training data. The model will be trained with the training set. Then the hyperparameters, which are used to improve the model with some different parameters dependent on the used model, are tuned with the help of the validation set. The test set is used to test the models actual performance at the end.
 
-After this, the next step is the modelling. For this, first, a training technique as well as a basic model has to be selected. Usually different models are tested several times, so that the best model can be choosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents for example over- and underfitting the model with the training data.
+After this, the next step is the modelling. For this, first, a training technique as well as a basic model has to be selected. Usually different models are tested several times, so that the best model can be choosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents for example over- and underfitting the model with the training data. [@Wirth2000]
 
-Then the model has to be evaluated with the test set. Also the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders the steps can be repeated starting from the Business Understanding with a deeper knowledge. This is how a model can be continuosly improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features or applying different training methods.
+Then the model has to be evaluated with the test set. Also the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders the steps can be repeated starting from the Business Understanding with a deeper knowledge. This is how a model can be continuosly improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features or applying different training methods. [@Wirth2000]
 
 ![Iterative Machine Learning lifecycle](images/chapter2/training_cycle.png){ width=500px #fig:ml_cycle}
 
 This process from preparing the data and adjusting the parameters can be seen in figure \ref{fig:ml_cycle} from a more technical perspective. First the developer gets the raw dataset, then he preprocesses this dataset and applies feature engineering to improve it. After it the dataset is splitted into different sets and the parameters get tuned. At the same time a model is getting selected and trained with the training set and the given parameters. This step is repeatable until the developer is satisfied with the created model. In the end the models predictions will be evaluated against the test data.
 
-Last the model needs to be deployed. For that also the monitoring and maintenance of the product needs to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process.
-
-ASUM?
+Last the model needs to be deployed. For that also the monitoring and maintenance of the product needs to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process. [@Wirth2000]
 
 With this standardized process of Artificial Intelligence development the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
 
@@ -468,11 +469,11 @@ With this standardized process of Artificial Intelligence development the basics
 
 The new steps described in chapter \ref{sec:aicycle} forces developers not only to change their development cycle, but also the operation. Additionally, new architectural models like micrsoservices, cloud technologies like containerization or Kubernetes as well as \acs{SaaS} as a new Software model as described in chapter \ref{sec:ms12} opens new possibilities of a scalable, flexible and reliable deployment of products. All this changes the way of DevOps for Machine Learning / AI and not all of the existing principles and practices are applicable any more or better approaches are imaginable. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
 
-First, DevOps for Machine Learning has to follow the principles named in chapter \ref{devops}. To repeat, these are following:
+First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are following:
 
 - Develop and test against production like systems
 - Deploy with repeatable processes
-- Amplify a feedback loop
+- Amplify a feedback loop [@Sharma2017]
 
 Additionally, the four stages - steer, develop, deploy and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through and necessary adoptions or additions will be made.
 
@@ -484,19 +485,17 @@ The difference in the steer phase is, that there is an additional step, which in
 
 The first is in the roles of the people, who handle these steps. This deep insight of the business data needs experts on this field instead of programmers with a lack of understanding all the correlations and meanings. Instead, usually, data scientists or data analysts are needed for defining the needed data, evaluating the quality and detecting problems, so that a clear way to clean and prepare the data can be determined.
 
-A second difference is the need of a tool to visualize these data. For that the data scientists or analysts need skills for creating visualized data as quickly as possible. A very common tool for that are *Jupyter Notebooks* as can be seen in figure \ref{jupyter_nb}.
+A second difference is the need of a tool to visualize these data. For that the data scientists or analysts need skills for creating visualized data as quickly as possible. A very common tool for that are *Jupyter Notebooks*, with which an easy preparation and plotting of the data is possible with the help of Python.
 
-First the data need to be CODE STUFF with python, then it can be visualized easily. This leads to a better understanding of the data, which helps finding issues, evaluate the quality, defining the way how to prepare and the objectives of what to do with the data. 
-
-However, the most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is splitted in two stages - data preperation and the building of the model. Also the Code is not the only input the developers have to deal with, but there is data as a second, important input. This leads to several differences for the practices and tools defined for this stage.
+However, the most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is splitted in two stages - data preperation and the building of the model. Also the Code is not the only input the developers have to deal with, but there is data as a second, important input. [@Dillon] This leads to several differences for the practices and tools defined for this stage.
 
 Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators, but also the data. Usual source control software like git sets limitations to the file size and are no designed for handling other data than code. This results in the need of another tool to handle big datasamples when developing an AI product, so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
 
-A solution for this problem could be Git \acl{LFS} (\acs{LFS}), which is desinged for storing audio samples, graphics, datasets and videos. 
+A solution for this problem could be Quilt or Git \acl{LFS} (\acs{LFS}), which are desinged for storing audio samples, graphics, datasets and videos. 
 
-Another common tool for developing software are IDEs, which are supporting the developer in coding, collaborating with your team and integrating the workflow in an efficient way. For Machine Learning such tools have to be extended or new tools need to be created to visualize and especially prepare data. This includes for example possibilities to label images or videos. Currently for this different tools has to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
+Another common tool for developing software are IDEs, which are supporting the developer in coding, collaborating with your team and integrating the workflow in an efficient way. For Machine Learning such tools have to be extended or new tools need to be created to visualize and especially prepare data. This includes for example possibilities to label images or videos and preprocess the data. Currently for this different tools has to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
 
-However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox to name just one, which offers simple data labeling and management, collaboration and even some automation features.
+However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox to name just one, which offers simple data labeling and management, collaboration and even some automation features. This labeled and prepared data then needs to be available from a shared repository, to which the whole team can contribute to, so that they can collaborate with each other.
 
 Another practice in traditional Software development is called *Continuous testing*. This includes automatically build the software and run unit tests on every single component as well as automated integration tests of the application as a whole. In AI development a completly different form of testing is necessary: 
 
@@ -508,11 +507,38 @@ For this approach the data needs to be splitted automatically into a training an
 
 The easiest one is the accuracy, which divides the correct classified results by all tested samples:
 
-Another indicator is a confusion matrix. A confusion matrix shows the number of *True Positives* and *True Negatives*, which states correctly predictes positive or negative values, as well as *False Positives* and *False Negatives*, which states falsely predicted values. An example can be seen below in figure \ref{fig:confusion_matrix}.
+\begin{equation}
+Accuracy := \frac{\mbox{number of correct predictions}}{\mbox{number of all predictions}}
+\end{equation}
+
+Another indicator is a confusion matrix. A confusion matrix shows the number of *True Positives* and *True Negatives*, which states correctly predictes positive or negative values, as well as *False Positives* and *False Negatives*, which states falsely predicted values. An example can be seen below:
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Example confusion matrix [@aditamishra]}
+\begin{tabular}{ c | c | c  }
+n=165 &\textbf{Predicted Positive} &\textbf{Predicted Negative} \\ \hline
+\textbf{Actual Negative} & 50 & 10  \\
+\textbf{Actual Positive} & 5 & 100 \\
+\end{tabular}
+\end{table}
 
 A third indicator is the F1 score, which first calculates the precision as well as the recall of a model. Precision is the number of correctly predicted positive results divided by the number of predicted positive results. Recall on the other hand is the number of correctly predicted positive results divided by the number of all samples. The F1 scores combines those two values to find a balance between them. The greater the F1 score, the better the performance of the model:
 
+\begin{equation}
+\begin{aligned}
+Precision &= \frac{\mbox{TruePositives}}{\mbox{TruePositives} + \mbox{FalsePositives}}\\
+Recall &= \frac{\mbox{TruePositives}}{\mbox{TruePositives} + \mbox{FalseNegatives}}\\
+F1 &= 2 * \frac{1}{\frac{1}{Precision}+\frac{1}{Recall}}
+\end{aligned}
+\end{equation}
+
 Last, also the mean squared error can be used as a measure for the performance of a model. The mean squared error calculates the average of the differences between the real value and the predicted value:
+
+\begin{equation}
+MSE := \frac{1}{N} * \sum_{j=1}^{N}{(y_j - \hat{y}_j)^2}
+\end{equation}
 
 However, there are still several other indicators that can be used for measuring the performance of a model. The developer should decide which indicators to use, so that they will be seen to evaluate the performance of a model after the automated tests have been driven.
 
@@ -528,12 +554,29 @@ For ML applications this monitoring and feedback gets one more, significant role
 
 Another eminent difference are the roles of the developing people. While in traditional development the developers are IT specialists, who can handle the operation cycle as well as the development. In ML development, usually Data Scientists take over the main part of the work as already mentioned above. They got a special skillset when it comes to the preparation of data and feature engineering, but sometimes they are lacking in experience with operation tools like delivery pipelines. That's why an easier way to build and operate a pipeline is necessary, which can be easily handled and reused, so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
 
-pipeline
+An important part of a solution is to provide an easy-to-use delivery pipeline for the Data Scientists, which combines every step of the development and automates all the operations as far as possible, so that the Data Scientist can focus on his main work. 
 
-evaluate principles - production like (k8s); repeatable and reliable (pipeline); monitor and validate (harder; get user feedback; can be reused)
+An example draft of such a pipeline can be seen in figure \{fig:devopsaipipeline}.
 
+![Example devops pipeline](images/chapter2/devops_ai_pipeline.png){ width=500px #fig:devops_architecture}
 
-UNIT TESTS & INTEGRATION TESTS!!!
-WHITE BOX VS BLACK BOX?
-pay per use?
+There the first difference to traditional DevOps pipelines is, that there is another input than only the code. This is mainly the data, but also a base model, on which the model will be trained on. Both of them can optionally serve as trigger for starting the delivery process. Alternatively the process can be sequentially executed or bumped by the developers by purpose.
+
+Then there are a preprocessing as well as a feature engineering step. These two steps are realized by some scripts of the developers, which take over the preprocessing and feature engineering automatically. The cleaning and every other necessary step to be made with the data has to be done manually before pusing the data to its repository.
+
+After this the dataset is splitted into three sets - training, validation and test. The training and validation sets are then used for the training of the model, while the test set is only used to test the finished model at the end. 
+
+However, before the training of the model the pipelines scales up the cluster, so that enough ressources for the training step are available. Also the hyperparameter tuning can be done by automated scripts here. Alternatively those hyperparameters can be given by input parameters before the pipeline is executed.
+
+For the training of the model, which takes the main part of the time, the pipeline usually uses a given baisc model, on which the model will be based on. This is done, because building a completly new model from scratch needs a lot of time and huge amounts of data, which is the reason why most models are based on some pretrained basic models and only some are built from scratch.
+
+After this is being done, the cluster can scale down again and the model can be tested with the test set. If the results are satisfying, the model and its application can get containerized automatically and then deployed on the cluster. The developer can define the way of how the application should be published and accessible from the cluster for the end-users. In case the model doesn't meet the requirements the data needs or the code needs to be adjusted or cleaned or different hyperparameters should be chosen, so that a better model will be built in the next try.
+
+Last it is to mention, that through feedback givenby the users during the operation stage, the dataset is continuously extended by new data. This is why the pipeline should repeat the model building sequentially, so that these new data can be used to improve the application continuously.
+
+With these adjusted and complemented practices above as well as with a delviery pipeline similar to the described one the principles of DevOps can be kept. Through the automated containerization and deployment on a cluster every environment can look exactly like the production environemnt. If the whole pipeline and application should be tested first locally before deploying it on a Cloud it can be tested on a lucel Kubernetes cluster like Minikube, which will be described in chapter \ref{sec:minikube}.
+Also the delivery pipeline guarantees a repeatable and reliable deployment, in which almost every step can be automated and the Data Scientist can focus on his work with the Data. The only thing the developers need to do is providing scripts for an automated preprocessing and feature engineering if necessary.
+The monitor and feedback principle has an even higher importance, because through this the application can be continuously improved through feeding the system with the newly gained knowledge.
+
+This is why such a pipeline has a big importance in DevOps for AI. In the next chapters two different approaches to build such a pipeline will be presented and evaluated with previously defined criteria.
 
