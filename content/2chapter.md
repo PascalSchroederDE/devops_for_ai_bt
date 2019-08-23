@@ -1,4 +1,4 @@
-# Theory {#sec:theory}
+# Theory - DevOps, Cloud and Machine Learning {#sec:theory}
 
 In this chapter, the theoretical basis, that is needed for creating DevOps principles for AI, will be given. For that, it will be started with an explanation of what DevOps is in general. Then it will be shown, which new possibilities came with Cloud and 12-factor-apps in chapter \ref{sec:ms12}. After that, the basics of Machine Learning and AI will be given in chapter \ref{sec:ml}, specializing on the lifecycle of AI development in chapter \ref{sec:aicycle}. Last in chapter \ref{sec:devopsai}, all these knowledge will be combined to adopt the DevOps principles explained in chapter \ref{sec:devops} to the new world of AI with the help of Cloud technologies.
 

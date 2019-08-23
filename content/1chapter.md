@@ -1,4 +1,4 @@
-# Introduction {#sec:intro}
+# Introduction - Software Development Trends {#sec:intro}
 
 The upcoming trends of \acl{AI} (\acs{AI}) and Cloud Computing are changing the world of \acl{IT} (\acs{IT}) as a whole. One very important aspect is the way applications are developed and operated. These processes can be summarized under the term \acl{DevOps} (\acs{DevOps}). This work will deal with how AI and Cloud force DevOps to transform and will discuss different approaches to adopt and realize those principles for AI applications. The following chapter will introduce the terms of AI and Cloud computing and will describe how these innovations force DevOps to transform.
 
@@ -14,12 +14,12 @@ This new type of software development is getting more and more important. Some p
 
 In this work, all the progresses that have led to this transformation will be explained in more detail. Additionally, it will be described which difficulties and challenges come along with it, focused on necessary changes for operations of the development cycle, called DevOps. 
 
-[//]: # (https://www.forbes.com/sites/janakirammsv/2018/05/27/here-are-three-factors-that-accelerate-the-rise-of-artificial-intelligence/#4349a30badd9)
-[//]: # (https://www.idc.com/getdoc.jsp?containerId=prUS449114199)
+[//]: # "https://www.forbes.com/sites/janakirammsv/2018/05/27/here-are-three-factors-that-accelerate-the-rise-of-artificial-intelligence/#4349a30badd9"
+[//]: # "https://www.idc.com/getdoc.jsp?containerId=prUS449114199"
 
-[//]: # (https://www.forbes.com/sites/mariyayao/2018/04/18/6-ways-ai-transforms-how-we-develop-software/#a67a11026cf8)
+[//]: # "https://www.forbes.com/sites/mariyayao/2018/04/18/6-ways-ai-transforms-how-we-develop-software/#a67a11026cf8"
 
-[//]: # (karpathy)
+[//]: # "karpathy"
 
 ## Cloud Computing  {#sec:cloud}
 
@@ -57,13 +57,13 @@ Serverless computing also reduces the interdependence, because the functions can
 
 All this forced developers to change their way of developing and operating their products. This change of the DevOps lifecycle will be introduced in chapter \ref{sec:devopsai}
 
-[//]: # (https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf)
+[//]: # "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf"
 
-[//]: # (https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-3.pdf)
+[//]: # "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-3.pdf"
 
-[//]: # (https://aws.amazon.com/lambda/)
+[//]: # "https://aws.amazon.com/lambda/"
 
-[//]: # (https://hub.packtpub.com/how-serverless-computing-is-making-ai-development-easier/)
+[//]: # "https://hub.packtpub.com/how-serverless-computing-is-making-ai-development-easier/"
 
 
 ## Development Operations in time of AI {#sec:devopsai}
@@ -96,9 +96,9 @@ The second trend is using DevOps for the development of AI. This means adopting 
 
 In this work this second trend will be analyzed, the influences leading to it will be described and possible solutions will be shown, compared and discussed.
 
-[//]: # (Gartner)
-[//]: # (https://techbeacon.com/app-dev-testing/devops-dictates-new-approach-cloud-development)
-[//]: # (https://blog.paperspace.com/ci-cd-for-machine-learning-ai/)
+[//]: # "Gartner"
+[//]: # "https://techbeacon.com/app-dev-testing/devops-dictates-new-approach-cloud-development"
+[//]: # "https://blog.paperspace.com/ci-cd-for-machine-learning-ai/"
 
 
 
