@@ -49,19 +49,39 @@ To create a model, Tensorflow offers APIs for several programming languages like
 (x_train, y_train), (x_test, y_test) = dist.load_data()
 ```
 
-The epithet `x` datasets are for the input, the `y` datasets for the labels. After that, keras can be used to build a model. For this, first, there need to be added some layers. In this example 
+The epithet `x` datasets are for the input, the `y` datasets for the labels. After that, keras can be used to build a model. For this, first, there need to be added some layers. In this example the first layer is the input layer, which receives a matrix in the size of 28x28. The second layer is the hidden layer. This layer is being initialized with 128 units and the sigmoid activation function. Last the output layer is defined, which gives 10 outputs - one match probability for every category. 
 
 ```
 model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
-    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dense(128, activation='sigmoid'),
     tf.keras.layers.Dense(10, activation='softmax')
 ])
+```
 
+After that the model has to be compiled with appropriate optimization, loss and metrics functions:
+
+```
 model.compile(optimizer=tf.keras.optimizers.RMSprop(),
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(),
                 metrics=[tf.keras.metrics.SparseCategoricalAccuracy()])
 ```
+
+Last this model can then be trained with some data. The num of epochs represents the number of how many times the model will be fed with the data :
+
+```
+model.fit(x_train, y_train, epochs=5)
+```
+
+This model can then be evaluated with comparing the predictions to the test set:
+
+```
+model.evaluate(x_test, y_test)
+```
+
+The evalution function will compare the labels to the predictions and outputs the loss and accuracy of the model. 
+
+This development process enables the User to quickly build and train neural networks and made Tensorflow to one of the most used Machine Learning fraemworks.
 
 ### Kubeflow
 
@@ -135,8 +155,55 @@ With building a pipeline with the Azure ML service it allows the user to automat
 
 An example how this service can be used will be described in chapter \ref{sec:azurepip}.
 
-## Use case of this work
+## Project objective and conditions
 
+In this work two example pipelines will be built and compared. For this a sample model will be built and every step of the AI development lifecycle will be gone through. The objective is to build a pipeline fullfilling every target and principle described in chapter \ref{devops:ai}.
+
+For this a public dataset will be used, called Fashion-MNIST. It has been put together by Zalando Research and contains 60.000 training and 10.000 testing images of different garments with a size of 28x28 pixel. This dataset has been converted to a CSV file on kaggle.com \ref{kaggle}. This version has been used to manipulate the data for preparing a more realistic dataset with noises and faults, which have to be removed. This way all the steps of AI development can be run through in a realistic way.
+
+For this, first, the training and testing datasets have been read and merged:
+
+```
+train_data = pd.read_csv('data/fashion-mnist_train.csv')
+test_data = pd.read_csv('data/fashion-mnist_test.csv')
+test_data.dropna(axis=1)
+data = train_data.append(test_data, ignore_index=True)
+```
+
+Then, the labels have been manipulated, so that the category labels are given as strings to show, what the pictures really represent. This forces the developer to clean these data later during the preprocessing step.
+
+```
+class_names = {0 : 'top', 1 : 'trouser', 2: 'pullover',3 : 'dress', 4: 'coat',
+               5 : 'sandal', 6 : 'shirt', 7 : 'sneaker', 8 : 'bag', 9: 'ankle_boot'}
+
+data.label = [class_names[item] for item in data.label]
+```
+
+Then,, some faulty values have been inserted, which has to be removed later:
+
+```
+import random
+
+manipulated_vals = ['tshirt', 'hat', 'jacket', 'accessoire', 'facemask']
+
+for i in data.index:
+    rnd = random.random()
+    if rnd <= 0.001:
+        data.loc[i,'label'] = random.choice(manipulated_vals)
+```
+
+For that, it will be iterated through every row and some random chosen rows will be manipulated in a way, so that value of the label of this row is changed to another category, which is not truly existing.
+
+Last, also some missing values have been inserted, so that these rows have to be deleted or manipulated during the development to avoid errors during the model building process:
+
+```
+import numpy as np
+
+rand_zero_one_mask = np.random.randint(100000, size=data.shape)
+data = data.where(rand_zero_one_mask!=0, "")
+```
+
+For that a mask of random matrix with the same size as the dataset is being created with an even distribution of numbers from 0 to 100.000.. Then the dataset will be compared to this matrix and every cell, that faces a 0 on its position in the matrix, will be changed to an empty value. This dataset is then stored as a CSV and will be used for the example implementation, which will be described in chapter \ref{sec:implementation}. 
 ## Creating the necessary environment {#sec:environment}
 
 To use Cloud integrated solutions the installation and access process can be done easily by clicking through the Cloud console. However, the installation of an open-source tool like Kubeflow can be more complicated.
@@ -228,3 +295,4 @@ $ kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
 ```
 
 Finally, the Kubeflow UI can be accessed by opening `localhost:8080` on the browser. Now pipelines can be uploaded and experiments with them can be executed on Kubeflow.
+
