@@ -8,7 +8,7 @@ First discussed in the 1940s, Artificial Intelligence has made great progress in
 
 These progresses do not only impact the products itself, but also their development. In contrast to a traditional software development process in which the business logic is explicitly encoded in rules, solutions that rely on \acl{ML} (\acs{ML}) are fed with huge amounts of data that contains the business logic only implicitly.
 
-This leads to a completely different development cycle. While classical software development is focused on the design and the development of the code, which is followed by testing and deployment, the machine learning lifecycle consists out of data collection, preparation, the training of the model with those data as well as the deployment of this model. [@MariyaYao] The differences between both is described in more detail in chapter \ref{sec:devopsai}.
+This leads to a completely different development cycle. While classical software development is focused on the design and the development of the code, which is followed by testing and deployment, the machine learning lifecycle consists out of data collection, preparation, the training of the model with those data as well as the deployment of this model. [@MariyaYao] The differences between both is described in more detail in chapter \ref{sec:devopsaitime}.
 
 This new type of software development is getting more and more important. Some people like Andrej Karpathy, Director of AI at Tesla, even predict, that these new type of software will replace traditional software development as a whole. [@AndrejKarpathy] This has some advantages, e.g. that it is easier to learn and to manage, more homogeneous and very well portable. In return it is harder to understand for humans so that those systems appear to us as "black boxes". Also debugging can be very difficult as well because usually there is no real error message. [@MariyaYao]
 
@@ -55,7 +55,7 @@ The first one is automated scalability, which eliminates the need to worry about
 
 Serverless computing also reduces the interdependence, because the functions can be updated, deleted or invoked any time without having any side effect on the rest of the system. [@BhagyashreeR]
 
-All this forced developers to change their way of developing and operating their products. This change of the DevOps lifecycle will be introduced in chapter \ref{sec:devopsai}
+All this forced developers to change their way of developing and operating their products. This change of the DevOps lifecycle will be introduced in chapter \ref{sec:devopsaitime}
 
 [//]: # "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf"
 
@@ -66,7 +66,7 @@ All this forced developers to change their way of developing and operating their
 [//]: # "https://hub.packtpub.com/how-serverless-computing-is-making-ai-development-easier/"
 
 
-## Development Operations in time of AI {#sec:devopsai}
+## Development Operations in time of AI {#sec:devopsaitime}
 
 The traditional software development has continuously been improving for years, defining standards and principles to increase the efficiency, portability, and quality of the development cycle. Those principles and practices are called DevOps. In the new type of software development described in chapter \ref{sec:devchanges}, not all of those are applicable any more and new ones need to be defined. Additionally, the upcoming Cloud technology changed the way how products can be deployed and managed as described in chapter \ref{sec:cloud}. In this chapter, the consequences of those changes for DevOps will be examined.
 

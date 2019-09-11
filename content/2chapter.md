@@ -6,7 +6,7 @@ In this chapter, the theoretical basis, that is needed for creating DevOps princ
 
 Since people started manufacturing products on a mass scale, the goal is to increase the efficiency of this manufacturing process and reduce waste of time and material. 
 
-One early set of best practices for manufacturing was the concept of *Lean manufacturing*, which tries to reduce the waste of resources and time of a production cycle as much as possible. With the upcoming use of software as a commercial product in the 1970s [@Pugh:2002:OSB:513126.513131] a desire came on to create best practices for developing and operating products the same way as it was already usual in conventional manufacturing. [@leanmanufacturing]
+One early set of best practices for manufacturing was the concept of *Lean manufacturing*, which tries to reduce the waste of resources and time of a production cycle as much as possible. With the upcoming use of software as a commercial product in the 1970s [@Pugh:2002:OSB:513126.513131] a desire came on to create best practices for developing and operating products the same way as it was already usual in conventional manufacturing. [@HOLWEG2007420]
 
 In 2009 two Flickr employees - John Allspaw and Paul Hammond - presented their way of combining Development and Operations. Inspired by this presentation, a Belgian consultant named Patrick Debois formed a new conference - the "Devopsday" in Ghent. This naming is how the term "DevOps" has been created and prevailed. [@SteveMezak]
 
@@ -32,7 +32,7 @@ The last principle is to *amplify feedback loops* intending to enable a quick re
 
 ### Practices
 
-The DevOps practices that have become commonplace can be split into four different sets based on the different periods of a product lifecycle. To each set, there are several practices, standards, and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{devops_architecture}. 
+The DevOps practices that have become commonplace can be split into four different sets based on the different periods of a product lifecycle. To each set, there are several practices, standards, and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{fig:devops_architecture}. 
 
 ![DevOps reference architecture[@Sharma2017]](images/chapter2/devops_architecture.png){ width=400px #fig:devops_architecture}
 
@@ -238,26 +238,27 @@ This way, Docker and Kubernetes are fulfilling each of the 12-factors, which sho
 
 ## Machine Learning {#sec:ml}
 
-Another eminent movement in IT is Machine Learning which helped AI to a new hype and opened several new possibilities and improvements to software development. In the meantime Machine Learning has become one of the most important tools when it comes to Artifical Intelligence.
+Another eminent movement in IT is Machine Learning, which helped AI to a new hype and opened several new possibilities and improvements to software development. Because of the exponential growth of computation power and data, Machine Learning has become one of the most important tools when it comes to Artifical Intelligence.
 
-The advantage of Machine Learning compared to traditional software development is, that it eliminates the need to write the code by yourself. Instead the developer has to enter some input data to the Machine Learning system. This system then figures out mathematical functions, which describes the given collection of data points best. The process of finding these function is called Machine Learning and the resulting function is mostly referred to as model.
+The advantage of Machine Learning compared to traditional software development is, that it eliminates the need to write the code by oneself. Instead, the developer enters some input data to the Machine Learning system. This system then figures out mathematical functions, which describes the given collection of data points best. The process of finding these function is called Machine Learning, and the resulting function is mostly referred to as model.
 
-This results in a system, which continuosly improves the more data it is fed with, because this leads to a more accurate function. Based on this assumption Tom Mitchell defined Machine Learning in 1997 as follows:
+This results in a system, which continuously improves the more data it is fed with because this leads to a more accurate function. Based on this assumption, Tom Mitchell defined Machine Learning in 1997 as follows:
 
 \newtheorem{definition}{Definition}
-\begin{definition}
-A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task in T, as measured by P, improves with experience E. [@Mitchell:1997:ML:541177]
-\end{definition}
 
-This means, that a computer program learns if it is improving its performance at some task through experience. This experience could be input data like pictures of trees, with which it gets trained with the task to identiy those trees on that picture.
+\begin{definition}
+
+A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task in T, as measured by P, improves with experience E. 
+
+\end{definition}[@Mitchell:1997:ML:541177]
+
+This definition means that a computer program learns if it is improving its performance at some task through experience. This experience could be input data like pictures of trees, with which it gets trained with the task to identify those trees on that picture.
 
 ### Tasks
 
-For fullfilling such a task it is necessary to define this task before. This definition is oriented to the book "Deep Learning" by Ian Goodfellow, Yoshua Bengio and Aaron Courville. [@Goodfellow-et-al-2016]
+For fulfilling such a task, it is necessary to define this task before. This definition is oriented to the book "Deep Learning" by Ian Goodfellow, Yoshua Bengio, and Aaron Courville. [@Goodfellow-et-al-2016]
 
-
-
-In general tasks are described in terms of how the Machine Learning system should process an example. An example is a collection of quantitative measurements, called features. This set can be written as a vector $x \in \mathbb{R}^n$ with each $x_i$ being one of the features.
+In general, tasks are described in terms of how the Machine Learning system should process an example. An example is a collection of quantitative measurements, called features. This set can be written as a vector $x \in \mathbb{R}^n$ with each $x_i$ being one of the features.
 
 The most important and most common tasks in computer science are
 
@@ -267,73 +268,73 @@ The most important and most common tasks in computer science are
 - Anomaly detection
 - Missing Values
 
-In *Classification* the objective is to figure out the category of an example out of a data set by given features. Mathematically this can be described as a function, that takes an example with all its features and assigns a category out of an appropriate set . This set of categories is limited to k, so it can be described as $\{1,...,k\}$. This can be represented as follows:
+In *classification*, the objective is to figure out the category of an example out of a data set by given features. Mathematically this can be described as a function, that takes an example with all its features. Then it assigns a category out of an appropriate set. This set of categories is limited to k so that it can be described as ${1,...,k}$. This function can be represented as follows:
 
 \begin{equation}\label{eq:classification }
-f: \mathbb{R}^n \rightarrow \{1, .., k\}
+f: \mathbb{R}^n \rightarrow {1, .., k}
 \end{equation}
 
-An example for this is character recognition. With a given input of a picture of a character the task is to assign this image to one element of the set of characters.
+An example of this is character recognition. It gets an image of a character as input. Then, the task is to assign this image to one element of the set of characters.
 
 The objective of a *Regression* is to predict a numeric value by given input data. This can be formulated as
 
-\begin{equation}\label{eq:regression }
+\begin{equation}\label{eq:regression}
 f: \mathbb{R}^n \rightarrow \mathbb{R}
 \end{equation}
 
 When the function that has to be learned is of the form $y=f(x)$ with $y \in \mathbb{R}$ and $x \in \mathbb{R}^n$ then $x$ should be a set of independent variables and $y$ should be a dependent variable on $x$.
 
-An example of a Regression is a prediction of the costs for a new appartment based on features like size, location and the amount of rooms.
+An example of a Regression is a prediction of the costs for a new apartment based on features like size, location, and the number of rooms.
 
-*Structured Output* tasks ask a learning algorithm to figure out the probability distribution that has produced the data set. This is then used to provide the relationship between single examples from the data set.
+*Structured Output* tasks ask a learning algorithm to figure out the probability distribution that has produced the data set. This value is then used to give an estimation of the relationship between single examples from the data set.i
 
-A well known example of this is to recommend products based on previously bought products. For that the learning algorithm figures out the similarity of the products with each other and recommends those with the highest consistency.
+A well-known example of this is to recommend products based on previously bought products. For that, the learning algorithm figures out the similarity between the products and recommends those with the highest consistency.
 
-*Anomaly detection* works similar to Structured Output, but instead of looking for elements with a high relationship it uses the probability distribution to check for irregularities within the dataset.
+*Anomaly detection* works similar to Structured Output, but instead of looking for elements with a great relationship, it uses the probability distribution to check for irregularities within the dataset.
 
-This is a good way to anticipate a fraud in a banking account through checking every transaction and hold back those, which are looking too irregular.
+This is an excellent way to anticipate a fraud in a banking account through checking every transaction and hold back those, which are looking too irregular.
 
-For *Missing Values* the probability distribution is used to infer what value should most likely be set at a specific position of a given, incomplete set of examples. This means, that a set $x \in \mathbb{R}$ with some $x_i$ missing. The objective is to figure out the best values for these missing entries..
+For *Missing Values*, the probability distribution is used to infer what value should most likely be set at a specific position of a given, incomplete set of examples. This means that a set $x \in \mathbb{R}$ with some $x_i$ missing. The objective is to figure out the best values for these missing entries.
 
-An example for this is to predict a logical sequence of numbers without the need to know the exact formula of the sequence.
+An example of this is to predict a logical sequence of numbers without the need to know the exact formula of the sequence.
 
 ### Training approaches
 
-As mentioned above, in Machine Learning all those tasks are not solved by explicitily coding algorithms and formulas, but with training a system with given input data. For training those systems there are different approaches existing, each used for different requirements. This chapter will also be oriented to the book "Deep Learning". [@Goodfellow-et-al-2016]
+As mentioned above, in Machine Learning, all those tasks are not solved by explicitly coding algorithms and formulas, but by training a system with given input data. For training those systems, different approaches are existing, each used for different requirements. This chapter will also be based on the book "Deep Learning". [@Goodfellow-et-al-2016]
 
-A first approach is called supervised learning. Supervised learning requires an additional value for each example representing the optimal solution for it. Formally the data set can be described as $\mathbb{D} \in 2^{\mathbb{R}^n}$. For every example vector $x \in \mathbb{D}$ there exists a $y \in \mathbb{R}$ such that $y=f(x)$ with $f:\mathbb{R}^n \rightarrow \mathbb{R}$ being the function that describes the task to be learned. This additional feature is mostly referred to as label or target. Usually the the tasks are accomplished by approximating the conditional probability distribution $p(x|y)$.
+One of the viable approaches is called supervised learning. Supervised learning requires an additional value for each example representing the optimal solution for it. Formally the data set can be described as $\mathbb{D} \in 2^{\mathbb{R}^n}$. For every example vector $x \in \mathbb{D}$ there exists a $y \in \mathbb{R}$ such that $y=f(x)$ with $f:\mathbb{R}^n \rightarrow \mathbb{R}$ being the function that describes the task to be learned. This additional feature is mostly referred to as label or target. Usually, the tasks are accomplished by approximating the conditional probability distribution $p(x|y)$.
 
 Supervised learning algorithms are often used for classification or regression tasks.
 
-Unsupervised learning on the other hand does not have any additional features, but has to work with the pure, raw data set. Usually the data points have many features and the task is to figure out some useful property about the relationship between these data points. This is usually done by using the probability distribution function $p(x)$ of the data set.
+Unsupervised learning, on the other hand, does not have any additional features but has to work with the pure, raw data set. Usually, the data points have many features, and the task is to figure out some useful property about the relationship between these data points. This is usually done by using the probability distribution function $p(x)$ of the data set.
 
-Semi supervised learning uses both - unlabeled examples as well as labeled examples - to predict the outcome. This faciliates the task for the developer, because not every data point has to be labeled, but decreases the size of labeled examples, which could worsen the resulting model.
+Semi-supervised learning uses both - unlabeled examples as well as labeled examples - to predict the outcome. This approach facilitates the task for the developer, because not every data point has to be labeled, but decreases the size of labeled examples, which could worsen the resulting model.
 
 Common tasks for unsupervised learning are clustering or anomaly detection.
 
-In figure \ref{fig:training_comparison} a comparison between supervised and unsupervised data sets used for clustering and classification can be seen. The data shown is not of a particular use case and just for demonstration purposes. In both representations the examples of the data set have only two features, one corresponding to the x-axis and the other ont the the y-axis. The task is to identify clusters in the data.
+In figure \ref{fig:training_comparison}, a comparison between supervised and unsupervised data sets used for clustering and classification can be seen. The data shown is not of a particular use case and just for demonstration purposes. In both representations, the examples of the data set have only two features, one corresponding to the x-axis and the other on the y-axis. The task is to identify clusters in the data.
 
 ![Comparison of unsupervised and semi supervised data sets used for clustering[@AmnahKhatun]](images/chapter2/training_comparison.png){ width=600px #fig:training_comparison}
 
-The difference is, that some of the data points of the second data set are labeled with either 'Class 1' or 'Class 2'. In the figure this can be seen by the coloration of the data points. Even tough in this example there are only some data points labeled, which is the reason why the applied learning approach is called semi-supervised learning, it is still functioning as an example for supervised learning and demonstrates the differences to the unsupervised model.
+The difference is that some of the data points of the second data set are labeled with either 'Class 1' or 'Class 2'. In the figure, this can be seen by the coloration of the data points. Even though in this example there are only some data points labeled, which is the reason why the applied learning approach is called semi-supervised learning, it is still functioning as an example for supervised learning and demonstrates the differences to the unsupervised model.
 
-The missing labels forces the first example to only use the features $x$ and $y$ and look for similarities to determine its association with a group. In the second examples the algorithm can use the labels as well to determine a function, which assigns a class to every data point.
+The missing labels force the first example to only use the features $x$ and $y$ and look for similarities to determine its association with a group. In the second examples, the algorithm can use the labels as well to determine a function, which assigns a class to every data point.
 
-In the figure on the left side two clusters can be seen, which are circled in a group. On the right side there is a line, which marks the function splitting the dataset into two groups. It is noticeable, that the first approach leads to some examples, which can't be assigned to either of the classes. 
+In the figure on the left side, two clusters can be seen, which are circled in a group. On the right side, there is a line, which marks the function splitting the dataset into two groups. It is noticeable that the first approach leads to some examples, which cannot be assigned to either of the classes. 
 
-Both approaches has different situations, in which they should be the preferred way to go. MISSING PART
 
-Additionally there is another approach called reinforcement learning. In reinforcement learning a model is built and then iteratively improved by taking in further examples. For that it needs to get some feedback of how good the built model is. For example this can be a reward or punishment function.
+
+Additionally, there is another approach called reinforcement learning. In reinforcement learning, a model is built and then iteratively improved by taking in further examples. For that, it needs to get some feedback on how good the built model is. For example, this can be a reward or punishment function.
 
 ### Models {#sec:nnmodels}
 
-With the approaches mentioned above the objective is to create and train a model, with which the tasks can be fullfilled. In modern Machine Learning the most important type of such models are \acl{ANN}s (\acs{ANN}s).
+With the approaches mentioned above the objective is to create and train a model, with which the tasks can be fulfilled. In modern Machine Learning, the most important type of such models are \acl{ANN}s (\acs{ANN}s).
 
-Neural Networks are inspired by biological neural networks like animal brains. According to that, \acs{ANN}s are based on a collection of nodes called artificial neurons. Each neuron has gets one or more input values and one output value. To generate the output value the neuron does some mathematical computations with the input values. [@Stroetmann2018]
+Neural Networks are inspired by biological neural networks like animal brains. According to that, \acs{ANN}s are based on a collection of nodes called artificial neurons. Each neuron gets one or more input values and one output value. To generate the output value, the neuron does some mathematical computations with the input values. [@Stroetmann2018]
 
-A network of such neurons usually persists out of at least three layers. The first layer is the input layer of the data, with which the neural network should be fed. Those values are then sent to every neuron of the hidden layer. Those are doing the necessary calculations described below and sending their output to the output layer. [@Stroetmann2018] This can be seen in figure \ref{fig:neural_net}. 
+A network of such neurons usually persists out of at least three layers. The first layer is the input layer of the data, with which the neural network should be fed. Those values are then sent to every neuron of the hidden layer. Those are doing the necessary calculations described below and send their output to the output layer. [@Stroetmann2018] This can be seen in figure \ref{fig:neural_net}. 
 
-![Simple neural network](images/chapter2/neural_net.png){ width=400px #fig:neural_net}
+![Simple neural network](images/chapter2/neural_net.png){ width=400px #fig:neural_net}	
 
 On the hidden layer the neurons are combining the inputs and calculating a new value with them. For that three parameters need to be given to generate the output $y$ with the input vector $x$:
 
@@ -341,7 +342,7 @@ On the hidden layer the neurons are combining the inputs and calculating a new v
 - A bias $b$
 - An activation function $f(x)$ [@VictorZhou]
 
-The weight vector is used to weight the different inputs. This means, that each input is multiblied by a weight as can be seen in equation [@VictorZhou] \ref{eq:weight}
+The weight vector is used to weight the different inputs. This means, that each input is multiblied by a weight as can be seen in the equation below [@VictorZhou]
 
 \begin{equation}
 x_1 \rightarrow x_1 * w_1
@@ -353,42 +354,43 @@ After that, all the weighted inputs are added together. Additionally the bias $b
 (x_1 * w_1) + (x_2 * w_2) + b
 \end{equation}
 
-Finally, the activation function is being used to generate the output. For that it takes the sum calculated in \ref{eq:weighted_sum} as input: [@VictorZhou]
+Finally, the activation function is being used to generate the output. For that it takes the sum calculated in the above equation as input: [@VictorZhou]
 
 \begin{equation}
-y = f((x_1 * w_1) + (x_2 * w_2) + b)
+y = f((x_1 * w_1) + (x_2 * w_2) + b
 \end{equation}
 
-A typical activation function is the sigmoid function, which outputs numbers in the range (0,1). The higher the input, the closer the result gets to 1. The lower the input, the closer it gets to 0. The sigmoid function can be seen in \ref{eq:sigmoid} [@VictorZhou]
+A typical activation function is the sigmoid function, which outputs numbers in the range (0,1). The higher the input, the closer the result gets to 1. The lower the input, the closer it gets to 0. The sigmoid function can be seen below [@VictorZhou]
 
 \begin{equation}
 y = \frac{1}{1 + e^{-x}}
 \end{equation}
 
-In figure \ref{fig:neuron} this whole process, that happens within the artificial neuron, can be seen in a simplified way. It takes the inputs $x_1$ and $x_2$, multiplies them with their belonging weights, sums up the results and add a bias. Last it takes the result of this calculation as input for the activation function. The result of this is the output $y$. [@VictorZhou]
+In figure \ref{fig:neuron} this whole process, that happens within the artificial neuron, can be seen in a simplified way. It takes the inputs $x_1$ and $x_2$, multiplies them with their belonging weights, sums up the results and adds a bias. Finally, it takes the result of this calculation as input for the activation function. The result of this is the output $y$. [@VictorZhou]
 
-![2 input Neuron[@VictorZhou]](images/chapter2/neuron.png){ width=400px #fig:neuron}
+![2 input Neuron[@VictorZhou]](images/chapter2/neuron.png){ width=400px #fig:neuron}																					
 
-A neural network can consist out of more than one hidden layer. In this case they are called deep neural network. In figure \ref{fig:deep_nn} such a deep neural network with three hidden layers and two output values can be seen. [@Stroetmann2018]
+
+A neural network can consist of more than one hidden layer. In that case, these networks are called deep neural network. In figure \ref{fig:deep_nn} such a deep neural network with three hidden layers and two output values can be seen. [@Stroetmann2018]
 
 ![Deep neural network with 3 hidden layers](images/chapter2/deep_neural_net.png){ width=500px #fig:deep_nn}
 
-When training a network the objective is to minimize the loss. The loss is  a function, which provides information about how good the neural network is. One common loss function is the Mean Squared Error: [@VictorZhou]
+
+When training a network, the objective is minimizing the loss function. The loss function is a function, which provides information about how good the neural network is. One common loss function is the Mean Squared Error: [@VictorZhou]
 
 \begin{equation}
-MSE = \frac{1}{n}\sum_{i=1}^{n}{(y_{true}-y_{pred})^2}
+MSE = \frac{1}{n}\sum*{i=1}^{n}{(y*{true}-y_{pred})^2}
 \end{equation}
 
-with $n$ as the number of samples, $y_true$ as the true value of the variable and $y_pred$ as the predicted value of it. To minimize this loss the neural network uses the partial derivative to change the weights and biases accordingly. This is done over and over again for every sample until the network is well trained with the given inputs.
+With $n$ as the number of samples, $y_{true}$ as the true value of the variable and $y_{pred}$ as the predicted value of it. To minimize this loss, the neural network uses the partial derivative to change the weights and biases accordingly. This is done over and over again for every sample until the network is well-trained with the given inputs.
 
-Still the Developer does not only have to give some input data, train the neural network and think all his work is done. Instead other challenges has to be faced like preparing the data, choosing the right parameters and amount of input data to get the best results and avoid problems like over- or underfitting the network. Overfitting means, that a network is trained with too many irrelevant features, called noise. This leads to a perfect working system for the known data, which however doesn't work at all for unknown data, because it is too specialized on the data on which it was trained on. Underfitting on the other hand occurs if the neural network was informed by too few features or regularized too much, which prevents the neural network from learning from the dataset. How the developer handles this difficulties and what the necessary steps are in this new kind of development will be described in chapter \ref{sec:aicycle}. [@Goodfellow-et-al-2016]
+Still, the developer does not only have to give some input data, train the neural network, and think all his work is done. Instead, other challenges have to be faced like preparing the data, choosing the right parameters and amount of input data to get the best results and avoid problems like over- or underfitting the network. Overfitting means that a network is trained with too many irrelevant features, called noise. Overfitting leads to a perfectly working system for the known data, which, on the other hand, does not work at all for unknown data, because it is too specialized on the data on which it was trained. Underfitting, on the other hand, occurs if the neural network was informed by too few features or regularized too much, which prevents the neural network from learning from the dataset. How the developer handles these difficulties and what the necessary steps are in this new kind of development will be described in chapter \ref{sec:aicycle}. [@Goodfellow-et-al-2016]
 
-[//]: # "https://towardsdatascience.com/machine-learning-for-beginners-an-introduction-to-neural-networks-d49f22d238f9"
-[//]: # "Stroetmann Skript"
+
 
 ## Artificial Intelligence lifecycle {#sec:aicycle}
 
-The new possibilities opened by Machine Learning as described in chapter \ref{sec:ml} forces developers to change their development lifecycle in a drastic way if they want to develop a Machine Learning based Artificial Intelligence. This lifecycle will be described and explained in the following chapter.
+The new possibilities opened by Machine Learning, as described in chapter \ref{sec:ml} force developers to change their development lifecycle in a drastic way if they want to develop a Machine Learning based Artificial Intelligence. This lifecycle will be described and explained in the following chapter.
 
 Important to mention is, that instead of code the developers have to produce for a specified objective, in Machine Learning the developers get some data as input and must train a model with this data to meet the objective. To simplify the process described in this chapter an example data set will be given and in the process of explaining the single steps this data will be used to exemplify these. This dataset can be seen below.
 
@@ -411,23 +413,25 @@ Important to mention is, that instead of code the developers have to produce for
 
 With this data the developer has to go through several steps to build a useful system based on them. These steps are defined in an open standard process model called \acl{CRISP-DM} or \acs{CRISP-DM}. This model can be seen in figure \ref{fig:crisp_dm}.
 
-![CRISP-DM standard[@WolfRiepl]](images/chapter2/crisp_dm.png){ width=400px #fig:crisp_dm}
+![CRISP-DM standard[@WolfRiepl]](images/chapter2/crisp_dm.png){ width=400px #fig:crisp_dm}															
 
-Following this standard model the first step is Business Understanding. During this step the project team has to determine overall goals and tasks for what to do with these data. For that the team has to access the situation, which means that the team has to include possible risks, costs, benefits and requirements for every possible objective in their evaluation process. After the overall objective is defined this can be partitioned into several data mining goals what to do specifically with this data. Also success criteria should be defined and a project plan should be established, which will be followed in the next steps. [@Wirth2000]
+Following this standard model, the first step is Business Understanding. During this step, the project team has to determine overall goals and tasks for what to do with these data. For that, the team has to access the situation, which means that the team has to include possible risks, costs, benefits, and requirements for every possible objective in their evaluation process. After the overall objective is defined, this can be partitioned into several data mining goals what to do specifically with this data. Also, success criteria should be defined, and a project plan should be established, which will be followed in the next steps. [@Wirth2000]
 
-For the example above such an objective could be to predict the price of real estate by the given features. The criteria could be, that in 90% of the tested data after the creation of the model the predicted price should lie in between a range of 10% of the real price.
+For the example above, such an objective could be to predict the price of real estate by the given features. The criteria could be, that in 90% of the tested data after the creation of the model, the predicted price should lie in between a range of 10% of the original price.
 
-Next the data need to be understood. For that, first as much data as possible should be collected and analyzed to get a first insight. This data should then be evaluated by its quality to estimate the necessary effort to prepare and clean the data for building a model. Also possible problems should be detected early to fix them as soon as possible.  [@Wirth2000]
+Next, the data need to be understood. For that, first, as much data as possible should be collected and analyzed to get a first insight. This data should then be evaluated by its quality to estimate the necessary effort to prepare and clean the data for building a model. Also, possible problems should be detected early to fix them as soon as possible.  [@Wirth2000]
 
-In the example there are far too little data for a real model and much more would be needed in a real project. But even in this small dataset some problems can be detected. The first one is the missing entry for the second object in the column "year built" as well as for the last object in the column "# of rooms". Also the type of the estate is categorical instead of numerical, which could cause problems when training the model.
+In the example, there are far too little data for a real model, and much more would be needed in a real project. However, even in this small dataset, some problems can be detected. The first one is the missing entry for the second object in the column "year built" as well as for the last object in the column "# of rooms". Also, the type of estate is categorical instead of numerical, which could cause problems when training the model.
 
-The next step is probably the most costly one - data preparation. First the project team needs to select the data, which it will use for building the model. Then the data need to be preprocessed.  [@Wirth2000]
+The next step is probably the one that needs the most effort of the developer - data preparation. First, the project team needs to select the data, which it will use for building the model. Then the data need to be preprocessed.  [@Wirth2000]
 
-This preprocessing step includes detecting and removing noisy and redundant data. Noisy data means data, that are irrelevant for the chosen business objective. In the given example the age of the buyer is an unnecessary information, because it doesn't change the price of the estate. That's why this column can be removed. Also wrongly labeled data should be removed. 
-Additionally in the preprocessing step unbalanced datasets should be balanced. This means, that if one specific class of data is overrepresented and another one underrepresented, the dataset should be balanced so that the distribution of the different data classes are representative. In the example appartments could be overrepresented, because there are twice as much appartments in the selected data than houses. The solution would be to add some more houses in the dataset or remove some appartments.
-Last missing values have to be handled, because null values could influence the model in a negative way. A better way would be to fill the missing cells with average values for this type of data. But to choose the average value is not always the right way - it could be better to choose the minimum for example. To decide the method of handling missing values is one challenging task for the developer. [@article]
+This preprocessing step includes detecting and removing noisy and redundant data. Noisy data means data that are irrelevant to the chosen business objective. In the given example, the age of the buyer is unnecessary information because it does not change the price of the estate. This circumstance is why this column can be removed. Also, wrongly labeled data should be removed. 
 
-After the preprocessing the dataset could be improved by feature engineering. The objective of this task is to improve the features such that the model better understand the coherences and improves its production function. [@article] For example new features could be created based on the knowledge of the data. A condition for that is to have a really good understanding of the data. In the example above the developers could combine the column 'year built' and 'year bought' to 'age at date of purchase' with a simple subtraction, which could give an important insight of the payed price. Another meaningful feature could be some relation between the size of the real estate and the number of rooms. 
+Additionally, in the preprocessing step, unbalanced datasets should be balanced. This means that if one specific class of data is overrepresented and another one underrepresented, the dataset should be balanced so that the distribution of the different data classes are representative. In the example, apartments could be overrepresented, because there are twice as many apartments in the selected data than houses. The solution would be to add some more houses in the dataset or remove some apartments.
+
+Last missing values have to be handled because null values could negatively influence the model. A better way would be to fill the missing cells with average values for this type of data. However, to choose the average value is not always the right way - it could be better to choose the minimum, for example. To decide the method of handling missing values is one challenging task for the developer. [@article]
+
+After the preprocessing, the dataset could be improved by feature engineering. The objective of this task is to improve the features such that the model better understand the coherences and improves its production function. [@article] For example, new features could be created based on the knowledge of the data. A condition for that is to have an excellent understanding of the data. In the example above the developers could combine the column 'year built' and 'year bought' to 'age at date of purchase' with a simple subtraction, which could give an essential insight of the price. Another meaningful feature could be some relation between the size of the real estate and the number of rooms. 
 
 Additionally, there can be features in a dataset that are not numerical but categorical. This data need to be encoded before training the model. The encoding technique depends on the context of the categorical data.  One simple technique is label encoding, with which for every different category tha column gets a different number. For example every 'Appartment' gets a 1 and every 'House' a 2 in the 'type' column. However, this could cause trouble, because the learning algorithm could interprete the numbers as sequence. That's why another technique is One-Hot-Encoding. In this technique every possible category gets an own column and for every entry in the dataset the value is set to either 1 or 0 for all of the columns. In the example this would mean, that the column 'type' would be replaced with the columns 'appartment' and 'house'. For every appartment the column 'appartment' would then be set to 1 and the column 'house' to 0. For every house it would be exactly the other way round.[@SunnySrinidhi]
 
@@ -454,57 +458,57 @@ In the end the example above could look like this:
 
 This data set has then to be splitted into three different sets - training, validation and testing. This is done to ensure that the model does not overfit to the training data. The model will be trained with the training set. Then the hyperparameters, which are used to improve the model with some different parameters dependent on the used model, are tuned with the help of the validation set. The test set is used to test the models actual performance at the end.
 
-After this, the next step is the modelling. For this, first, a training technique as well as a basic model has to be selected. Usually different models are tested several times, so that the best model can be choosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents for example over- and underfitting the model with the training data. [@Wirth2000]
+After this, the next step is modeling. For this, first, a training technique, as well as a basic model, has to be selected. Usually, different models are tested several times, so that the best model can be chosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents, for example, over- and underfitting the model with the training data. [@Wirth2000]
 
-Then the model has to be evaluated with the test set. Also the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders the steps can be repeated starting from the Business Understanding with a deeper knowledge. This is how a model can be continuosly improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features or applying different training methods. [@Wirth2000]
+Then the model has to be evaluated with the test set. Also, the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders, the steps can be repeated starting from the Business Understanding with deeper knowledge. This is how a model can be continuously improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features, or applying different training methods. [@Wirth2000]
 
-![Iterative Machine Learning lifecycle](images/chapter2/training_cycle.png){ width=500px #fig:ml_cycle}
+![Iterative Machine Learning lifecycle](images/chapter2/training_cycle.png){ width=500px #fig:ml_cycle}																
 
-This process from preparing the data and adjusting the parameters can be seen in figure \ref{fig:ml_cycle} from a more technical perspective. First the developer gets the raw dataset, then he preprocesses this dataset and applies feature engineering to improve it. After it the dataset is splitted into different sets and the parameters get tuned. At the same time a model is getting selected and trained with the training set and the given parameters. This step is repeatable until the developer is satisfied with the created model. In the end the models predictions will be evaluated against the test data.
+This process from preparing the data and adjusting the parameters can be seen in figure \ref{fig:ml_cycle} from a more technical perspective. First, the developer gets the raw dataset, then he preprocesses this dataset and applies feature engineering to improve it. After it, the dataset is split into different sets, and the parameters get tuned. At the same time, a model is getting selected and trained with the training set and the given parameters. This step is repeatable until the developer is satisfied with the created model. In the end, the model's predictions will be evaluated against the test data.
 
-Last the model needs to be deployed. For that also the monitoring and maintenance of the product needs to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process. [@Wirth2000]
+Last, the model needs to be deployed. For that also, the monitoring and maintenance of the product need to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process. [@Wirth2000]
 
-With this standardized process of Artificial Intelligence development the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
+With this standardized process of Artificial Intelligence development, the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
 
 ## DevOps for Artificial Intelligence {#sec:devopsai}
 
-The new steps described in chapter \ref{sec:aicycle} forces developers not only to change their development cycle, but also the operation. Additionally, new architectural models like micrsoservices, cloud technologies like containerization or Kubernetes as well as \acs{SaaS} as a new Software model as described in chapter \ref{sec:ms12} opens new possibilities of a scalable, flexible and reliable deployment of products. All this changes the way of DevOps for Machine Learning / AI and not all of the existing principles and practices are applicable any more or better approaches are imaginable. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
+The new steps described in chapter \ref{sec:aicycle} forces developers to change not only their development cycle but also the operation. Additionally, new architectural models like microservices, cloud technologies like containerization or Kubernetes as well as \acs{SaaS} as a new Software model as described in chapter \ref{sec:ms12} opens new possibilities of a scalable, flexible and reliable deployment of products. All this changes the way of DevOps for Machine Learning / AI, and not all of the existing principles and practices are applicable any more or better approaches are imaginable. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
 
-First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are following:
+First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are the following:
 
-- Develop and test against production like systems
+- Develop and test against production-like systems
 - Deploy with repeatable processes
 - Amplify a feedback loop [@Sharma2017]
 
-Additionally, the four stages - steer, develop, deploy and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through and necessary adoptions or additions will be made.
+Additionally, the four stages - steer, develop, deploy, and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through, and necessary adoptions or additions will be made.
 
-The first set - **steer** - was about managment and planning, which includes Continuous Business Planning, Continuous Improvement and Release Planning. All this includes tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quick as possible. 
+The first set - **steer** - was about management and planning, which includes Continuous Business Planning, Continuous Improvement, and Release Planning. All this includes: Tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quickly as possible. 
 
-All this also applies for the development of AI and overlaps with the CRISP-DM process described in chapter \ref{aicycle}. This defines as first stage the *Business Understanding*, in which business goals and objectives should be defined. During this step the same practices and tools can help as in traditional software development as there is no difference in planning and managing the objectives and release plan of a Machine Learning or a tradtitional software project. 
+All this also applies to the development of AI and overlaps with the CRISP-DM process described in chapter \ref{sec:aicycle}. This process defines *Business Understanding* as the first stage, in which business goals and objectives should be defined. During this step, the same practices and tools can help as in traditional software development as there is no difference in planning and managing the objectives and release plan of a Machine Learning or a traditional software project. 
 
-The difference in the steer phase is, that there is an additional step, which includes understanding the data. This needs a deeper insight in the business correlations, necessary information and context of the data. This leads to two major differences -
+The difference in the steer phase is that there is an additional step, which includes understanding the data. This understanding needs a deeper insight into the business correlations, necessary information, and context of the data. So, there are two significant differences -
 
-The first is in the roles of the people, who handle these steps. This deep insight of the business data needs experts on this field instead of programmers with a lack of understanding all the correlations and meanings. Instead, usually, data scientists or data analysts are needed for defining the needed data, evaluating the quality and detecting problems, so that a clear way to clean and prepare the data can be determined.
+The first is in the roles of the people who handle these steps. This profound insight of the business data needs experts on this field instead of programmers with a lack of understanding all the correlations and meanings. Instead, usually, data scientists or data analysts are needed for defining the needed data, evaluating the quality and detecting problems, so that a clear way to clean and prepare the data can be determined.ro
 
-A second difference is the need of a tool to visualize these data. For that the data scientists or analysts need skills for creating visualized data as quickly as possible. A very common tool for that are *Jupyter Notebooks*, with which an easy preparation and plotting of the data is possible with the help of Python.
+A second difference is a need for a tool to visualize these data. For that, the data scientists or analysts need skills for creating visualized data as quickly as possible. A widespread tool for this is *Jupyter Notebooks*, with which an easy preparation and plotting of the data are possible with the help of Python.
 
-However, the most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is splitted in two stages - data preperation and the building of the model. Also the Code is not the only input the developers have to deal with, but there is data as a second, important input. [@Dillon] This leads to several differences for the practices and tools defined for this stage.
+However, most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is split into two stages - data preparation and the building of the model. Also, the code is not the only input the developers have to deal with, but there is data as a second, valuable input. [@Dillon] This leads to several differences in the practices and tools defined for this stage.
 
-Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators, but also the data. Usual source control software like git sets limitations to the file size and are no designed for handling other data than code. This results in the need of another tool to handle big datasamples when developing an AI product, so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
+Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators but also the data. Usual source control software like git sets limitations to the file size and are not designed for handling other data than code. This results in need of another tool to handle big data samples when developing an AI product so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
 
-A solution for this problem could be Quilt or Git \acl{LFS} (\acs{LFS}), which are desinged for storing audio samples, graphics, datasets and videos. 
+A solution to this problem could be Quilt or Git \acl{LFS} (\acs{LFS}), which are designed for storing audio samples, graphics, datasets, and videos. 
 
-Another common tool for developing software are IDEs, which are supporting the developer in coding, collaborating with your team and integrating the workflow in an efficient way. For Machine Learning such tools have to be extended or new tools need to be created to visualize and especially prepare data. This includes for example possibilities to label images or videos and preprocess the data. Currently for this different tools has to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
+Another common tool for developing software are IDEs, which are supporting the developer in coding, collaborating with one's team, and efficiently integrating the workflow. For Machine Learning, such tools have to be extended, or new tools need to be created to visualize and especially prepare data. This includes, for example, possibilities to label images or videos and preprocess the data. Currently, for this, different tools have to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
 
-However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox to name just one, which offers simple data labeling and management, collaboration and even some automation features. This labeled and prepared data then needs to be available from a shared repository, to which the whole team can contribute to, so that they can collaborate with each other.
+However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox, to name just one, which offers simple data labeling and management, collaboration, and even some automation features. This labeled and prepared data then needs to be available from a shared repository, to which the whole team can contribute to so that they can collaborate.
 
-Another practice in traditional Software development is called *Continuous testing*. This includes automatically build the software and run unit tests on every single component as well as automated integration tests of the application as a whole. In AI development a completly different form of testing is necessary: 
+Another practice in traditional Software development is called *Continuous testing*. This practice includes automatically build the software and run unit tests on every single component as well as automated integration tests of the application as a whole. In AI development, a completely different form of testing is necessary: 
 
-First, a Machine Learning model can only be tested as a whole instead of its single components. Machine Learning models work more as a black box, because it is difficult to look at how the inner components are working and evaluate its actions. This means, that only an input can be given and the output can be classified as true or false without a valuation of the single components.
+First, a Machine Learning model can only be tested as a whole instead of its single components. Machine Learning models work more like a black box because it is difficult to look at how the inner components are working and evaluate its actions. This means that only an input can be given and the output can be classified as true or false without a valuation of the single components.
 
-Additionally, if the output is correct for one input that doesn't give any information about another input, because usually ML models are too complex to predict its outcome. Both of it leads to another form of testing.
+Additionally, if the output is correct for one input that does not give any information about another input, because usually, ML models are too complex to predict its outcome. Both of it leads to another form of testing.
 
-For this approach the data needs to be splitted automatically into a training and a test set before training the model. After the training step is done, the test set is used to compare the predicted outcome with the real value. Applying this approach can give valuable insights about the model, which can be expressed as different indicators.
+For this approach, the data needs to be split automatically into a training and a test set before training the model. After the training step is done, the test set is used to compare the predicted outcome with the real value. Applying this approach can give valuable insights into the model, which can be expressed as different indicators.
 
 The easiest one is the accuracy, which divides the correct classified results by all tested samples:
 
@@ -517,13 +521,14 @@ Another indicator is a confusion matrix. A confusion matrix shows the number of 
 \begin{table}[htb]
 \centering
 \small
-\caption{Example confusion matrix [@aditamishra]}
+\caption{Example confusion matrix}
 \begin{tabular}{ c | c | c  }
 n=165 &\textbf{Predicted Positive} &\textbf{Predicted Negative} \\ \hline
 \textbf{Actual Negative} & 50 & 10  \\
 \textbf{Actual Positive} & 5 & 100 \\
 \end{tabular}
 \end{table}
+[@AdityaMishra]
 
 A third indicator is the F1 score, which first calculates the precision as well as the recall of a model. Precision is the number of correctly predicted positive results divided by the number of predicted positive results. Recall on the other hand is the number of correctly predicted positive results divided by the number of all samples. The F1 scores combines those two values to find a balance between them. The greater the F1 score, the better the performance of the model:
 
@@ -538,46 +543,47 @@ F1 &= 2 * \frac{1}{\frac{1}{Precision}+\frac{1}{Recall}}
 Last, also the mean squared error can be used as a measure for the performance of a model. The mean squared error calculates the average of the differences between the real value and the predicted value:
 
 \begin{equation}
-MSE := \frac{1}{N} * \sum_{j=1}^{N}{(y_j - \hat{y}_j)^2}
+MSE := \frac{1}{N} * \sum*{j=1}^{N}{(y_j - \hat{y}*j)^2}
 \end{equation}
 
 However, there are still several other indicators that can be used for measuring the performance of a model. The developer should decide which indicators to use, so that they will be seen to evaluate the performance of a model after the automated tests have been driven.
 
-During the modelling stage another important difference occurs: The heavy need of ressources, especially of computing units and memory. In opposite to traditional Software development this use doesn't equal the need of ressources while running the application in production, but it needs far more ressources to train the model. Usually \acs{GPU}s are used to build models, because their design fits the need of model training better. However, \acs{GPU}s are not very common in traditional Software development, so teams would have to purchase one just for this purpose. Additionally these ressources are only needed during the modelling stage and the rest of the time they would be unused, which is a waste of ressources. This is where the advantages of Cloud Computing can be utilized. With its capability of flexible ressource allocation the ressources can be used more efficient and money can be saved because of the pay-per-use model of Cloud Computing. This approach of saving cost and ressources through training your model within a Cloud can be called *Dynamical ressource demand*.
+During the modeling stage, another important difference occurs: The urgent need for resources, especially of computing units and memory. In opposite to traditional Software development, this use does not equal the need for resources while running the application in production, but it needs far more resources to train the model. Usually, \acs{GPU}s are used to build models because their design fits the need for model training better. However, \acs{GPU}s are not very common in traditional Software development, so teams would have to purchase one just for this purpose. Additionally, these resources are only needed during the modeling stage, and the rest of the time, they would be unused, which is a waste of resources. This is where the advantages of Cloud Computing can be utilized. With its capability of flexible resource allocation, the resources can be used more efficiently, and money can be saved because of the pay-per-use model of Cloud Computing. This approach of saving cost and resources through training the model within a Cloud can be called *Dynamical resource demand*.
 
-The next stage is the **delivery**, in which the practice *Continuous delivery* applies. This practice deals with the automation of the deployment of the Software to different environments. This demand also applies for Machine Learning development, only the implementation differs slightly. In common Software development the trigger for starting the building and deployment process is usually a newly committed code in the master repository. In Machine Learning it could also be necessary or recommended to rebuilt and deploy the model when new or changed data occurs, which forces a second trigger. Additionally the built of the project requires more steps than just compiling the code like training the model, which takes some time. This is described in more detail below, when it comes to delivery pipelines.
+The next stage is the **delivery**, in which the practice *Continuous delivery* applies. This practice deals with the automation of the deployment of the software to different environments. This demand also applies to Machine Learning development. Only the implementation differs slightly. In common Software development, the trigger for starting the building and deployment process is usually a newly committed code in the master repository. In Machine Learning, it could also be necessary or recommended to rebuilt and deploy the model when new or changed data occurs, which forces a second trigger. Additionally, the built of the project requires more steps than just compiling the code like training the model, which takes some time. This is described in more detail below when it comes to delivery pipelines.
 
-An important practice during the delivery stage to guarantee the principle of developing and testing against production like systems is to containerize the ML applications and its contents. This guarantees a consistent environment during all stages, because the containers provide their environemnts on their own. The containers can then be deployed in any system, whether local or Cloud, and the results should stay the same. This is already pretty common for traditional Software, but is often avoided with Machine Learning applications because of missing Cloud computing options. This is why Cloud providers are forced to build Cloud platforms, that enable the use of \acs{GPU}s on a cluster, so that containerized ML applications can become reality. This would speed up the development of ML applications as well as it would increase its efficiency and reduce to costs due to easier ways of building, testing and deploying these applications.
+An essential practice during the delivery stage to guarantee the principle of developing and testing against production-like systems is to containerize the ML applications and its contents. This guarantees a consistent environment during all stages, because the containers provide their environments on their own. The containers can then be deployed in any system, whether local or Cloud and the results should stay the same. This is already pretty common for traditional software but is often avoided with Machine Learning applications because of missing Cloud computing options. This is why Cloud providers are forced to build Cloud platforms, that enable the use of \acs{GPU}s on a cluster so that containerized ML applications can become a reality. This would speed up the development of ML applications as well as it would increase its efficiency and reduce costs due to more comfortable ways of building, testing, and deploying these applications.
 
-Last there is the **operation** stage. During this stage the use of the application should be monitored and feedback should be collected. Those information should then be used to improve future products and support the current version with updates and bugfixes. 
+Last, there is the **operation** stage. During this stage, the use of the application should be monitored, and feedback should be collected. That information should then be used to improve future products and support the current version with updates and bugfixes. 
 
-For ML applications this monitoring and feedback gets one more, significant role - through the collection of more data the model can be continuosly improved through *Refitting of the model*. This is an exclusive feature for ML applications, because in the opposite of traditional Software these are adaptive. This demands a clean collection of the data as well as automated processing of these. Then this data can be used to periodically retrain the model and redeploy it after. This offers the users to experience a significant improvement of the app's performance and that way increases the User experience due to better results.
+For ML applications, this monitoring and feedback get one more, significant role - through the collection of more data, the model can be continuously improved through *Refitting of the model*. This is an exclusive feature for ML applications because, in the opposite of traditional software, these are adaptive. This demands a clean collection of the data as well as automated processing of these. Then this data can be used to retrain the model and redeploy it after periodically. This offers the users to experience a significant improvement of the app's performance, and that way increases the User experience due to better results.
 
-Another eminent difference are the roles of the developing people. While in traditional development the developers are IT specialists, who can handle the operation cycle as well as the development. In ML development, usually Data Scientists take over the main part of the work as already mentioned above. They got a special skillset when it comes to the preparation of data and feature engineering, but sometimes they are lacking in experience with operation tools like delivery pipelines. That's why an easier way to build and operate a pipeline is necessary, which can be easily handled and reused, so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
+Another critical difference is the roles of developing people. While in traditional development, the developers are IT specialists, who can handle the operational cycle as well as the development. In ML development, usually, Data Scientists take over the main part of the work as already mentioned above. They got a unique skill set when it comes to the preparation of data and feature engineering, but sometimes they lack in experience with operation tools like delivery pipelines. That is why a more natural way to build and operate a pipeline is necessary, which can be easily handled and reused so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
 
-An important part of a solution is to provide an easy-to-use delivery pipeline for the Data Scientists, which combines every step of the development and automates all the operations as far as possible, so that the Data Scientist can focus on his main work. 
+An essential part of a solution is to provide an easy-to-use delivery pipeline for the Data Scientists, which combines every step of the development and automates all the operations as far as possible so that the Data Scientist can focus on his main work. 
 
-An example draft of such a pipeline can be seen in figure \{fig:devopsaipipeline}.
+An example draft of such a pipeline can be seen in figure {fig:devopsaipipeline}.
 
 ![Example devops pipeline](images/chapter2/devops_ai_pipeline.png){ width=500px #fig:devops_architecture}
 
-There the first difference to traditional DevOps pipelines is, that there is another input than only the code. This is mainly the data, but also a base model, on which the model will be trained on. Both of them can optionally serve as trigger for starting the delivery process. Alternatively the process can be sequentially executed or bumped by the developers by purpose.
+There the first difference to traditional DevOps pipelines is, that there is another input than only the code. This is mainly the data, but also a base model, on which the model will be trained on. Both of them can optionally serve as a trigger for starting the delivery process. Alternatively, the process can be sequentially executed or bumped by the developers by purpose.
 
-Then there are a preprocessing as well as a feature engineering step. These two steps are realized by some scripts of the developers, which take over the preprocessing and feature engineering automatically. The cleaning and every other necessary step to be made with the data has to be done manually before pusing the data to its repository.
+Then there are a preprocessing as well as a feature engineering step. These two steps are realized by some scripts of the developers, which take over the preprocessing and feature engineering automatically. The cleaning and every other necessary step to be made with the data has to be done manually before pushing the data to its repository.
 
-After this the dataset is splitted into three sets - training, validation and test. The training and validation sets are then used for the training of the model, while the test set is only used to test the finished model at the end. 
+After this, the dataset is split into three sets - training, validation, and test. The training and validation sets are then used for the training of the model, while the test set is only used to test the finished model at the end. 
 
-However, before the training of the model the pipelines scales up the cluster, so that enough ressources for the training step are available. Also the hyperparameter tuning can be done by automated scripts here. Alternatively those hyperparameters can be given by input parameters before the pipeline is executed.
+However, before the training of the model, the pipelines scales up the cluster, so that enough resources for the training step are available. Also, the hyperparameter tuning can be done by automated scripts here. Alternatively, those hyperparameters can be given by input parameters before the pipeline is executed.
 
-For the training of the model, which takes the main part of the time, the pipeline usually uses a given baisc model, on which the model will be based on. This is done, because building a completly new model from scratch needs a lot of time and huge amounts of data, which is the reason why most models are based on some pretrained basic models and only some are built from scratch.
+For the training of the model, which takes the main part of the time, the pipeline usually uses a given basic model, on which the model will be based on. This is done because building a completely new model from scratch needs much time and huge amounts of data, which is the reason why most models are based on some pretrained basic models and only some are built from scratch.
 
-After this is being done, the cluster can scale down again and the model can be tested with the test set. If the results are satisfying, the model and its application can get containerized automatically and then deployed on the cluster. The developer can define the way of how the application should be published and accessible from the cluster for the end-users. In case the model doesn't meet the requirements the data needs or the code needs to be adjusted or cleaned or different hyperparameters should be chosen, so that a better model will be built in the next try.
+After this is being done, the cluster can scale down again, and the model can be tested with the test set. If the results are satisfying, the model and its application can get containerized automatically and then deployed on the cluster. The developer can define the way of how the application should be published and accessible from the cluster for the end-users. In case the model does not meet the requirements the data needs or the code needs to be adjusted or cleaned, or different hyperparameters should be chosen, so that a better model will be built in the next try.
 
-Last it is to mention, that through feedback givenby the users during the operation stage, the dataset is continuously extended by new data. This is why the pipeline should repeat the model building sequentially, so that these new data can be used to improve the application continuously.
+Last it is to mention, that through feedback given by the users during the operation stage, the dataset is continuously extended by new data. This is why the pipeline should repeat the model building sequentially so that these new data can be used to improve the application continuously.
 
-With these adjusted and complemented practices above as well as with a delviery pipeline similar to the described one the principles of DevOps can be kept. Through the automated containerization and deployment on a cluster every environment can look exactly like the production environemnt. If the whole pipeline and application should be tested first locally before deploying it on a Cloud it can be tested on a lucel Kubernetes cluster like Minikube, which will be described in chapter \ref{sec:minikube}.
-Also the delivery pipeline guarantees a repeatable and reliable deployment, in which almost every step can be automated and the Data Scientist can focus on his work with the Data. The only thing the developers need to do is providing scripts for an automated preprocessing and feature engineering if necessary.
-The monitor and feedback principle has an even higher importance, because through this the application can be continuously improved through feeding the system with the newly gained knowledge.
+With these adjusted and complemented practices above as well as with a delivery pipeline similar to the described one, the principles of DevOps can be kept. Through the automated containerization and deployment on a cluster, every environment can look exactly like the production environment. If the whole pipeline and application should be tested first locally before deploying it on a Cloud, it can be tested on a local Kubernetes cluster like Minikube, which will be described in chapter \ref{sec:minikube}.
 
-This is why such a pipeline has a big importance in DevOps for AI. In the next chapters two different approaches to build such a pipeline will be presented and evaluated with previously defined criteria.
+Also, the delivery pipeline guarantees a repeatable and reliable deployment, in which almost every step can be automated, and the Data Scientist can focus on his work with the data. The only thing the developers need to do is providing scripts for an automated preprocessing and feature engineering if necessary.
 
+The monitor and feedback principle has an even higher importance because through this, the application can be continuously improved through feeding the system with the newly gained knowledge.
+
+This is why such a pipeline has significant importance in DevOps for AI. In the next chapters, two different approaches to building such a pipeline will be presented and evaluated with previously defined criteria.
