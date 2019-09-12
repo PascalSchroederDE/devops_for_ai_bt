@@ -32,15 +32,15 @@ The last principle is to *amplify feedback loops* intending to enable a quick re
 
 ### Practices
 
-The DevOps practices that have become commonplace can be split into four different sets based on the different periods of a product lifecycle. To each set, there are several practices, standards, and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{fig:devops_architecture}. 
-
-![DevOps reference architecture[@Sharma2017]](images/chapter2/devops_architecture.png){ width=400px #fig:devops_architecture}
+The DevOps practices that have become commonplace can be split into four different sets based on the different periods of a product lifecycle. To each set, there are several practices, standards, and tools available, which help to achieve the best possible result. The four different sets and some example practices can be seen in figure \ref{fig:devops_architecture}.
 
 The first set is called **Steer**, which is about managing and planning the development and lifecycle of a product. This set includes establishing and continuously adjusting business goals. The process of resolving this issue is called *Continuous Business Planning*. 
 
 This practice includes three major points - the acceleration of software delivery, a good balance between speed, cost, quality and risk, and the reduction of the time it needs to get customer feedback. [@IBM2013] 
 
 These points are mainly fulfilled via tools and practices to track the status, feedback, and needs of a project efficiently. First, a vision of the projects overall objective should be created, and every action should be guided by it. [@IBM2013]
+
+![DevOps reference architecture[@Sharma2017]](images/chapter2/devops_architecture.png){ width=400px #fig:devops_architecture}
 
 The strategy, which should lead to this vision, has to be monitored and adjusted continuously based on new information and feedback. This procedure is called *continuous improvement*. For that, a good dialog between a Business and IT is necessary for defining good scopes and priorities. [@IBM2013]
 
@@ -168,9 +168,9 @@ One of them is containerization of applications. This can be understood as a pac
 
 An industry-leading container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
 
-![Comparison between Docker and VM[@Mikesir87]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
-
 On the left side, the infrastructure of a VM can be seen, on the right side, the infrastructure of a Docker container. Both need the infrastructure of a physical device and its host operating system. On top of a VM on this Host Operating System, there is a Hypervisor, and on this Hypervisor several Guest OS can be running. On those again, the apps itself can be executed, and the necessary libraries and binaries are running in the background.
+
+![Comparison between Docker and VM[@Mikesir87]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
 
 In case of a docker container, those binaries and libraries are directly running inside of a container on the operating system. There is no need for a hypervisor or a complete version of a Guest OS. This approach also enables the app to be running on top of that. The containers are isolated from each other in different namespaces and own network stacks. This means that processes running within a container cannot see or interact with processes of other containers, and they do not get privileged access to sockets or interfaces of other containers. [@DockerDocumentation]
 
@@ -242,7 +242,7 @@ Another eminent movement in IT is Machine Learning, which helped AI to a new hyp
 
 The advantage of Machine Learning compared to traditional software development is, that it eliminates the need to write the code by oneself. Instead, the developer enters some input data to the Machine Learning system. This system then figures out mathematical functions, which describes the given collection of data points best. The process of finding these function is called Machine Learning, and the resulting function is mostly referred to as model.
 
-This results in a system, which continuously improves the more data it is fed with because this leads to a more accurate function. Based on this assumption, Tom Mitchell defined Machine Learning in 1997 as follows:
+This results in a system, which continuously improves the more data it is fed with because this leads to a more accurate function. Based on this assumption, Tom Mitchell defined Machine Learning in 1997 as follows[@Mitchell:1997:ML:541177]:
 
 \newtheorem{definition}{Definition}
 
@@ -250,7 +250,7 @@ This results in a system, which continuously improves the more data it is fed wi
 
 A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task in T, as measured by P, improves with experience E. 
 
-\end{definition}[@Mitchell:1997:ML:541177]
+\end{definition}
 
 This definition means that a computer program learns if it is improving its performance at some task through experience. This experience could be input data like pictures of trees, with which it gets trained with the task to identify those trees on that picture.
 
@@ -322,8 +322,6 @@ The missing labels force the first example to only use the features $x$ and $y$ 
 
 In the figure on the left side, two clusters can be seen, which are circled in a group. On the right side, there is a line, which marks the function splitting the dataset into two groups. It is noticeable that the first approach leads to some examples, which cannot be assigned to either of the classes. 
 
-
-
 Additionally, there is another approach called reinforcement learning. In reinforcement learning, a model is built and then iteratively improved by taking in further examples. For that, it needs to get some feedback on how good the built model is. For example, this can be a reward or punishment function.
 
 ### Models {#sec:nnmodels}
@@ -368,8 +366,7 @@ y = \frac{1}{1 + e^{-x}}
 
 In figure \ref{fig:neuron} this whole process, that happens within the artificial neuron, can be seen in a simplified way. It takes the inputs $x_1$ and $x_2$, multiplies them with their belonging weights, sums up the results and adds a bias. Finally, it takes the result of this calculation as input for the activation function. The result of this is the output $y$. [@VictorZhou]
 
-![2 input Neuron[@VictorZhou]](images/chapter2/neuron.png){ width=400px #fig:neuron}																					
-
+![2 input Neuron[@VictorZhou]](images/chapter2/neuron.png){ width=400px #fig:neuron}
 
 A neural network can consist of more than one hidden layer. In that case, these networks are called deep neural network. In figure \ref{fig:deep_nn} such a deep neural network with three hidden layers and two output values can be seen. [@Stroetmann2018]
 
@@ -384,8 +381,7 @@ MSE = \frac{1}{n}\sum*{i=1}^{n}{(y*{true}-y_{pred})^2}
 
 With $n$ as the number of samples, $y_{true}$ as the true value of the variable and $y_{pred}$ as the predicted value of it. To minimize this loss, the neural network uses the partial derivative to change the weights and biases accordingly. This is done over and over again for every sample until the network is well-trained with the given inputs.
 
-Still, the developer does not only have to give some input data, train the neural network, and think all his work is done. Instead, other challenges have to be faced like preparing the data, choosing the right parameters and amount of input data to get the best results and avoid problems like over- or underfitting the network. Overfitting means that a network is trained with too many irrelevant features, called noise. Overfitting leads to a perfectly working system for the known data, which, on the other hand, does not work at all for unknown data, because it is too specialized on the data on which it was trained. Underfitting, on the other hand, occurs if the neural network was informed by too few features or regularized too much, which prevents the neural network from learning from the dataset. How the developer handles these difficulties and what the necessary steps are in this new kind of development will be described in chapter \ref{sec:aicycle}. [@Goodfellow-et-al-2016]
-
+Still, the developer does not only have to give some input data, train the neural network, and think all his work is done. Instead, other challenges have to be faced like preparing the data, choosing the right parameters and amount of input data to get the best results and avoid problems like over- or underfitting the network. How the developer handles these difficulties and what the necessary steps are in this new kind of development will be described in chapter \ref{sec:aicycle}. [@Goodfellow-et-al-2016]
 
 
 ## Artificial Intelligence lifecycle {#sec:aicycle}
@@ -413,9 +409,9 @@ Important to mention is, that instead of code the developers have to produce for
 
 With this data the developer has to go through several steps to build a useful system based on them. These steps are defined in an open standard process model called \acl{CRISP-DM} or \acs{CRISP-DM}. This model can be seen in figure \ref{fig:crisp_dm}.
 
-![CRISP-DM standard[@WolfRiepl]](images/chapter2/crisp_dm.png){ width=400px #fig:crisp_dm}															
-
 Following this standard model, the first step is Business Understanding. During this step, the project team has to determine overall goals and tasks for what to do with these data. For that, the team has to access the situation, which means that the team has to include possible risks, costs, benefits, and requirements for every possible objective in their evaluation process. After the overall objective is defined, this can be partitioned into several data mining goals what to do specifically with this data. Also, success criteria should be defined, and a project plan should be established, which will be followed in the next steps. [@Wirth2000]
+
+![CRISP-DM standard[@WolfRiepl]](images/chapter2/crisp_dm.png){ width=350px #fig:crisp_dm}															
 
 For the example above, such an objective could be to predict the price of real estate by the given features. The criteria could be, that in 90% of the tested data after the creation of the model, the predicted price should lie in between a range of 10% of the original price.
 
@@ -435,7 +431,13 @@ After the preprocessing, the dataset could be improved by feature engineering. T
 
 Additionally, there can be features in a dataset that are not numerical but categorical. This data need to be encoded before training the model. The encoding technique depends on the context of the categorical data.  One simple technique is label encoding, with which for every different category tha column gets a different number. For example every 'Appartment' gets a 1 and every 'House' a 2 in the 'type' column. However, this could cause trouble, because the learning algorithm could interprete the numbers as sequence. That's why another technique is One-Hot-Encoding. In this technique every possible category gets an own column and for every entry in the dataset the value is set to either 1 or 0 for all of the columns. In the example this would mean, that the column 'type' would be replaced with the columns 'appartment' and 'house'. For every appartment the column 'appartment' would then be set to 1 and the column 'house' to 0. For every house it would be exactly the other way round.[@SunnySrinidhi]
 
-In the next step all collected and cleaned data should be integrated and merged. After that the feature values should be normalized, because there is usually a significant difference between the minimum and the maximum value of a feature. To increase the performance of a model it could be helpful to scale the values down to, for exaple, a range from 0 to 1. [@article]
+In the next step all collected and cleaned data should be integrated and merged. After that the feature values should be normalized, because there is usually a significant difference between the minimum and the maximum value of a feature. To increase the performance of a model it could be helpful to scale the values down to, for example, a range from 0 to 1. [@article] One approach for this is called MinMax and converts the numbers through the following equation [@MicrosoftDocsb]:
+
+\begin{equation}
+z = \frac{x-\min(x)}{[\max(x) - \min(x)]}
+\end{equation}
+
+
 
 In the end the example above could look like this:
 
