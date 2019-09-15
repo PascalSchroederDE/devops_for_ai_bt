@@ -215,6 +215,20 @@ Another challenge can be to create a local Kubernetes cluster to test the develo
 
 How these installations can be done is described in this chapter.
 
+### Azure Machine Learning service {#sec:azuremlservice}
+
+The Azure Machine Learning service is provided on the Microsoft Azure Cloud. For accessing the Azure Cloud, a confirmed Microsoft account is needed. Then the Cloud can be accessed via [portal.azure.com](https://portal.azure.com).
+
+First, a resource group has to be created. For that the *Resource groups* button has to be selected on the left sidebar. Then a new group can be added by clicking on *Add*. In the upcoming form, a name has to be given as well as a subscription model has to be chosen. For non-paying users, the only possible subscription model is the free model. Additionally, a region can be chosen.
+
+Next, a resource has to be created with the *Create Resource* button on the left side panel. There a Machine Learning workspace has to be created. For that, it can either be navigated to the category *AI + Machine Learning* or directly be searched for *"Machine Learning*" via the search bar. Then the *Machine Learning service workspace* has to be selected.
+
+On the next page, this workspace can then be created by clicking *Create*. Then a name has to be given and the region, as well as a subscription model, has to be chosen the same way as for creating a resource group. Additionally, the newly created resource group has to be selected.
+
+This new resource can then be accessed via the *All resources* page, which can be found on the left side panel. There the service appears with the chosen name. When clicking on the service, a new page with a navigation panel is loaded. To create a visual interface for a Machine Learning pipeline, the *Visual Interface* button has to be clicked, which can be found in the category *Authoring (Preview)*. Then this interface can be launched by pressing *Launch visual interface* on the appearing page.
+
+After that, the project is successfully prepared for creating a pipeline with the Azure visual interface.
+
 ### Minikube {#sec:minikube}
 
 A critical principle of DevOps is to design the environments in a way that they behave as similar to the production environment as possible. Because of the decision to deploy the product inside of containers on a Kubernetes cluster, it is necessary to set up such a cluster on a local system.  Currently, there are two popular solutions for this - Minikube and microk8s.

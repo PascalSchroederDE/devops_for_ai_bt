@@ -99,24 +99,16 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Loading data...")
     df = load_data(args.dataset_location)
 
-    logging.info("Unify dataset (Integers to Float)...")
     df = unify_datatypes(df)
 
-    logging.info("Remove rows with missing values...")
     df = remove_mis_values(df)
 
-    logging.info("Remove rows with faulty values...")
     df = remove_faulty_values(df)
 
-    logging.info("Normalize values (every cell should have a value between 0 and 1)")
     df = normalize_values(df)
 
-    logging.info("Writing resulting dataframe to csv")
     df.to_csv(args.output, index=False)
 
     write_file("/prepdf_output.txt", args.output)
@@ -189,15 +181,10 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Loading data...")
     df = load_data(args.dataset_location)
 
-    logging.info("Applying one hot encoding...")
     df = one_hot_encoding(df)    
 
-    logging.info("Writing resulting dataframe to csv")
     df.to_csv(args.output, index=False)
 
     write_file("/findf_output.txt", args.output)
@@ -225,16 +212,13 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Loading data...")
     df = load_data(args.dataset_location)
 
     image_df, label_df = split_label_and_img(df)
 
     images_train, images_test, labels_train, labels_test = train_test_split(image_df, label_df, test_size=args.test_size, random_state=args.random_state)
-    logging.info("Writing resulting dataframes to csvs")
-    images_train.to_csv(args.output_train_img, index=False)
+
+	images_train.to_csv(args.output_train_img, index=False)
     labels_train.to_csv(args.output_train_label, index=False)
     images_test.to_csv(args.output_test_img, index=False)
     labels_test.to_csv(args.output_test_label, index=False)
@@ -267,17 +251,12 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Building model...")
     model = build_model((args.input_shape_height, args.input_shape_width), args.num_units, args.num_outputs, get_activation_func(args.activation_l2), get_activation_func(args.activation_l3))
 
-    logging.info("Compile model...")
     model.compile(optimizer=args.optimizer,
         loss=args.loss,
         metrics=[args.metrics])
 
-    logging.info("Saving model...")
     model.save(args.output)
 
     write_file("/model.txt", args.output)
@@ -304,12 +283,8 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Downloading model...")
     model = download_model((args.input_shape_height, args.input_shape_width))
 
-    logging.info("Saving model...")
     model.save(args.output)
 
     write_file("/model.txt", args.output)
@@ -325,23 +300,14 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Loading data...")
     train_img_raw = load_data(args.input_train_img)
     train_label = load_data(args.input_train_label)
 
-    logging.info("Preparing images...")
     train_img = prepare_image_shape(train_img_raw, args.input_shape_height, args.input_shape_width)
 
-    logging.info("Loading model...")
     model = load_model(args.model_location)
-    logging.info(train_img.shape)
-    logging.info(train_label.shape)
-    logging.info("Training model...")
     model.fit(train_img, train_label, epochs=args.epochs)
 
-    logging.info("Saving model weights...")
     model.save(args.output)
 
     write_file("/trained_model.txt", args.output)
@@ -364,24 +330,15 @@ def main():
     [...]
     args = parser.parse_args()
 
-    logging.getLogger().setLevel(logging.INFO)
-
-    logging.info("Loading data...")
     test_img = load_data(args.input_test_img)
     test_label = load_data(args.input_test_label)
 
-    logging.info("Preparing images...")
     test_img = prepare_image_shape(test_img.values, args.input_shape_height, args.input_shape_width)
 
-    logging.info("Loading model...")
     model = load_model(args.model_location)
 
-    logging.info("Evaluate model...")
     loss, acc = model.evaluate(test_img, test_label)
-    logging.info("Evaluation loss: {}".format(loss))
-    logging.info("Evaluation accuracy: {}".format(acc))
 
-    logging.info("Saving loss and accuracy...")
     store_loss_acc(args.output, loss, acc)
 
     write_file("/result.txt", args.output)

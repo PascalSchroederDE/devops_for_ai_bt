@@ -50,13 +50,15 @@ The second set of practices is for the time of **development and testing**. Two 
 
 *Collaborative development* enables different practitioners - architects as well as analysts, developers, specialists, and other participants - to work together on one project. For that, it provides a standard set of practices and a common platform to create and deliver the software. 
 
-One core capability is a practice called *continuous integration*, in which developers continuously or frequently integrate their work with the other developers. For that, a shared platform or repository is necessary, on which the developers can frequently commit their changes in the code. Usually, this is done using a version control system like Git. What a Git workflow looks like can be seen in figure \ref{fig:git}.
+One core capability is a practice called *continuous integration*, in which developers continuously or frequently integrate their work with the other developers. For that, a shared platform or repository is necessary, on which the developers can frequently commit their changes in the code. Often, this is done using a version control system like Git, which does not only enable version controlling and continuous integration, but supports almost the whole operation lifecycle, which is known as *GitOps*. *GitOps* is a special kind of DevOps and starts with a Collaboration platform like Github to enable a group of people to work together. It also enables version controlling and continuous integration. What a typical integration workflow with Git looks like can be seen in figure \ref{fig:git}.
 
 ![Git workflow](images/chapter2/git_flow.png){ width=600px #fig:git}
 
 There the project is split into several branches, which are represented by a rectangular box. The circles represent single commits of new code. Arrows are representing the push of a new version and dashed arrows are representing the base version, on which the new commit was built and to which it will be merged.
 
 The most important branch is the master branch. On the master branch, every finished version is pushed, and from this branch, it can be released.  The development branch is for ongoing changes. Small changes can be done directly on the development branch. More significant changes, like added features, should get their branch. Every developer can create their branch for a new version so that the developers do not interfere with each other. When all code changes are done, the new version will be merged into the development branch. Sometimes some conflicts in the code have to be fixed for a clean merge in case two different commits changed the same code piece. As soon as the new version is working on the development branch and everything is tested and ready, it can be merged into the master branch, so that this new version can be rolled out. In case an error occurs, it can be fixed in a hotfix branch directly descending from the master branch.
+
+The master branch can then serve as trigger for a delivery pipeline, which compiles the code and moves it to the deployment environment, for example a Kubernetes cluster. This fianlizes the *GitOps* cycle, which shows, that a *GitOps* workflow can support the development from coding to deployment.
 
 Additionally, the application should be tested and verified continuously. For that, the developer can run local unit tests to verify their changes before integrating. Unit tests test a specific component with defined input and output and checks if the calculated output is the expected one. However, this does not verify that the integrated code performs as designed. [@AmazonDocumentation] A continuous integration service like Jenkins can relieve the developer of this task and automatically builds and runs unit tests on the newly committed and integrated code. In doing so, it runs not only unit tests, but also integration tests, which test the software as a whole. This process is called *continuous testing*.
 
@@ -74,7 +76,7 @@ Based on those retrieved data, businesses may adjust their plans and priorities,
 
 One technology to allow developers to follow above practices is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a larger scale. This technology is implemented with machine-readable definitions and configurations. Based on them, the machine can provide the necessary environment automatically to enable continuous delivery.
 
-The most important technology for DevOps may be a **delivery pipeline**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage, and production. This can be seen in figure \ref{fig:del_pipeline}.
+One of the most important technology for DevOps are **delivery pipelines**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage, and production. This can be seen in figure \ref{fig:del_pipeline}.
 
 ![Delivery pipeline[@Sharma2017]](images/chapter2/delivery_pipeline.png){ width=400px #fig:del_pipeline}
 
