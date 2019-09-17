@@ -1,8 +1,8 @@
 # Theory - DevOps, Cloud and Machine Learning {#sec:theory}
 
-In this chapter, the theoretical basis, that is needed for creating DevOps principles for AI, will be given. For that, it will be started with an explanation of what DevOps is in general. Then it will be shown, which new possibilities came with Cloud and 12-factor-apps in chapter \ref{sec:ms12}. After that, the basics of Machine Learning and AI will be given in chapter \ref{sec:ml}, specializing on the lifecycle of AI development in chapter \ref{sec:aicycle}. Last in chapter \ref{sec:devopsai}, all these knowledge will be combined to adopt the DevOps principles explained in chapter \ref{sec:devops} to the new world of AI with the help of Cloud technologies.
+In this chapter, the theoretical basis, that is needed for creating DevOps principles for AI, will be explained. For that, it will be started with an explanation of DevOps in general. Then it will be shown, which new possibilities came with Cloud and Microservices in chapter \ref{sec:ms12}. After that, the basics of Machine Learning and AI will be delighted in chapter \ref{sec:ml}, specializing on the lifecycle of AI development in chapter \ref{sec:aicycle}. In chapter \ref{sec:devopsai}, this knowledge will be combined to adopt the DevOps principles explained in chapter \ref{sec:devops} to the new world of AI with the help of Cloud technologies.
 
-## Development Operations {#sec:devops}
+## DevOps - Development Operations {#sec:devops}
 
 Since people started manufacturing products on a mass scale, the goal is to increase the efficiency of this manufacturing process and reduce waste of time and material. 
 
@@ -10,7 +10,7 @@ One early set of best practices for manufacturing was the concept of *Lean manuf
 
 In 2009 two Flickr employees - John Allspaw and Paul Hammond - presented their way of combining Development and Operations. Inspired by this presentation, a Belgian consultant named Patrick Debois formed a new conference - the "Devopsday" in Ghent. This naming is how the term "DevOps" has been created and prevailed. [@SteveMezak]
 
-Since then, DevOps has been established or at least planned in 91% of all companies as an essential way to increase their efficiency of software development. [@SauceLabs] For almost every stage of development, there are principles and practices defined and continuously improved. However, before those practices are explained, further insight into the business need will be given. All this will be oriented to the book "DevOps for Dummies" by Sanjeev Sharma and Bernie Coyne. [@Sharma2017]
+Since then, DevOps has been established or at least planned in 91% of all companies as an essential way to increase their efficiency of software development. [@SauceLabs] For almost every stage of development, there are principles and practices defined and continuously improved. However, before those practices are explained, further insight into the business need will be given. Among a lot of good literature the book "DevOps for Dummies" by Sanjeev Sharma and Bernie Coyne stood out, which is why this chapter is based to a great extent on knowledge gained from this book. [@Sharma2017]
 
 Every process or product need a business value that covers the costs caused by it. For that, there must be either an outcome for the customer or reduced producing costs.
 
@@ -70,13 +70,13 @@ After the deployment follows the **Operation**. During this stage, the performan
 
 *Continuous feedback*, on the other hand, provides data coming directly from the customer. This data includes the behavior of the users as well as feedback provided by them.
 
-Based on those retrieved data, businesses may adjust their plans and priorities, improve the development cycle and features, and enhance the environment in which the application is deployed in a more agile and responsive way. The objective of this is to improve the product and satisfy the users. Additionally, this knowledge should be used for new products, that will be developed in the future.
+Based on those retrieved data, businesses may adjust their plans and priorities, improve the development cycle and features, and enhance the environment in which the application is deployed in a more agile and responsive way. The objective of this is to improve the products speed and quality. Additionally, this knowledge should be used for new products, that will be developed in the future.
 
 ### Technologies
 
-One technology to allow developers to follow above practices is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a larger scale. This technology is implemented with machine-readable definitions and configurations. Based on them, the machine can provide the necessary environment automatically to enable continuous delivery.
+One technology to allow developers to implement above practices is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a larger scale. This technology is implemented with machine-readable definitions and configurations. Based on them, the machine can provide the necessary environment automatically to enable continuous delivery.
 
-One of the most important technology for DevOps are **delivery pipelines**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage, and production. This can be seen in figure \ref{fig:del_pipeline}.
+Another important technology for DevOps are **delivery pipelines**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage, and production. This can be seen in figure \ref{fig:del_pipeline}.
 
 ![Delivery pipeline[@Sharma2017]](images/chapter2/delivery_pipeline.png){ width=400px #fig:del_pipeline}
 
@@ -86,7 +86,7 @@ In the development environment, all the code updates are being done. There are t
 
 Source control management is typically combined with version control. This enables the developer also to store previous versions of his application and reduces the risk of issues in new updates because it can roll them back in case of an error.[@TaliSoroker]
 
-After the development, the delivery pipeline must care for the application to be built.
+After the development, the delivery pipeline must take care for the application to be built.
 
 Second, there is the testing environment, in which single components can be tested. For that, it has to manage test data, scenarios, scripts, and associated results. Similar to the development environment, it must not look like the production environment. 
 
@@ -98,7 +98,7 @@ The delivery pipeline consists of all those stages and manages an automated tran
 
 For this deployment automation tools are necessary, which perform the deployments and track which version is deployed on which node. It also manages changes that need to be performed for the middleware components and configurations as well as database components or the environment. 
 
-Last, there should also be a tool for **release management**, which provides a single collaboration portal for all stakeholders participating in a project to plan and track the releases of an application and its components across all stages. 
+Also, a tool for **release management** i smandatory, which provides a single collaboration portal for all stakeholders participating in a project to plan and track the releases of an application and its components across all stages. 
 
 With such technologies, most of the defined practices can be performed with the help of accordingly educated people and well-thought-out processes. However, DevOps is no static set of practices and tools, but it changes with the changes in the world IT, such as Cloud or AI. In the next chapters, these technologies will be reflected, and the impact those have on DevOps will be analyzed.
 
@@ -123,7 +123,7 @@ However, the development and deployment of portable, resilient applications that
 
 ### Microservice Architecture
 
-For that, the term Microservice Architecture has sprung up over the last few years. There is no unique definition for it, but when talking about Microservice Architecture mostly, it is referred to Martin Fowler's characteristics described in [@MartinFowler].
+For that, the term Microservice Architecture has developed over the last few years. There is no unique definition for it, but when talking about Microservice Architecture mostly, it is referred to Martin Fowler's characteristics described in [@MartinFowler].
 
 Following Fowler, the first characteristic is, that componentization is realized via services. In monolithic software, different components are linked together via libraries. Services on the other side are out-of-process components. The communication is realized with web service requests or remote procedure calls. The advantage of this approach is that they are independently deployable, which is the reason why this is the usual approach in Microservice Architecture.
 
@@ -166,9 +166,9 @@ Following these guidelines, stable and performant Microservices can be built. In
 
 ### Container - Docker
 
-One of them is containerization of applications. This can be understood as a package for the isolation of application within a closed environment, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light-weighted. [@Jerry2015] This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
+Such a technology is containerization of applications. For this an open standard - Open Container Initiative - has been developed, which is implemented by most leaders of the container industry. This technology can be understood as a package for the isolation of application within a closed environment, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light-weighted. [@Jerry2015] This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
 
-An industry-leading container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
+One container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
 
 On the left side, the infrastructure of a VM can be seen, on the right side, the infrastructure of a Docker container. Both need the infrastructure of a physical device and its host operating system. On top of a VM on this Host Operating System, there is a Hypervisor, and on this Hypervisor several Guest OS can be running. On those again, the apps itself can be executed, and the necessary libraries and binaries are running in the background.
 
@@ -192,13 +192,13 @@ Still, in a local environment, not each of the 12 factors is fulfilled. Instead,
 
 ### Kubernetes as an enabler
 
-Kubernetes can serve as such an enabler. It can host Microservices as Docker containers and ensure all of the 12 factors to be met.
+Kubernetes can serve as such an enabler. Kubernetes was originally developed by Google and evolved out of Project Borg. Borg is a cluster management system, that schedules, starts and monitors applications within a cluster. [@43438] Kubernetes has been built based on knowledge and experiences with Borg and has been open sourced in 2014. [@Lardinois] Kubernetes has been designed to host Microservices as Docker containers and ensures in its design all of the 12 factors to be met.
 
-In general, Kubernetes enables an automated deployment, scaling, and management of these containers within a cluster of nodes. Thereby a cluster consists of at least one master node and any number of worker nodes. Figure \ref{fig:kubernetes_services} shows the different services owned by master and worker nodes.
+In general, Kubernetes is a management platform. It enables an automated deployment, scaling, and management of containers within a cluster of nodes. Thereby a cluster consists of at least one master node and any number of worker nodes. Figure \ref{fig:kubernetes_services} shows the different services owned by master and worker nodes.
 
 ![Kubernetes service allocation[@Fricke]](images/chapter2/kubernetes.png){ width=500px #fig:kubernetes_services}
 
-First, there are several pods on each worker node. Pods are the smallest unit in Kubernetes. They contain one or more containers, which are deployed together on the same host. There they can work together to perform a set of tasks. [@CoreOS]
+Pods are the smallest unit in Kubernetes. They contain one or more containers, which are deployed together on the same host. There they can work together to perform a set of tasks. [@CoreOS]
 
 On the master node, there are an \acs{API} (\acl{API}) Server, a Controller Manager, a Scheduler and a key-value store called etcd. [@Fricke][@JorgeAcetozi]
 
@@ -240,7 +240,7 @@ This way, Docker and Kubernetes are fulfilling each of the 12-factors, which sho
 
 ## Machine Learning {#sec:ml}
 
-Another eminent movement in IT is Machine Learning, which helped AI to a new hype and opened several new possibilities and improvements to software development. Because of the exponential growth of computation power and data, Machine Learning has become one of the most important tools when it comes to Artifical Intelligence.
+Machine Learning evolves as another leading technology in IT as big players focus their work more and more on AI. For example, IBM announced the *Cognitive Era* and Google changed its focus from *Mobile First* to *AI first* a few years ago. This helped AI to a new hype and opened several new possibilities and improvements to software development. Because of the exponential growth of computation power and data, Machine Learning has become one of the most important tools when it comes to Artifical Intelligence.
 
 The advantage of Machine Learning compared to traditional software development is, that it eliminates the need to write the code by oneself. Instead, the developer enters some input data to the Machine Learning system. This system then figures out mathematical functions, which describes the given collection of data points best. The process of finding these function is called Machine Learning, and the resulting function is mostly referred to as model.
 
@@ -258,7 +258,7 @@ This definition means that a computer program learns if it is improving its perf
 
 ### Tasks
 
-For fulfilling such a task, it is necessary to define this task before. This definition is oriented to the book "Deep Learning" by Ian Goodfellow, Yoshua Bengio, and Aaron Courville. [@Goodfellow-et-al-2016]
+For fulfilling such a task, it is necessary to define this task before. In the book "Deep Learning" by Ian Goodfellow, Yoshua Bengio, and Aaron Courville this have been done and the definitions below will be based on the definitions from this book. [@Goodfellow-et-al-2016]
 
 In general, tasks are described in terms of how the Machine Learning system should process an example. An example is a collection of quantitative measurements, called features. This set can be written as a vector $x \in \mathbb{R}^n$ with each $x_i$ being one of the features.
 
@@ -302,9 +302,9 @@ An example of this is to predict a logical sequence of numbers without the need 
 
 ### Training approaches
 
-As mentioned above, in Machine Learning, all those tasks are not solved by explicitly coding algorithms and formulas, but by training a system with given input data. For training those systems, different approaches are existing, each used for different requirements. This chapter will also be based on the book "Deep Learning". [@Goodfellow-et-al-2016]
+As mentioned above, in Machine Learning, all those tasks are not solved by explicitly coding algorithms and formulas, but by training a system with given input data. For training those systems, different approaches are existing, each used for different requirements. These approaches have also been described In the book "Deep Learning". This chapter will be oriented to the according descripitions in this book. [@Goodfellow-et-al-2016]
 
-One of the viable approaches is called supervised learning. Supervised learning requires an additional value for each example representing the optimal solution for it. Formally the data set can be described as $\mathbb{D} \in 2^{\mathbb{R}^n}$. For every example vector $x \in \mathbb{D}$ there exists a $y \in \mathbb{R}$ such that $y=f(x)$ with $f:\mathbb{R}^n \rightarrow \mathbb{R}$ being the function that describes the task to be learned. This additional feature is mostly referred to as label or target. Usually, the tasks are accomplished by approximating the conditional probability distribution $p(x|y)$.
+One approach is called supervised learning. Supervised learning requires an additional value for each example representing the optimal solution for it. Formally the data set can be described as $\mathbb{D} \in 2^{\mathbb{R}^n}$. For every example vector $x \in \mathbb{D}$ there exists a $y \in \mathbb{R}$ such that $y=f(x)$ with $f:\mathbb{R}^n \rightarrow \mathbb{R}$ being the function that describes the task to be learned. This additional feature is mostly referred to as label or target. Usually, the tasks are accomplished by approximating the conditional probability distribution $p(x|y)$.
 
 Supervised learning algorithms are often used for classification or regression tasks.
 
@@ -390,7 +390,9 @@ Still, the developer does not only have to give some input data, train the neura
 
 The new possibilities opened by Machine Learning, as described in chapter \ref{sec:ml} force developers to change their development lifecycle in a drastic way if they want to develop a Machine Learning based Artificial Intelligence. This lifecycle will be described and explained in the following chapter.
 
-Important to mention is, that instead of code the developers have to produce for a specified objective, in Machine Learning the developers get some data as input and must train a model with this data to meet the objective. To simplify the process described in this chapter an example data set will be given and in the process of explaining the single steps this data will be used to exemplify these. This dataset can be seen below.
+Important to mention is, that instead of code the developers have to produce for a specified objective, in Machine Learning the developers get some data as input and must train a model with this data to meet the objective. This objective can not be evaluated by common methods of verifying the functionalities of a software. Instead it has to be evaluated by measuring the accordance of the calculated output with the true output with explicit testing data.  
+
+To simplify the process described in this chapter an example data set will be given and in the process of explaining the single steps this data will be used to exemplify these. This dataset can be seen below.
 
 \begin{table}[htb]
 \centering
@@ -421,7 +423,7 @@ Next, the data need to be understood. For that, first, as much data as possible 
 
 In the example, there are far too little data for a real model, and much more would be needed in a real project. However, even in this small dataset, some problems can be detected. The first one is the missing entry for the second object in the column "year built" as well as for the last object in the column "# of rooms". Also, the type of estate is categorical instead of numerical, which could cause problems when training the model.
 
-The next step is probably the one that needs the most effort of the developer - data preparation. First, the project team needs to select the data, which it will use for building the model. Then the data need to be preprocessed.  [@Wirth2000]
+The next step is probably the one that needs the most effort of the developer - data preparation. First, the the data, which it will use for building the model, needs to be selected. Then the data need to be preprocessed.  [@Wirth2000]
 
 This preprocessing step includes detecting and removing noisy and redundant data. Noisy data means data that are irrelevant to the chosen business objective. In the given example, the age of the buyer is unnecessary information because it does not change the price of the estate. This circumstance is why this column can be removed. Also, wrongly labeled data should be removed. 
 
@@ -464,57 +466,7 @@ This data set has then to be splitted into three different sets - training, vali
 
 After this, the next step is modeling. For this, first, a training technique, as well as a basic model, has to be selected. Usually, different models are tested several times, so that the best model can be chosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents, for example, over- and underfitting the model with the training data. [@Wirth2000]
 
-Then the model has to be evaluated with the test set. Also, the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders, the steps can be repeated starting from the Business Understanding with deeper knowledge. This is how a model can be continuously improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features, or applying different training methods. [@Wirth2000]
-
-![Iterative Machine Learning lifecycle](images/chapter2/training_cycle.png){ width=500px #fig:ml_cycle}																
-
-This process from preparing the data and adjusting the parameters can be seen in figure \ref{fig:ml_cycle} from a more technical perspective. First, the developer gets the raw dataset, then he preprocesses this dataset and applies feature engineering to improve it. After it, the dataset is split into different sets, and the parameters get tuned. At the same time, a model is getting selected and trained with the training set and the given parameters. This step is repeatable until the developer is satisfied with the created model. In the end, the model's predictions will be evaluated against the test data.
-
-Last, the model needs to be deployed. For that also, the monitoring and maintenance of the product need to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process. [@Wirth2000]
-
-With this standardized process of Artificial Intelligence development, the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
-
-## DevOps for Artificial Intelligence {#sec:devopsai}
-
-The new steps described in chapter \ref{sec:aicycle} forces developers to change not only their development cycle but also the operation. Additionally, new architectural models like microservices, cloud technologies like containerization or Kubernetes as well as \acs{SaaS} as a new Software model as described in chapter \ref{sec:ms12} opens new possibilities of a scalable, flexible and reliable deployment of products. All this changes the way of DevOps for Machine Learning / AI, and not all of the existing principles and practices are applicable any more or better approaches are imaginable. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
-
-First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are the following:
-
-- Develop and test against production-like systems
-- Deploy with repeatable processes
-- Amplify a feedback loop [@Sharma2017]
-
-Additionally, the four stages - steer, develop, deploy, and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through, and necessary adoptions or additions will be made.
-
-The first set - **steer** - was about management and planning, which includes Continuous Business Planning, Continuous Improvement, and Release Planning. All this includes: Tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quickly as possible. 
-
-All this also applies to the development of AI and overlaps with the CRISP-DM process described in chapter \ref{sec:aicycle}. This process defines *Business Understanding* as the first stage, in which business goals and objectives should be defined. During this step, the same practices and tools can help as in traditional software development as there is no difference in planning and managing the objectives and release plan of a Machine Learning or a traditional software project. 
-
-The difference in the steer phase is that there is an additional step, which includes understanding the data. This understanding needs a deeper insight into the business correlations, necessary information, and context of the data. So, there are two significant differences -
-
-The first is in the roles of the people who handle these steps. This profound insight of the business data needs experts on this field instead of programmers with a lack of understanding all the correlations and meanings. Instead, usually, data scientists or data analysts are needed for defining the needed data, evaluating the quality and detecting problems, so that a clear way to clean and prepare the data can be determined.ro
-
-A second difference is a need for a tool to visualize these data. For that, the data scientists or analysts need skills for creating visualized data as quickly as possible. A widespread tool for this is *Jupyter Notebooks*, with which an easy preparation and plotting of the data are possible with the help of Python.
-
-However, most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is split into two stages - data preparation and the building of the model. Also, the code is not the only input the developers have to deal with, but there is data as a second, valuable input. [@Dillon] This leads to several differences in the practices and tools defined for this stage.
-
-Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators but also the data. Usual source control software like git sets limitations to the file size and are not designed for handling other data than code. This results in need of another tool to handle big data samples when developing an AI product so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
-
-A solution to this problem could be Quilt or Git \acl{LFS} (\acs{LFS}), which are designed for storing audio samples, graphics, datasets, and videos. 
-
-Another common tool for developing software are IDEs, which are supporting the developer in coding, collaborating with one's team, and efficiently integrating the workflow. For Machine Learning, such tools have to be extended, or new tools need to be created to visualize and especially prepare data. This includes, for example, possibilities to label images or videos and preprocess the data. Currently, for this, different tools have to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
-
-However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox, to name just one, which offers simple data labeling and management, collaboration, and even some automation features. This labeled and prepared data then needs to be available from a shared repository, to which the whole team can contribute to so that they can collaborate.
-
-Another practice in traditional Software development is called *Continuous testing*. This practice includes automatically build the software and run unit tests on every single component as well as automated integration tests of the application as a whole. In AI development, a completely different form of testing is necessary: 
-
-First, a Machine Learning model can only be tested as a whole instead of its single components. Machine Learning models work more like a black box because it is difficult to look at how the inner components are working and evaluate its actions. This means that only an input can be given and the output can be classified as true or false without a valuation of the single components.
-
-Additionally, if the output is correct for one input that does not give any information about another input, because usually, ML models are too complex to predict its outcome. Both of it leads to another form of testing.
-
-For this approach, the data needs to be split automatically into a training and a test set before training the model. After the training step is done, the test set is used to compare the predicted outcome with the real value. Applying this approach can give valuable insights into the model, which can be expressed as different indicators.
-
-The easiest one is the accuracy, which divides the correct classified results by all tested samples:
+Then the model has to be evaluated with the test set. There are several indicators defined to measure the performance of a model. Ine is the accuracy, which divides the correct classified results by all tested samples:
 
 \begin{equation}
 Accuracy := \frac{\mbox{number of correct predictions}}{\mbox{number of all predictions}}
@@ -552,6 +504,60 @@ MSE := \frac{1}{N} * \sum*{j=1}^{N}{(y_j - \hat{y}*j)^2}
 
 However, there are still several other indicators that can be used for measuring the performance of a model. The developer should decide which indicators to use, so that they will be seen to evaluate the performance of a model after the automated tests have been driven.
 
+After that, the whole process needs to be reviewed and improved if possible. Dependent on the resulting model and the satisfaction of all stakeholders, the steps can be repeated starting from the Business Understanding with deeper knowledge. 
+
+This is how a model can be continuously improved until all stakeholders are satisfied by tuning the hyperparameters, choosing different models or improved data and features, or applying different training methods. [@Wirth2000]
+
+![Iterative Machine Learning lifecycle](images/chapter2/training_cycle.png){ width=500px #fig:ml_cycle}																
+
+This process from preparing the data and adjusting the parameters can be seen in figure \ref{fig:ml_cycle} from a more technical perspective. First, the developer gets the raw dataset, then he preprocesses this dataset and applies feature engineering to improve it. After it, the dataset is split into different sets, and the parameters get tuned. At the same time, a model is getting implemented and trained with the training set and the given parameters. This step is repeatable until the developer is satisfied with the created model. In the end, the model's predictions will be evaluated against the test data.
+
+Last, the model needs to be deployed. For that also, the monitoring and maintenance of the product need to be clarified. This is how the model can be applied to its business case. The objective is an easy and stable way to access the new product. The cycle will then be finalized with a final report and review of the product as well as the process. [@Wirth2000]
+
+With this standardized process of Artificial Intelligence development, the basics for applying DevOps to them are already existing. In chapter \ref{sec:devopsai} will be described how these steps can be automated while simplifying the work for the developer and increasing the efficiency at the same time based on the principles and practices of DevOps described in chapter \ref{sec:devops}.
+
+## DevOps for Artificial Intelligence {#sec:devopsai}
+
+The new steps described in chapter \ref{sec:aicycle} forces developers to change not only their development cycle but also the operation. Additionally, new architectural models like microservices, cloud technologies like containerization or Kubernetes as well as \acs{SaaS} as a new Software model as described in chapter \ref{sec:ms12} opens new possibilities. Scalable, flexible and reliable deployments of products are enabled by the described technologies.
+All this changes the way of DevOps, including DevOps specialized on Machine Learning / AI. 
+For this new type of DevOps a holistic approach has to be made to transform existing principles and practices and some may have been created from scratch. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
+
+First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are the following:
+
+- Develop and test against production-like systems
+- Deploy with repeatable processes
+- Amplify a feedback loop [@Sharma2017]
+
+The four stages - steer, develop, deploy, and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through, and necessary adoptions or additions will be made.
+
+The first set - **steer** - was about management and planning, which includes Continuous Business Planning, Continuous Improvement, and Release Planning. All this includes: Tracking the status and the needs of a project,  monitoring a product and getting feedback from the users as well as tracking the progress of the project to minimize the risks and be able to react on trends as quickly as possible. 
+
+All this also applies to the development of AI and overlaps with the CRISP-DM process described in chapter \ref{sec:aicycle}. This process defines *Business Understanding* as the first stage, in which business goals and objectives should be defined. During this step, the same practices and tools can help as in traditional software development as there is no difference in planning and managing the objectives and release plan of a Machine Learning or a traditional software project. 
+
+The difference in the steer phase is that there is an additional step, which includes understanding the data. This understanding needs a deeper insight into the business correlations, necessary information, and context of the data. So, there are two significant differences -
+
+The first is in the roles of the people who handle these steps. This profound insight of the business data needs experts on this field instead of programmers with a lack of understanding all the correlations and meanings. Instead, usually, data scientists or data analysts are needed for defining the needed data, evaluating the quality and detecting problems, so that a clear way to clean and prepare the data can be determined.ro
+
+A second difference is a need for a tool to visualize these data. For that, the data scientists or analysts need skills for creating visualized data as quickly as possible. A widespread tool for this is *Jupyter Notebooks*, with which an easy preparation and plotting of the data are possible with the help of Python.
+
+However, most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is split into two stages - data preparation and the building of the model. Also, the code is not the only input the developers have to deal with, but there is data as a second, valuable input. [@Dillon] This leads to several differences in the practices and tools defined for this stage.
+
+Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators but also the data. Usual source control software like git sets limitations to the file size and are not designed for handling other data than code. This results in need of another tool to handle big data samples when developing an AI product so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
+
+A solution to this problem could be Quilt or Git \acl{LFS} (\acs{LFS}), which are designed for storing audio samples, graphics, datasets, and videos. 
+
+For Machine Learning, also IDEs, programming languages and paradigms have to be extended, or new ones need to be created to visualize and especially prepare data. This includes, for example, possibilities to label images or videos and preprocess the data. Currently, for this, different tools have to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
+
+However, tools for labeling data, managing its quality and collaborating with a team are emerging. An example is Labelbox, to name just one, which offers simple data labeling and management, collaboration, and even some automation features. This labeled and prepared data then needs to be available from a shared repository, to which the whole team can contribute to so that they can collaborate.
+
+Another important piece in traditional Software development is called *Continuous testing*. This practice includes automatically build the software and run unit tests on every single component as well as automated integration tests of the application as a whole. In AI development, a completely different form of testing is necessary: 
+
+First, a Machine Learning model can only be tested as a whole instead of its single components. Machine Learning models work more like a black box because it is difficult to look at how the inner components are working and evaluate its actions. This means that only an input can be given and the output can be classified as true or false without a valuation of the single components.
+
+Additionally, if the output is correct for one input that does not give any information about another input, because usually, ML models are too complex to predict its outcome. Both of it leads to another form of testing.
+
+For this approach, the data needs to be split automatically into a training and a test set before training the model. After the training step is done, the test set is used to compare the predicted outcome with the real value. Applying this approach can give valuable insights into the model, which can be expressed as different indicators. Thore are explained in chapter \ref{sec:aicycle}.
+
 During the modeling stage, another important difference occurs: The urgent need for resources, especially of computing units and memory. In opposite to traditional Software development, this use does not equal the need for resources while running the application in production, but it needs far more resources to train the model. Usually, \acs{GPU}s are used to build models because their design fits the need for model training better. However, \acs{GPU}s are not very common in traditional Software development, so teams would have to purchase one just for this purpose. Additionally, these resources are only needed during the modeling stage, and the rest of the time, they would be unused, which is a waste of resources. This is where the advantages of Cloud Computing can be utilized. With its capability of flexible resource allocation, the resources can be used more efficiently, and money can be saved because of the pay-per-use model of Cloud Computing. This approach of saving cost and resources through training the model within a Cloud can be called *Dynamical resource demand*.
 
 The next stage is the **delivery**, in which the practice *Continuous delivery* applies. This practice deals with the automation of the deployment of the software to different environments. This demand also applies to Machine Learning development. Only the implementation differs slightly. In common Software development, the trigger for starting the building and deployment process is usually a newly committed code in the master repository. In Machine Learning, it could also be necessary or recommended to rebuilt and deploy the model when new or changed data occurs, which forces a second trigger. Additionally, the built of the project requires more steps than just compiling the code like training the model, which takes some time. This is described in more detail below when it comes to delivery pipelines.
@@ -562,7 +568,7 @@ Last, there is the **operation** stage. During this stage, the use of the applic
 
 For ML applications, this monitoring and feedback get one more, significant role - through the collection of more data, the model can be continuously improved through *Refitting of the model*. This is an exclusive feature for ML applications because, in the opposite of traditional software, these are adaptive. This demands a clean collection of the data as well as automated processing of these. Then this data can be used to retrain the model and redeploy it after periodically. This offers the users to experience a significant improvement of the app's performance, and that way increases the User experience due to better results.
 
-Another critical difference is the roles of developing people. While in traditional development, the developers are IT specialists, who can handle the operational cycle as well as the development. In ML development, usually, Data Scientists take over the main part of the work as already mentioned above. They got a unique skill set when it comes to the preparation of data and feature engineering, but sometimes they lack in experience with operation tools like delivery pipelines. That is why a more natural way to build and operate a pipeline is necessary, which can be easily handled and reused so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
+Another critical difference is the roles of developing people. While in traditional development, the developers are programmers, who can handle the operational cycle as well as the development. In ML development, Data Scientists are from a high importance. They got a unique skill set when it comes to the preparation of data and feature engineering, but sometimes they lack in experience with operation tools like delivery pipelines. That is why a more natural way to build and operate a pipeline is necessary, which can be easily handled and reused so that the process of development is as easy as possible and the Data Scientist can focus on his main work with the data.
 
 An essential part of a solution is to provide an easy-to-use delivery pipeline for the Data Scientists, which combines every step of the development and automates all the operations as far as possible so that the Data Scientist can focus on his main work. 
 
@@ -576,15 +582,15 @@ Then there are a preprocessing as well as a feature engineering step. These two 
 
 After this, the dataset is split into three sets - training, validation, and test. The training and validation sets are then used for the training of the model, while the test set is only used to test the finished model at the end. 
 
-However, before the training of the model, the pipelines scales up the cluster, so that enough resources for the training step are available. Also, the hyperparameter tuning can be done by automated scripts here. Alternatively, those hyperparameters can be given by input parameters before the pipeline is executed.
+However, before the training of the model, the pipelines scales up the used infrastructure, so that enough resources for the training step are available. Also, the hyperparameter tuning can be done by automated scripts here. Alternatively, those hyperparameters can be given by input parameters before the pipeline is executed.
 
-For the training of the model, which takes the main part of the time, the pipeline usually uses a given basic model, on which the model will be based on. This is done because building a completely new model from scratch needs much time and huge amounts of data, which is the reason why most models are based on some pretrained basic models and only some are built from scratch.
+For the training of the model, which takes a large part of the time, the pipeline usually uses a model with pretrained weights, adjusting the architecture of the model and train this model with new data. This is done because building a completely new model from scratch needs much time and huge amounts of data, which is the reason why most models are based on some models with a specific ground truth and only some are built from scratch.
 
-After this is being done, the cluster can scale down again, and the model can be tested with the test set. If the results are satisfying, the model and its application can get containerized automatically and then deployed on the cluster. The developer can define the way of how the application should be published and accessible from the cluster for the end-users. In case the model does not meet the requirements the data needs or the code needs to be adjusted or cleaned, or different hyperparameters should be chosen, so that a better model will be built in the next try.
+After this is being done, the infrastructure can scale down again, and the model can be tested with the test set. If the results are satisfying, the model and its application can get containerized automatically and then deployed on the cluster. The developer can define the way of how the application should be published and accessible from the cluster for the end-users. In case the model does not meet the requirements the data needs or the code needs to be adjusted or cleaned, or different hyperparameters should be chosen, so that a better model will be built in the next try.
 
-Last it is to mention, that through feedback given by the users during the operation stage, the dataset is continuously extended by new data. This is why the pipeline should repeat the model building sequentially so that these new data can be used to improve the application continuously.
+Last it is to mention, that through feedback given by the users and generated by applying data analytics to its behavior during the operation stage, the dataset is continuously extended by new data. This is why the pipeline should repeat the model building sequentially so that these new data can be used to improve the application continuously.
 
-With these adjusted and complemented practices above as well as with a delivery pipeline similar to the described one, the principles of DevOps can be kept. Through the automated containerization and deployment on a cluster, every environment can look exactly like the production environment. If the whole pipeline and application should be tested first locally before deploying it on a Cloud, it can be tested on a local Kubernetes cluster like Minikube, which will be described in chapter \ref{sec:minikube}.
+With these adjusted and complemented practices above as well as with a delivery pipeline similar to the described one, the principles of DevOps can be applied to an AI enriched software development ecosystem. Through the automated containerization and deployment on a cluster, every environment can look exactly like the production environment. If the whole pipeline and application should be tested first locally before deploying it on a Cloud, it can be tested on a local Kubernetes cluster like Minikube, which will be described in chapter \ref{sec:minikube}.
 
 Also, the delivery pipeline guarantees a repeatable and reliable deployment, in which almost every step can be automated, and the Data Scientist can focus on his work with the data. The only thing the developers need to do is providing scripts for an automated preprocessing and feature engineering if necessary.
 

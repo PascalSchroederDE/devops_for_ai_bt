@@ -25,11 +25,13 @@ For the described objective above, first, the dataset created in \ref{sec:object
 
 First, the columns, with which the work will be done, has to be chosen. With the component `Select columns in Dataset,` this can be done quickly. The dataset output has to be connected to its input, and then the columns can be selected in the configs of this component. By clicking on a component, some configurations can be made. For this component, all the columns to be worked with can be selected as can be seen in \ref{fig:selcols}. The output will then be connected to the next step.
 
+![Microsoft Azure Machine Learning Service column selection](images/chapter4/azure_column_select.png){ width=500px #fig:selcols}
+
 In this case, this is the cleaning of the data. For this, there is a corresponding component in the category `Data Transformation / Manipulation`. After dragging it to the workspace, it has to be chosen, which columns should be tested for missing data. Because in the used dataset, every single cell is required to have a value, every column is being selected. Then it has to be set, what should happen with faulty rows. There are six options that can be performed: Removing the entire row when a missing value occurs within this row; Removing the entire column when a missing value occurs within this column; Replacing it with the mean, median or mode value or replacing it with a user-specified value.
 
 There are not many missing values within this huge dataset so that the removing rows influence the overall performance of the creating model noticeably. Because of this and for simplicity reasons, the method to remove rows with missing values has been chosen.
 
-Next, the data need to be normalized, which means that the values of the single pixels, which lay between 0 and 255, should be transformed into a value between 0 and 1. This can be done with the `Normalize Data` component. There the *MinMax*  transformation method has been chosen, which has been described in chapter \ref{sec:sec:aicycle}.
+Next, the data need to be normalized, which means that the values of the single pixels, which lay between 0 and 255, should be transformed into a value between 0 and 1. This can be done with the `Normalize Data` component. There the *MinMax*  transformation method has been chosen, which has been described in chapter \ref{sec:aicycle}.
 
 Other possibilities would have been Zscore, Logistic, LogNormal, or TanH.
 
@@ -52,7 +54,7 @@ The encoding is being done with the help of Scikit-Learn and assigns every categ
 
 Now the data needs to be split to a training dataset and a testing dataset. The `Split Data` component provides this functionality and only needs to be connected to a data frame as input. Then the size of the training set can be configured, and it gives both datasets as output - training as well as testing.
 
-After that, every necessary step has been completed to start the training of the model. However, for this, a model needs to be built before. Because this model-building needs no input, it can be done parallel to preparing the data. For the model building, there are several components with different models. For this image classification task, a `Multiclass Neural Network` is the component to use.
+After that, every necessary step has been completed to start the training of the model. However, for this, a model needs to be built before. Because this model-building needs no input, it can be done parallel to preparing the data. For the model building, there are several components with different models. For this image classification task, a `Multiclass Neural Network` is the component to use. The reason for this are the ten different image categories the pictures should be assigned to. However, the use of such a predefined model restricts the user to one specific architecure, used framework and pretrained weights and limits the user in his flexibility.
 
 There, the number of hidden nodes, the learning rate, the number of learning iterations, and the momentum can be configured. For this example, 128 hidden layers have been used, and 100 iterations have been made. The learning rate, so the size of the step taken at each iteration, has been set to 0.1. The momentum, which is a weight to apply to nodes, has been set to 0 because there are no previous iterations to take this information from.
 
@@ -66,7 +68,7 @@ This can be run on an Azure cluster by clicking Run. After it has been completed
 
 ![Microsoft Azure Machine Learning Service evaluation](images/chapter4/azure_evaluation.png){ width=500px #fig:azureevaluation}
 
-As can be gathered from figure \ref{fig:azureres}, the accuracy of the resulting model is about 89%. If this is considered good enough, it can now be connected to a Web Service or similar. Otherwise, some parameters can be edited, or additional steps can be added to improve the model further. This makes this pipeline very easy to use to build models with existing data quickly.
+As can be gathered from figure \ref{fig:azureevaluation}, the accuracy of the resulting model is about 89%. If this is considered good enough, it can now be connected to a Web Service and get exposed. Otherwise, some parameters for tuning the model like size of the training split, number of epochs or other hyperparameter can be edited, or additional steps can be added to improve the model further. This makes this pipeline very easy to use to build models with existing data quickly.
 
 ## Kubeflow pipeline {#sec:kubeflowpip}
 

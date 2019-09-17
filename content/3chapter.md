@@ -1,22 +1,22 @@
 # Method - State of the Art {#sec:method}
 
-In chapter \ref{sec:devopsai} DevOps practices have been adopted to the new world of AI development. One essential technology to meet those requirements is a delivery pipeline, which accompanies the entire development and deployment process. In this chapter, first, criteria will be defined to measure the success of a pipeline. Then some exemplary frameworks to create such a pipeline and other basic frameworks necessary for the development process will be introduced before it will be explained how to prepare the necessary environment for such frameworks and how to use them. Last, an exemplary problem will be created, whose solution will be presented in chapter \ref{sec:result}.
+In chapter \ref{sec:devopsai} DevOps practices have been adopted to the new world of AI development. One essential technology to meet those requirements is a delivery pipeline, which accompanies the entire development and deployment process. In this chapter, first, criteria will be defined to measure the success of a pipeline. Then some exemplary frameworks to create such a pipeline and other basic frameworks necessary for the development process will be introduced before it will be explained how to prepare the necessary environment for such frameworks and how to use them. Last, an exemplary problem will be described, whose solution will be presented in chapter \ref{sec:result}.
 
 ## Catalogue of criteria {#sec:catalogue}
 
 For defining the criteria to measure the success of a delivery pipeline framework for AI development, this chapter will be oriented on the adopted and extended practices described in chapter \ref{sec:devopsai}. 
 
-First, it is important to mention that people who are dealing with these enormous amounts of data are usually other people with different skills than those who are usually dealing with IT operations. These Data Scientists are not mandatory skilled or even experienced with the delivery and operation of Software. This is why a framework for building such a pipeline should be easy to use and standardized as far as possible. The Data Scientists should have an easy time to set up the development environment, get familiar to the framework, and learn about the companies culture and working methods. This is why the first criteria to evaluate the different approaches is *simplicity*.
+First, it is important to mention that people who are dealing with these enormous amounts of data are usually other people with different skills than those who are usually dealing with IT operations. The core responsibilities of data scientists are not focused on the delivery and operation of Software. This is why a framework for building such a pipeline should be easy to use and standardized as far as possible. The Data Scientists should have an easy time to set up the development environment, get familiar to the framework, and learn about the companies culture and working methods. This is why the first criteria to evaluate the different approaches is *simplicity*.
 
-Besides an easy way to use such a delivery pipeline tool, it is also necessary that it is adaptable to other frameworks and technologies. This should be one of the main objectives, because technologies are changing quickly, especially in the field of AI. What is the most common tool nowadays can be completely outdated in a few weeks when an innovation breaks through. This is why tools for handling these technologies should be as *adaptable as possible* so that only small adjustments are necessary to change the basic framework or similar.
+Besides an easy way to use such a delivery pipeline tool, it is also necessary that it is adaptable to other frameworks and technologies. This should be one of the main objectives, because technologies are changing quickly, especially in the field of AI. What is the most common tool nowadays can be completely outdated in a few weeks when an innovation breaks through, because all this is still a new field of research. This is why tools for handling these technologies should be as *adaptable as possible* so that only small adjustments are necessary to change the basic framework or similar.
 
-Another essential point for the developers that is different from traditional software development is the missing *IDE integration*. Because of some necessary scripts to handle the data during the delivery process, an integrated development environment would be helpful to support the Data Scientist in integrating the script within the delivery pipeline. An example of that would be an integration of Jupyter Notebooks.
+Another essential point for the developers that is different from traditional software development is the *IDE integration*, which is still far behind those of traditional Software tools. Because of some necessary scripts to handle the data during the delivery process, an integrated development environment would be helpful to support the Data Scientist in integrating the script within the delivery pipeline. An example of that would be an integration of Jupyter Notebooks.
 
-Probably the most important point is the *support of a collaboration platform* for the data so that an entire team can work on them at the same time as it is already common with code. Additional *versioning* of the data as well as the resulting models would be welcomed as well.
+Another point is the *support of a collaboration platform* for the data so that an entire team can work on them at the same time as it is already common with code. Additional *versioning* of the data as well as the resulting models is a mandatory condition as well for being able to handle errors or issues with developed models and guarantee the liability of a product.
 
-Additionally, it would be necessary to *pass on some parameters* when starting the delivery process, for example, the base model or values for the hyperparameters.
+Additionally, it is necessary to *pass on some parameters* when starting the delivery process, for example, the base model or values for the hyperparameters.
 
-To enable *scalability* to the delivery process, especially for the training step, the support of a cluster like Kubernetes would be needed. For this, every operation has to be containerized, so that it can run on the cluster. Ideally, the execution on Kubernetes or a similar cluster is directly integrated.
+To enable *scalability* to the delivery process, especially for the training step, the support of a scalable infrastructure like Kubernetes would be needed. In case of Kubernetes, every operation has to be containerized, so that it can run on the cluster. Ideally, the execution on Kubernetes or a similar technology is directly integrated.
 
 For a proper evaluation of the resulting model, good *visualization of the testing results* is desirable. The developer has to be able to see the results and react accordingly.
 
@@ -143,7 +143,7 @@ Last, the pipeline needs to get compiled with the Python SDK. Then the pipeline 
 
 ### Azure pipeline
 
-An alternative to an open-source solution like Kubeflow are Cloud integrated solutions. Every Cloud provider is developing its own solution for this problem, which becomes more and more important through time. So is Microsoft providing a Cloud-based environment to develop, train, test, deploy, manage, and track ML models with its Azure Machine Learning service.
+An alternative to an open-source solution like Kubeflow are Cloud integrated solutions. Major Cloud providers are all developing its own solution for this problem, which becomes more and more important through time. So is Microsoft providing a Cloud-based environment to develop, train, test, deploy, manage, and track ML models with its Azure Machine Learning service.
 
 Azure Machine Learning service supports different ML frameworks like PY Torch, TensorFlow, and Scikit Learning for any kind of Machine Learning. To offer support over the whole ML development cycle, it offers the use of different tools like a visual interface for building experiments and deploying models, a jupyter notebook to write the code or a Visual Studio Code extension to integrate the service directly into an IDE. [@MicrosoftDocsa]
 
@@ -157,11 +157,12 @@ An example of how this service can be used will be described in chapter \ref{sec
 
 ## Project objective and conditions {#sec:objective}
 
-In this work, two example pipelines will be built and compared. For this, a sample model will be built, and every step of the AI development lifecycle will be gone through. The objective is to build a pipeline fulfilling every target and principle described in chapter \ref{sec:devopsai}.
+In this work, two example pipelines will be built and compared. For this, a sample model will be built, and it will be conducted through every step of the AI development lifecycle will be conducted. The objective is to build a pipeline fulfilling every target and principle described in chapter \ref{sec:devopsai}.
 
-For this, a public dataset will be used, called Fashion-MNIST. It has been put together by Zalando Research and contains 60.000 training and 10.000 testing images of different garments with a size of 28x28 pixel. This dataset has been converted to a CSV file on kaggle.com [@Research2017]. This version has been used to manipulate the data for preparing a more realistic dataset with noises and faults, which have to be removed. This way, all the steps of AI development can be run through realistically. [@Xiao2017FashionMNISTAN]
+For this, a standard AI dataset for benchmarking will be used. Such datasets can be identified as the *Hello World* for AI. The used dataset in this work is called Fashion-MNIST. The advantage to the default MNIST dataset is the slightly higher complexity.It has been put together by Zalando Research and contains 60.000 training and 10.000 testing images of different garments with a size of 28x28 pixel. [@Research2017]. 
+This version has been used to manipulate the data for preparing a more realistic dataset with noises and faults, which have to be removed. This way, all the steps of AI development can be run through realistically. [@Xiao2017FashionMNISTAN]
 
-For this, first, the training and testing datasets have been read and merged:
+For this, first, the training and testing datasets have been read and merged. This an all following code snippets are written in Python.
 
 ```
 train_data = pd.read_csv('data/fashion-mnist_train.csv')
@@ -209,11 +210,13 @@ This dataset is then stored as a CSV and will be used for the example implementa
 
 ## Creating the necessary environment {#sec:environment}
 
-To use Cloud integrated solutions, the installation and access process can be done quickly by clicking through the Cloud console. However, the installation of an open-source tool like Kubeflow can be more complicated.
+To use Cloud integrated solutions, the installation and access process can be done quickly by clicking through the Cloud console. However, the local installation of an open-source tool like Kubeflow can be more complicated.
 
 Another challenge can be to create a local Kubernetes cluster to test the development processes on a local system first.
 
-How these installations can be done is described in this chapter.
+For the described project the available system was a Linux Ubuntu running on an Intel NUC with 32GB of memory and a 2GHz Quadcore Intel CPU. Additionally an nVidia Titan RTX with 12GB memory has been plugged in to the system and nVidia CUDA has been installed to enable GPU support for the model training.
+
+To compare different approaches, another setup has been created on the Microsoft Azure Cloud. For both approaches the setup of the environments and necessary steps to begin the creation of the pipelines will be described in this chapter.
 
 ### Azure Machine Learning service {#sec:azuremlservice}
 
@@ -231,7 +234,7 @@ After that, the project is successfully prepared for creating a pipeline with th
 
 ### Minikube {#sec:minikube}
 
-A critical principle of DevOps is to design the environments in a way that they behave as similar to the production environment as possible. Because of the decision to deploy the product inside of containers on a Kubernetes cluster, it is necessary to set up such a cluster on a local system.  Currently, there are two popular solutions for this - Minikube and microk8s.
+A critical principle of DevOps is to design the environments in a way that they behave as similar to the production environment as possible. Because of the decision to deploy the product inside of containers on a Kubernetes cluster, it is necessary to set up such a cluster on a local system. In this project it was supposed to use one of two solutions for this - Minikube or microk8s. To decide which approach to use following factors has to be evaluated:
 
 Minikube can start a Kubernetes cluster on the local device either within a \acs{VM} or without a VM directly on the system. Microk8s always start the cluster directly on the system.
 
