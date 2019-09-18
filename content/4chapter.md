@@ -33,22 +33,22 @@ There are not many missing values within this huge dataset so that the removing 
 
 Next, the data need to be normalized, which means that the values of the single pixels, which lay between 0 and 255, should be transformed into a value between 0 and 1. This can be done with the `Normalize Data` component. There the *MinMax*  transformation method has been chosen, which has been described in chapter \ref{sec:aicycle}.
 
-Other possibilities would have been Zscore, Logistic, LogNormal, or TanH.
+Other possibilities would have been Zscore, Logistic, LogNormal, or TanH. These methods are explained in the according Microsoft Documentation. [@MicrosoftDocsb]
 
 After that, the data has been prepared. However, the features can be improved with Feature Engineering. One example is to encode the categories so that they are given as numbers instead of strings. For that, there is no specific component existing, so it can only be done by writing and adding a Python script. The Python Script component can get three inputs - two datasets and a script bundle as *zip*  for providing necessary methods. The script to encode the data can look as follows:
 
-```
+\begin{lstlisting}[caption={Python: Label encoder for Azure ML service}, captionpos=b]
 import pandas as pd
 from sklearn import preprocessing 
 
 def azureml_main(df = None, df2 = None):
     label_encoder = preprocessing.LabelEncoder() 
-  
+
     df['label']=label_encoder.fit_transform(df['label']) 
     df['label'].unique() 
         
     return df
-```
+\end{lstlisting}
 
 The encoding is being done with the help of Scikit-Learn and assigns every category a number. Then the new data frame is returned and is used as output. A second data frame could have been returned as well and function as a second output of the component, but in this case, there is only one data frame necessary as input as well as output.
 
@@ -95,32 +95,32 @@ These will be investigated and described first before the creation of the pipeli
 
 During the preparation steps the initial dataframe gets loaded and manipulated such, that there are no missing or faulty values and, that the data has been normalized. This has been realized with following Python script:
 
-```
+\begin{lstlisting}[caption={Python: Preprocessing of dataset}, captionpos=b]
 def main():
     parser = argparse.ArgumentParser(description="Preprocessing")
     [...]
     args = parser.parse_args()
 
     df = load_data(args.dataset_location)
-
+    
     df = unify_datatypes(df)
-
+    
     df = remove_mis_values(df)
-
+    
     df = remove_faulty_values(df)
-
+    
     df = normalize_values(df)
-
+    
     df.to_csv(args.output, index=False)
-
+    
     write_file("/prepdf_output.txt", args.output)
-```
+\end{lstlisting}
 
 There the main function gets started when the file is executed. This function first adds some input parameter. In this, there are two - the location of the original dataset, on which the transformations should be done, and the output location of where to store the resulting, cleaned dataset.
 
 After that, first, the dataset is being loaded into the script. Then the datatype gets unified because some columns are recognized as Integer and some as Floats. For this, every column being recognized as Integer is converted to a Float and the appropriate field gets overwritten.
 
-```
+\begin{lstlisting}[caption={Python: Converting datatypes}, captionpos=b]
 def load_data(path):
     return pd.read_csv(path)
     
@@ -128,35 +128,35 @@ def unify_datatypes(dataset):
     for col in dataset.select_dtypes("int64"):
         dataset[col] = dataset[col].astype("float64")
     return dataset
-```
+\end{lstlisting}
 
 Next, rows with missing values are being removed. For this, every empty cell is being replaced with a missing value sign. Then all of them gets removed by the `dropna` function provided by the *pandas* library.
 
-```
+\begin{lstlisting}[caption={Python: Remove rows with missing values}, captionpos=b]
 def remove_mis_values(dataset):
     dataset.replace('', np.nan, inplace=True)
     dataset = dataset.dropna()
     return dataset
-```
+\end{lstlisting}
 
 Also, rows with faulty values have to be removed. For this, the rows have to be removed, in which the label does not equal one of the valid categories. These have been defined in the `CATEGORIES` array. This is done by only keeping the rows which label is included in this array::
 
-```
+\begin{lstlisting}[caption={Python: Remove rows with faulty values}, captionpos=b]
 CATEGORIES = ['top', 'trouser', 'pullover', 'dress', 'coat', 'sandal', 'shirt', 'sneaker', 'bag', 'ankle_boot']
 
 def remove_faulty_values(dataset):
     dataset = dataset[dataset.label.isin(CATEGORIES)]
     return dataset
-```
+\end{lstlisting}
 
 The last step is to normalize the data. For this over every cell excluding the label cell is being iterrated and every value is divided by 255.0:
 
-```
+\begin{lstlisting}[caption={Python: Normalize values}, captionpos=b]
 def normalize_values(dataset):
     for col in (col for col in dataset.columns if col not in ["label"]):
         dataset[col] = dataset[col] / 255.0
     return dataset
-```
+\end{lstlisting}
 
 This can be done because every value lays between 0 and 255, so that the MinMax equation results in:
 
@@ -166,189 +166,189 @@ z = \frac{x-\min(x)}{[\max(x) - \min(x)]} = \frac{x-0}{[255 - 0]} = \frac{x}{255
 
 Last, the dataframe is saved as *CSV* and the output location is stored to the given output file:
 
-```
+\begin{lstlisting}[caption={Python: Create and write file}, captionpos=b]
 def write_file(path, content):
     f = open(path, "w")
     f.write(content)
     f.close()
-```
+\end{lstlisting}
 
 This needs to be done because Kubeflow uses txt files to transfer the location of stored files to the next component.
 
 The next component should deal with the feature engineering to optimize the features and labels for the training process. For example, in the described case it could be helpful to transform the label of the cateogory to a numerical value. The performance of the resulting model can be further improved by applying One-Hot-Encoding described in chapter \ref{sec:aicycle}. This can be done with following script:
 
-```
+\begin{lstlisting}[caption={Python: Feature engineering}, captionpos=b]
 def main():
     parser = argparse.ArgumentParser(description="Feature engineering")
     [...]
     args = parser.parse_args()
 
     df = load_data(args.dataset_location)
-
+    
     df = one_hot_encoding(df)    
-
+    
     df.to_csv(args.output, index=False)
-
+    
     write_file("/findf_output.txt", args.output)
-```
+\end{lstlisting}
 
 First, the arguments are added. These are once again the location of the dataset and the output location of the resulting dataset. Then the data gets loaded the same way as in the data processing component.  Afterward, the one-hot encoding is being executed.
 
 For this the *pandas* library can be used to grab the different categories, building an own column for each of them and filling the cells with either 1 or 0, dependent on whether the cell had equalled the according value before. Then the original label column gets dropped and the resulting columns of the described operations are joined to the dataset:
 
-```
+\begin{lstlisting}[caption={Python: One Hot Encoding}, captionpos=b]
 def one_hot_encoding(dataset):
     one_hot = pd.get_dummies(dataset['label'])
     dataset = dataset.drop('label',axis = 1)
     dataset = dataset.join(one_hot) 
     return dataset
-```
+\end{lstlisting}
 
 Afterward, the dataset is stored into a *CSV* file and its location to a *txt* file the same way as at the end of the data preparation component.
 
 The last part of handling the data is to split it into different sets - training and testing. Following scripts takes over that task:
 
-```
+\begin{lstlisting}[caption={Python: Train-Test-Split}, captionpos=b]
 def main():
-    parser = argparse.ArgumentParser(description="Feature engineering")
+    parser = argparse.ArgumentParser(description="Train-Test-Split")
     [...]
     args = parser.parse_args()
 
     df = load_data(args.dataset_location)
-
+    
     image_df, label_df = split_label_and_img(df)
-
+    
     images_train, images_test, labels_train, labels_test = train_test_split(image_df, label_df, test_size=args.test_size, random_state=args.random_state)
-
-	images_train.to_csv(args.output_train_img, index=False)
+    
+    images_train.to_csv(args.output_train_img, index=False)
     labels_train.to_csv(args.output_train_label, index=False)
     images_test.to_csv(args.output_test_img, index=False)
     labels_test.to_csv(args.output_test_label, index=False)
-
+    
     write_file("/trainimg.txt", args.output_train_img)
     write_file("/trainlabel.txt", args.output_train_label)
     write_file("/testimg.txt", args.output_test_img)
     write_file("/testlabel.txt", args.output_test_label)
-```
+\end{lstlisting}
 
 In this script, first, the required arguments are defined. On the one hand, these are the locations of the input as well as the resulting datasets. On the other hand, also the size of the testing set and a random state, with which different compositions of the datasets can be created, has to be given as a parameter.
 
 Then the dataset is being loaded as described above, before the labels and the image informations are split. For this, two datasets are created - one, which consists of all columns, that includes the keyword *'pixel'*, and one of all columns, that does not include this keyword:
 
-```
+\begin{lstlisting}[caption={Python: Split label and images}, captionpos=b]
 def split_label_and_img(df):
     images = df.drop([col for col in df.columns if 'pixel' not in col ], axis='columns')
     labels = df.drop([col for col in df.columns if 'pixel' in col ], axis='columns')
 
     return images, labels
-```
+\end{lstlisting}
 
 Next, the `train_test_split` function included in the *Scikit-Learn* library can be used to split those datasets into testing and training sets. These are then stored as four different files - the training images, the training labels, the testing images, and the testing labels. The output location is then written to a *txt* file once again.
 
 Parallel to this data preparation, also the model has to be prepared. The layers has to be defined and the model needs to be compiled. Following script offers such functionalities:
 
-```
+\begin{lstlisting}[caption={Python: Model building}, captionpos=b]
 def main():
-    parser = argparse.ArgumentParser(description="Feature engineering")
+    parser = argparse.ArgumentParser(description="Model building")
     [...]
     args = parser.parse_args()
 
     model = build_model((args.input_shape_height, args.input_shape_width), args.num_units, args.num_outputs, get_activation_func(args.activation_l2), get_activation_func(args.activation_l3))
-
+    
     model.compile(optimizer=args.optimizer,
         loss=args.loss,
         metrics=[args.metrics])
-
+    
     model.save(args.output)
-
+    
     write_file("/model.txt", args.output)
-```
+\end{lstlisting}
 
 First, several arguments are passed. These are the input shape of the images, the number of units in the hidden layer, the number of output categories, the activation functions for the different layers and optimizer, loss and metrics parameters for compiling the model. Then the model needs to be built. For this, Keras is being used to define the single layers and enters all the parameters:
 
-```
+\begin{lstlisting}[caption={Python: Build model architecture}, captionpos=b]
 def build_model(input_shape, num_units, num_outputs, activation_l2, activation_l3):
     return keras.Sequential([
         keras.layers.Flatten(input_shape=input_shape),
         keras.layers.Dense(num_units, activation=activation_l2),
         keras.layers.Dense(num_outputs, activation=activation_l3)
     ])
-```
+\end{lstlisting}
 
 To get the activation functions, the `get_activation_func` function gets a string of the functions name and returns the function itself. After that, the model needs to be compiled with the loss function, the optimizer, and the metrics to be used. This model is then saved and its location stored into a *txt* file.
 
 Alternatively a prexisting and possibly pretrained model can be downloaded. One example for this can be found in the following script:
 
-```
+\begin{lstlisting}[caption={Python: Model downloading}, captionpos=b]
 def main():
-    parser = argparse.ArgumentParser(description="Feature engineering")
+    parser = argparse.ArgumentParser(description="Model downloading")
     [...]
     args = parser.parse_args()
 
     model = download_model((args.input_shape_height, args.input_shape_width))
-
+    
     model.save(args.output)
-
+    
     write_file("/model.txt", args.output)
-```
+\end{lstlisting}
 
 There, only the input shape and the location of where the downloaded model should be stored has to be parsed as a parameter. Then the model can be downloaded with the given input shape and gets stored afterward.
 
 No matter if the model has been built from scratch or a preexisting model has been downloaded, the next step is to train the model by feeding it with some data.
 
-```
+\begin{lstlisting}[caption={Python: Model training}, captionpos=b]
 def main():
-    parser = argparse.ArgumentParser(description="Feature engineering")
+    parser = argparse.ArgumentParser(description="Model training")
     [...]
     args = parser.parse_args()
 
     train_img_raw = load_data(args.input_train_img)
     train_label = load_data(args.input_train_label)
-
+    
     train_img = prepare_image_shape(train_img_raw, args.input_shape_height, args.input_shape_width)
-
+    
     model = load_model(args.model_location)
     model.fit(train_img, train_label, epochs=args.epochs)
-
+    
     model.save(args.output)
-
+    
     write_file("/trained_model.txt", args.output)
-```
+\end{lstlisting}
 
 For doing this, the script needs the location of the image as well as the label dataset and of the basic as well as the resulting model. Additionally, it needs to know about the input shape for the images and the number of epochs, which means the number of iterations of feeding the model with data to complete for the training. Afterward, the data gets loaded, and the images get shaped correctly:
 
-```
+\begin{lstlisting}[caption={Python: Shape images}, captionpos=b]
 def prepare_image_shape(imageset, shape_height, shape_width):
     return np.array([img.reshape(shape_height,shape_width) for img in imageset.values])
-```
+\end{lstlisting}
 
 For this, the `reshape` method for arrays of the *numpy* library can be used. Then the model is loaded too, and it can be fitted with the loaded and prepared data. Last, this model gets stored, and its output location is written into a *txt* file.
 
 The last step is then to evaluate this model. For this it needs the same parameters as for training the model with the only difference, that it gets the location of the testing datasets instead of the training datasets:
 
-```
+\begin{lstlisting}[caption={Python: Model evaluation}, captionpos=b]
 def main():
-    parser = argparse.ArgumentParser(description="Feature engineering")
+    parser = argparse.ArgumentParser(description="Model evaluation")
     [...]
     args = parser.parse_args()
 
     test_img = load_data(args.input_test_img)
     test_label = load_data(args.input_test_label)
-
+    
     test_img = prepare_image_shape(test_img.values, args.input_shape_height, args.input_shape_width)
-
+    
     model = load_model(args.model_location)
-
+    
     loss, acc = model.evaluate(test_img, test_label)
-
+    
     store_loss_acc(args.output, loss, acc)
-
+    
     write_file("/result.txt", args.output)
-```
+\end{lstlisting}
 
 Then all the data gets loaded, the images prepared and the model evaluated. During this operation, the accuracy, as well as the loss, are getting calculated. After the evaluation has been finished, these information are written to an artifact, so that it can be visualized in the pipeline:
 
-```
+\begin{lstlisting}[caption={Python: Store artifact}, captionpos=b]
 def store_loss_acc(file, loss, acc):
     metadata = {
         'outputs' : [
@@ -360,13 +360,13 @@ def store_loss_acc(file, loss, acc):
     }
     with open (file,'w') as f:
         json.dump(metadata, f)
-```
+\end{lstlisting}
 
 For this a \acs{JSON} is being created, which stores the results in markdown format. This is then written to the output file, which can be used by the pipeline to visualize this markdown.
 
 With all these components being created, these need to be packed into a Docker container. For this, a Dockerfile is necessary, which has to look similar to the one below:
 
-```
+\begin{lstlisting}[caption={Dockerfile: Example Dockerfile for components}, captionpos=b]
 FROM Python:3
 
 COPY ./requirements.txt .
@@ -376,7 +376,7 @@ RUN pip install -r requirements.txt
 COPY ./data_preparation.py .
 
 ENTRYPOINT ["python", "/data_preparation.py"]
-```
+\end{lstlisting}
 
 The base image of the Docker containers is a plain Python image. On top of it, the requirements are getting installed, which includes every necessary library and framework, and then the script itself is being loaded into the Docker container. This file then represents the entrypoint of the container with the possibility to pass additional arguments to it, so that every necessary information can be provided.
 
@@ -388,16 +388,16 @@ Then these Docker containers are build and finally pushed to a repository, from 
 
 With every container build and pushed the creation of the pipeline itself can start. For this, first, several components of the Kubeflow Python SDK needs to be imported:
 
-```
+\begin{lstlisting}[caption={Python: Kubeflow pipeline imports}, captionpos=b]
 import kfp
 from kfp import components
 from kfp import dsl
 from kfp import onprem
-```
+\end{lstlisting}
 
 Then the single steps or operations to be executed during the development have to be defined as functions. Such a function looks like below:
 
-```
+\begin{lstlisting}[caption={Python: Pipeline - data preparation operation}, captionpos=b]
 def data_prep_op(dataset_location, output):
   return dsl.ContainerOp(
     name='Data preparation',
@@ -410,7 +410,7 @@ def data_prep_op(dataset_location, output):
       'output': '/prepdf_output.txt'
     }
   )
-```
+\end{lstlisting}
 
 The function gets the necessary parameters as input. Then it returns a ContainerOperation, defined in the Kubeflow Python SDK, with a given name, the docker image to be used and arguments as well as file outputs.
 
@@ -428,10 +428,10 @@ In the example case, both should be tested - a new model built from scratch as w
 
 After every step is defined and called the pipeline can be compiled with the Kubeflow SDK like this:
 
-```
+\begin{lstlisting}[caption={Python: Pipeline compiler}, captionpos=b]
 if __name__ == '__main__':
   kfp.compiler.Compiler().compile(pipeline, __file__ + '.tar.gz')
-```
+\end{lstlisting}
 
 This only needs the file to be started usually and then created an archive, which can be imported to the Kubeflow dashboard.
 
@@ -441,11 +441,11 @@ The user can then start this pipeline. When starting it, the user can enter or c
 
 Finally, the pipeline gets started, and every single step will be gone through automatically. With the manipulated *Fashion-MNIST* dataset created in chapter \ref{sec:objective} the accuracy can be measured and lays at about 98% while a loss of about 5%. This result can be visualized with an artifact. This artifact file replaces the `file_outputs` field of the defined operation:
 
-```
+\begin{lstlisting}[caption={Python: Define artifact in pipeline operation}, captionpos=b]
 output_artifact_paths={
             'mlpipeline-ui-metadata': '/mlpipeline-ui-metadata.json',
     },
-```
+\end{lstlisting}
 
 This output artifact then creates a visualization on the pipeline looking like below:
 

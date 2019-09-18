@@ -1,5 +1,5 @@
 ---
-title: Technical and organizational challenges when adopting DevOps principles for the integration of Artificial Intelligence into classical Software Engineering
+title: Challenges adopting DevOps principles for the integration of Artificial Intelligence into Software Engineering
 author:
   - Pascal Schroeder
 supervisor:
@@ -46,4 +46,8 @@ keywords: [AI, ML, DevOps, AIOps, Kubernetes, Kubeflow]
 logo: images/dhbw.png
 logoIBM: images/logo.png
 acs: true
+abstract: |
+   Abstract
+abstract-de: |
+    Abstrakt
 ...

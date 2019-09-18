@@ -583,7 +583,7 @@ $endif$
 
 $if(listings)$
 \lstdefinestyle{eisvogel_listing_style}{
-  language         = java,
+  language         = python,
   numbers          = left,
   backgroundcolor  = \color{listing-background},
   basicstyle       = \color{listing-text-color}\small\ttfamily{}\linespread{1.15}, % print whole listing small
@@ -756,10 +756,15 @@ $for(author)$$author$$sep$ \and $endfor$
 $endif$
 
 $if(abstract)$
+\begingroup
 \pagenumbering{gobble}
+\let\clearpage\relax
 \pagestyle{empty}
-\addchap*{Abstract}
+\addchap*{Abstract - English}
 $abstract$
+\addchap*{Abstrakt - Deutsch}
+$abstract-de$
+\endgroup
 $endif$
 $endif$
 
@@ -805,26 +810,29 @@ $if(listings)$
 	\lstlistoflistings
 $endif$
 $if(acs)$
-\addchap*{Abkürzungsverzeichnis}
+\addchap*{Abbreviations}
 \begin{acronym}
 	\acro{AI}[AI]{Artificial Intelligence}
-	\acro{IT}[IT]{Information Technology}
-	\acro{DevOps}[DevOps]{Development and Operations}
+	\acro{ANN}[ANN]{Artificial Neural Network}
 	\acro{API}[API]{Application Programming Interface}
+	\acro{CNTK}[CNTK]{Microsoft Cognitive Toolkit}
+	\acro{CPU}[CPU]{Central Processing Unit}
+	\acro{CRISP-DM}[CRISP-DM]{Cross Industry Standard Process for Data Mining}
+	\acro{DevOps}[DevOps]{Development and Operations}
+	\acro{FaaS}[FaaS]{Function as a Service}
+	\acro{GPU}[GPU]{Graphics Processing Unit}
+	\acro{IaaS}[IaaS]{Infrastructure as a Service}
+	\acro{IDE}[IDE]{Integrated Development Environment}
+	\acro{IT}[IT]{Information Technology}
+	\acro{JSON}[JSON]{Java Script Object Notation}
+	\acro{LFS}[LFS]{Large File Storage}
+	\acro{ML}[ML]{Machine Learning}
+	\acro{PaaS}[PaaS]{Platform as a Service}
 	\acro{REST}[REST]{Representional State Transfer}
 	\acro{SaaS}[SaaS]{Software as a Service}
-	\acro{ML}[ML]{Machine Learning}
-	\acro{VM}[VM]{Virtual Machine}
-	\acro{CPU}[CPU]{Central Processing Unit}
-	\acro{GPU}[GPU]{Graphics Processing Unit}
-	\acro{IDE}[IDE]{Integrated Development Environment}
-	\acro{ANN}[ANN]{Artificial Neural Network}
-	\acro{CRISP-DM}[CRISP-DM]{Cross Industry Standard Process for Data Mining}
-	\acro{LFS}[LFS]{Large File Storage}
-	\acro{CNTK}[CNTK]{Microsoft Cognitive Toolkit}
-	\acro{UI}[UI]{User Interface}
 	\acro{SDK}[SDK]{Software Development Kit}
-	\acro{JSON}[JSON]{Java Script Object Notation}
+	\acro{UI}[UI]{User Interface}
+	\acro{VM}[VM]{Virtual Machine}
 \end{acronym}
 $endif$
 

@@ -7,7 +7,7 @@
 
 ## Kubeflow pipeline implementation{#sec:kfpipelineimpl}
 
-```
+\begin{lstlisting}[caption={Python: Kubeflow Fashion-MNIST pipeline}, captionpos=b]
 def pipeline(
     dataset_location='/mnt/data/manipulated_fashion_mnist.csv',         
     test_size=0.3, 
@@ -46,7 +46,8 @@ def pipeline(
     model_building = model_build_op(input_shape_height, input_shape_width, model_units_num, model_outputs_num, model_activation_func_layer2, model_activation_func_layer3, optimizer, loss, metrics, location_base_model).apply(onprem.mount_pvc("fashion-mnist-vol", 'local-storage', "/mnt"))
     model_training = model_train_op(data_split.outputs['train_img'], data_split.outputs['train_label'], input_shape_height, input_shape_width, model_building.outputs['output_model_loc'], num_epochs, location_trained_model).apply(onprem.mount_pvc("fashion-mnist-vol", 'local-storage', "/mnt"))
     model_evaluation = model_eval_op(data_split.outputs['test_img'], data_split.outputs['test_label'], input_shape_height, input_shape_width, model_training.outputs['output_model_loc'], location_result).apply(onprem.mount_pvc("fashion-mnist-vol", 'local-storage', "/mnt"))
-```
+\end{lstlisting}
+
 \newpage
 
 ## Kubeflow pipeline{#sec:kfpipeline}

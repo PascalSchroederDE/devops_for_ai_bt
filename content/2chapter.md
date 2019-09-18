@@ -12,7 +12,13 @@ In 2009 two Flickr employees - John Allspaw and Paul Hammond - presented their w
 
 Since then, DevOps has been established or at least planned in 91% of all companies as an essential way to increase their efficiency of software development. [@SauceLabs] For almost every stage of development, there are principles and practices defined and continuously improved. However, before those practices are explained, further insight into the business need will be given. Among a lot of good literature the book "DevOps for Dummies" by Sanjeev Sharma and Bernie Coyne stood out, which is why this chapter is based to a great extent on knowledge gained from this book. [@Sharma2017]
 
-Every process or product need a business value that covers the costs caused by it. For that, there must be either an outcome for the customer or reduced producing costs.
+Before starting to describe the single principles and practices leading to the fulfilling of these objectives, the term DevOps needs to be defined. For this Len Bass, Ingo Weber, and Liming Zhu defined DevOps as follows: [@BassWeberZhu15]
+
+\begin{definition}
+DevOps is a set of practices intended to reduce the time between committing a change to a system and the change being placed into normal production, while ensuring high quality.
+\end{definition}
+
+Following this definition, every process or product need a business value that covers the costs caused by it. For that, there must be either an outcome for the customer or reduced producing costs.
 
 For DevOps, it is usually even both - on the one hand, enhanced customer experience can be guaranteed, and on the other hand, the efficiency of the production cycle can be increased.
 
@@ -58,7 +64,7 @@ There the project is split into several branches, which are represented by a rec
 
 The most important branch is the master branch. On the master branch, every finished version is pushed, and from this branch, it can be released.  The development branch is for ongoing changes. Small changes can be done directly on the development branch. More significant changes, like added features, should get their branch. Every developer can create their branch for a new version so that the developers do not interfere with each other. When all code changes are done, the new version will be merged into the development branch. Sometimes some conflicts in the code have to be fixed for a clean merge in case two different commits changed the same code piece. As soon as the new version is working on the development branch and everything is tested and ready, it can be merged into the master branch, so that this new version can be rolled out. In case an error occurs, it can be fixed in a hotfix branch directly descending from the master branch.
 
-The master branch can then serve as trigger for a delivery pipeline, which compiles the code and moves it to the deployment environment, for example a Kubernetes cluster. This fianlizes the *GitOps* cycle, which shows, that a *GitOps* workflow can support the development from coding to deployment.
+A master branch can then serve as trigger for a delivery pipeline, which compiles the code and moves it to the deployment environment, for example a Kubernetes cluster. This fianlizes the *GitOps* cycle, which shows, that a *GitOps* workflow can support the development from coding to deployment.
 
 Additionally, the application should be tested and verified continuously. For that, the developer can run local unit tests to verify their changes before integrating. Unit tests test a specific component with defined input and output and checks if the calculated output is the expected one. However, this does not verify that the integrated code performs as designed. [@AmazonDocumentation] A continuous integration service like Jenkins can relieve the developer of this task and automatically builds and runs unit tests on the newly committed and integrated code. In doing so, it runs not only unit tests, but also integration tests, which test the software as a whole. This process is called *continuous testing*.
 
@@ -74,13 +80,13 @@ Based on those retrieved data, businesses may adjust their plans and priorities,
 
 ### Technologies
 
-One technology to allow developers to implement above practices is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a larger scale. This technology is implemented with machine-readable definitions and configurations. Based on them, the machine can provide the necessary environment automatically to enable continuous delivery.
+One technology to enable developers to implement above practices is **Infrastructure as code**, which enables organizations to deploy their environments faster and on a larger scale. This technology is implemented with machine-readable definitions and configurations. Based on them, the machine can provide the necessary environment automatically to enable continuous delivery.
 
 Another important technology for DevOps are **delivery pipelines**. A delivery pipeline controls the product cycle of an application from development to production. Typically there are four or more stages - development, test, stage, and production. This can be seen in figure \ref{fig:del_pipeline}.
 
 ![Delivery pipeline[@Sharma2017]](images/chapter2/delivery_pipeline.png){ width=400px #fig:del_pipeline}
 
-For every stage, there is usually one specific environment. Those are represented as a box. The dark boxes represent a production like an environment.
+For every stage, there is usually one specific environment. Those are represented as a box. The two boxes on the right hald represent a production-like environment.
 
 In the development environment, all the code updates are being done. There are tools provided like \acs{IDE}s (\acl{IDE}) to write the code as well as tools that enable collaborative development like source control management or project planning.
 
@@ -147,7 +153,7 @@ The advantage of those Microservices for Cloud applications is mainly caused by 
 
 ### 12 factor apps
 
-One standard set of guidelines and best practices for the development of Cloud-based software and especially Microservices are the 12 factors drafted by developers at Heroku. These factors are
+One standard set of guidelines and best practices for the development of Cloud-based software and especially Microservices are the 12 factors drafted by developers at Heroku. These factors are [@Wiggins]
 
 - Codebase - For every deployed service there should be precisely one codebase, for example, an IT repository
 - Dependency - Services should explicitly declare and isolate all dependencies 
@@ -160,39 +166,45 @@ One standard set of guidelines and best practices for the development of Cloud-b
 - Disposability - The objective should be a robust and resilient system with fast startup and graceful shutdown
 - Dev/prod parity - The development, staging, production and every other environment should be as similar as possible
 - Logs - Applications should produce logs as event streams
-- Admin processes - Admin tasks should be packaged alongside the application to ensure that it is run with the same environment [@Wiggins]
+- Admin processes - Admin tasks should be packaged alongside the application to ensure that it is run with the same environment
 
 Following these guidelines, stable and performant Microservices can be built. In the last years, some technologies have emerged as particularly suitable for developing such services.
 
-### Container - Docker
+### Container
 
-Such a technology is containerization of applications. For this an open standard - Open Container Initiative - has been developed, which is implemented by most leaders of the container industry. This technology can be understood as a package for the isolation of application within a closed environment, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light-weighted. [@Jerry2015] This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
+Such a technology is containerization of applications. Following techterms.com, a container is defined as follows: [@Techterms.com]
 
-One container engine technology is Docker. In figure \ref{fig:docker_vm} the differences between a \acs{VM} and Docker can be seen.
+\begin{definition}
+A container is a software package that contains everything the software needs to run. This includes the executable program as well as system tools, libraries, and settings. Containers are not installed like traditional software programs, which allows them to be isolated from the other software and the operating system itself.
+\end{definition}
 
-On the left side, the infrastructure of a VM can be seen, on the right side, the infrastructure of a Docker container. Both need the infrastructure of a physical device and its host operating system. On top of a VM on this Host Operating System, there is a Hypervisor, and on this Hypervisor several Guest OS can be running. On those again, the apps itself can be executed, and the necessary libraries and binaries are running in the background.
+For this an open standard - Open Container Initiative - has been developed, which is implemented by most leaders of the container industry. This technology can be understood as a package for the isolation of application within a closed environment, which provides everything the application needs. It is comparable to a \acs{VM} (\acl{VM}), but much more light-weighted. [@Jerry2015] This enables a light deployment without unnecessary services or applications running in the background, which leads to a very performant execution.
 
-![Comparison between Docker and VM[@Mikesir87]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
+Exemplary container engine technologies are Docker or OpenShift Container Platform. In figure \ref{fig:docker_vm} the differences between such container engines and a VM can be seen.
 
-In case of a docker container, those binaries and libraries are directly running inside of a container on the operating system. There is no need for a hypervisor or a complete version of a Guest OS. This approach also enables the app to be running on top of that. The containers are isolated from each other in different namespaces and own network stacks. This means that processes running within a container cannot see or interact with processes of other containers, and they do not get privileged access to sockets or interfaces of other containers. [@DockerDocumentation]
+On the left side of that figure, the infrastructure of a VM can be seen, on the right side, the infrastructure of container engines. Both need the infrastructure of a physical device and its host operating system. If using a VM, there is a Hypervisor on top of the Host Operating System. On this Hypervisor several Guest OS can be running. Some resources are assigned to every single VM. The Guest OSs on the VMs can then be used as usual systems and libraries and applications can be started and hosted on this OS. For this only the assigned resources can be used.
 
-Additionally, a Docker Daemon is running in another process. The Docker Daemon has three main tasks - listening and processing API requests from the Docker client to run Docker commands, managing Docker objects (images, containers, volumes, and networks) and parsing Dockerfiles for building Docker images. [@Lipke2017]
+![Comparison between container and a VM[@Twistlock]](images/chapter2/docker_vm.png){ width=500px #fig:docker_vm}
 
-With this technology, several of the 12 factors described above are fulfilled. One factor is the explicitly declared and isolated dependency management. Within the Dockerfile, every dependency needs to be explicitly declared to fulfill all the requirements of the application. [@NoahZoschke]
+In case of container engines, on top of the Host Operating System there is the container engine itself running on top of the Operating system. The task of those engines is listining and processing API requests from the client, managing objects like the containers or volumes and building the images. 
 
-Also, Docker containers cannot communicate with each other directly but need to communicate externally over with backing services over the network [@NoahZoschke]
+The containers are running on top of the OS as well and are coordinated by the container engine. The difference is, that the containers are sharing the resources of the OS. Every container runs every necessary binary and library. Every single one has an own layer, so that they can be shared. The apps to be executed are then running inside of those containers.  For this the containers are able to directly access the resources of the Host Operating System. [@DockerDocumentation] [@Lipke2017]
 
-Additionally, Docker containers are executed as stateless processes with ephemeral storage only.  [@NoahZoschke]
+With this technology, several of the 12 factors described above are fulfilled. One factor is the explicitly declared and isolated dependency management. Within the files, with which the containers are defined, every dependency needs to be explicitly declared to fulfill all the requirements of the application. [@NoahZoschke]
+
+For security reasons containers are strictly seperated cannot communicate with each other directly but need to communicate externally over with backing services over the network [@NoahZoschke]
+
+Additionally, containers are executed as stateless processes with ephemeral storage only.  [@NoahZoschke]
 
 The development and production parity is given because containers standardize the way of delivering applications as well as its dependencies. [@NoahZoschke]
 
-Even admin processes can be run as one-off processes inside the Docker container through jumping inside the container and executing all necessary commands.
+Even admin processes can be run as one-off processes inside the container engine through jumping inside the container and executing all necessary commands.
 
 Still, in a local environment, not each of the 12 factors is fulfilled. Instead, an enabler is needed, which scalable and failure safe way to deploy those containers.
 
 ### Kubernetes as an enabler
 
-Kubernetes can serve as such an enabler. Kubernetes was originally developed by Google and evolved out of Project Borg. Borg is a cluster management system, that schedules, starts and monitors applications within a cluster. [@43438] Kubernetes has been built based on knowledge and experiences with Borg and has been open sourced in 2014. [@Lardinois] Kubernetes has been designed to host Microservices as Docker containers and ensures in its design all of the 12 factors to be met.
+Kubernetes can serve as such an enabler. Kubernetes was originally developed by Google and evolved out of Project Borg. Borg is a cluster management system, that schedules, starts and monitors applications within a cluster. [@43438] Kubernetes has been built based on knowledge and experiences with Borg and has been open sourced in 2014. [@Lardinois] Kubernetes has been designed to host Microservices as containers and ensures in its design all of the 12 factors to be met.
 
 In general, Kubernetes is a management platform. It enables an automated deployment, scaling, and management of containers within a cluster of nodes. Thereby a cluster consists of at least one master node and any number of worker nodes. Figure \ref{fig:kubernetes_services} shows the different services owned by master and worker nodes.
 
@@ -200,27 +212,27 @@ In general, Kubernetes is a management platform. It enables an automated deploym
 
 Pods are the smallest unit in Kubernetes. They contain one or more containers, which are deployed together on the same host. There they can work together to perform a set of tasks. [@CoreOS]
 
-On the master node, there are an \acs{API} (\acl{API}) Server, a Controller Manager, a Scheduler and a key-value store called etcd. [@Fricke][@JorgeAcetozi]
+On the master node, there are an \acs{API} (\acl{API}) Server, a Controller Manager, a Scheduler and a key-value store like etcd. [@Fricke][@JorgeAcetozi]
 
-The API Server is for clients to run their requests against it. That means the API Server is responsible for the communication between Master and Worker nodes and for updating corresponding objects in the etcd. [@Fricke][@JorgeAcetozi]
+The API Server is for clients to run their requests against it. That means the API Server is responsible for the communication between Master and Worker nodes and for updating corresponding objects in the key-value store. [@Fricke][@JorgeAcetozi]
 
 The Controller Manager is a daemon, which embeds all of the Kubernetes controllers. Examples for them are the Replication Controller or the Endpoint Controller. Those controllers are watching the state of the cluster through the API Server. Whenever a specific action happens, it performs the necessary actions to hold the current state or to move the cluster towards the desired state. [@Fricke][@JorgeAcetozi]
 
 The scheduler manages the binding of pods to nodes. Therefore it watches for new deployments as well as for old ones to create new pods if a new deployment is created or recreating a pod whenever a pod gets destroyed. The scheduler organizes the allocation of the pods within the cluster based on available resources. [@Fricke][@JorgeAcetozi]
 
-The etcd is a key-value store, which stores the configuration data and the condition of the Kubernetes cluster. [@Fricke][@JorgeAcetozi]
+The key-value store stores the configuration data and the condition of the Kubernetes cluster. [@Fricke][@JorgeAcetozi]
 
 The worker node consists of a Kubelet, a cAdvisor, a Kube-Proxy and - as mentioned before - several Pods. 
 
-The Kubelet needs to be used if a new pod should be deployed. Then it gets the action to create all needed containers. For that, it uses Docker to create them. Afterward, it combines some containers into one pod. Containers in one pod are always started and stopped together. This pod will then be deployed on the node, on which the Kubelet is located. [@Fricke][@JorgeAcetozi]
+The Kubelet needs to be used if a new pod should be deployed. Then it gets the action to create all needed containers. For that, it uses a container engine like Docker to create them. Afterward, it combines some containers into one pod. Containers in one pod are always started and stopped together. This pod will then be deployed on the node, on which the Kubelet is located. [@Fricke][@JorgeAcetozi]
 
 The cAdvisor measures the usage of CPU-resources as well as demanded memory on its node. That information is forwarded to the master node. Based on those measurements, the scheduler allocates the pods within the cluster to ensure the best possible allocation of resources. [@Fricke][@JorgeAcetozi]
 
 The kube-proxy is a daemon that runs as a simple network proxy to provide the possibility of communicating to that node within the cluster.[@Fricke][@JorgeAcetozi]
 
-With this architecture, Kubernetes enables all the factors that are missing in a local deployment of Docker containers.
+With this architecture, Kubernetes enables all the factors that are missing in a local deployment of containers.
 
-First, the codebase of the deployment is given as YAML or JSON file and the container in Dockerfile. This way, source control of all the necessary code can be done using git, for example. [@MichaelD.Elder]
+First, the codebase of the deployment is given as YAML or JSON file and the container in a file specified by the container engine, e.g. a Dockerfile. This way, source control of all the necessary code can be done using git, for example. [@MichaelD.Elder]
 
 Also, the dependencies for one Microservice can be checked easily with the functions *readinessProbe* and *livenessProbe*. While the *readinessProbe* tests whether there are backing services, the *livenessProbe* tests if the backing services are all healthy. In case of a missing or failed Microservice, the appropriate pod is automatically restarted. [@MichaelD.Elder]
 
@@ -236,7 +248,7 @@ Also, disposability is fulfilled because every pod can be destroyed or started q
 
 Last, logs are written to *stdout* and *stderr*  and can be easily accessed. They are not stored and managed as internal files. [@MichaelD.Elder]
 
-This way, Docker and Kubernetes are fulfilling each of the 12-factors, which shows that it is an excellent way to provide Microservices. This is the reason why many big companies decided to use Kubernetes as an enabler for big platforms like Google Cloud to give just one example.
+This way, a container engine like Docker and Kubernetes are fulfilling each of the 12-factors, which shows that it is an excellent way to provide Microservices. This is the reason why many big companies decided to use Kubernetes as an enabler for big platforms like Google Cloud to give just one example.
 
 ## Machine Learning {#sec:ml}
 
@@ -244,9 +256,7 @@ Machine Learning evolves as another leading technology in IT as big players focu
 
 The advantage of Machine Learning compared to traditional software development is, that it eliminates the need to write the code by oneself. Instead, the developer enters some input data to the Machine Learning system. This system then figures out mathematical functions, which describes the given collection of data points best. The process of finding these function is called Machine Learning, and the resulting function is mostly referred to as model.
 
-This results in a system, which continuously improves the more data it is fed with because this leads to a more accurate function. Based on this assumption, Tom Mitchell defined Machine Learning in 1997 as follows[@Mitchell:1997:ML:541177]:
-
-\newtheorem{definition}{Definition}
+This results in a system, which continuously improves the more data it is fed with because this leads to a more accurate function. Based on this assumption, Tom Mitchell defined Machine Learning in 1997 as follows: [@Mitchell:1997:ML:541177]
 
 \begin{definition}
 
@@ -336,11 +346,11 @@ A network of such neurons usually persists out of at least three layers. The fir
 
 ![Simple neural network](images/chapter2/neural_net.png){ width=400px #fig:neural_net}	
 
-On the hidden layer the neurons are combining the inputs and calculating a new value with them. For that three parameters need to be given to generate the output $y$ with the input vector $x$:
+On the hidden layer the neurons are combining the inputs and calculating a new value with them. For that three parameters need to be given to generate the output $y$ with the input vector $x$: [@VictorZhou]
 
 - A weight vector $w$
 - A bias $b$
-- An activation function $f(x)$ [@VictorZhou]
+- An activation function $f(x)$ 
 
 The weight vector is used to weight the different inputs. This means, that each input is multiblied by a weight as can be seen in the equation below [@VictorZhou]
 
@@ -423,7 +433,7 @@ Next, the data need to be understood. For that, first, as much data as possible 
 
 In the example, there are far too little data for a real model, and much more would be needed in a real project. However, even in this small dataset, some problems can be detected. The first one is the missing entry for the second object in the column "year built" as well as for the last object in the column "# of rooms". Also, the type of estate is categorical instead of numerical, which could cause problems when training the model.
 
-The next step is probably the one that needs the most effort of the developer - data preparation. First, the the data, which it will use for building the model, needs to be selected. Then the data need to be preprocessed.  [@Wirth2000]
+The next step is probably the one that needs the most time effort of the developer - data preparation. First, the the data, which it will use for building the model, needs to be selected. Then the data need to be preprocessed.  [@Wirth2000]
 
 This preprocessing step includes detecting and removing noisy and redundant data. Noisy data means data that are irrelevant to the chosen business objective. In the given example, the age of the buyer is unnecessary information because it does not change the price of the estate. This circumstance is why this column can be removed. Also, wrongly labeled data should be removed. 
 
@@ -464,7 +474,7 @@ In the end the example above could look like this:
 
 This data set has then to be splitted into three different sets - training, validation and testing. This is done to ensure that the model does not overfit to the training data. The model will be trained with the training set. Then the hyperparameters, which are used to improve the model with some different parameters dependent on the used model, are tuned with the help of the validation set. The test set is used to test the models actual performance at the end.
 
-After this, the next step is modeling. For this, first, a training technique, as well as a basic model, has to be selected. Usually, different models are tested several times, so that the best model can be chosen in the end. This model will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents, for example, over- and underfitting the model with the training data. [@Wirth2000]
+After this, the next step is the development of the model. For this, first, a training technique, as well as a pretrained model, has to be selected. Usually, different models are tested several times, so that the best model can be chosen in the end. During this progress the models architecture needs to be adjusted, parameters needs to be tuned and the results have to be evaluated several times. Often, there are already models with pretrained weights for specific use cases existing. These can be adjusted by tuning the parameters and optimizing its architecture. Then they can get fitted with the existing use-case-specific data and tested. The model, that is considered to fit the best, will then be used to train it with the training set. As already mentioned above the hyperparameters are then tuned with the help of the validation set. This prevents, for example, over- and underfitting the model with the training data.  [@Wirth2000]
 
 Then the model has to be evaluated with the test set. There are several indicators defined to measure the performance of a model. Ine is the accuracy, which divides the correct classified results by all tested samples:
 
@@ -522,11 +532,11 @@ The new steps described in chapter \ref{sec:aicycle} forces developers to change
 All this changes the way of DevOps, including DevOps specialized on Machine Learning / AI. 
 For this new type of DevOps a holistic approach has to be made to transform existing principles and practices and some may have been created from scratch. Based on the common set of practices and principles of DevOps described in chapter \ref{sec:devops} in this chapter these principles will be adopted and extended for applying it to AI development with the help of the new technologies presented in chapter \ref{sec:ms12}.
 
-First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are the following:
+First, DevOps for Machine Learning has to follow the principles named in chapter \ref{sec:devops}. To repeat, these are the following: [@Sharma2017]
 
 - Develop and test against production-like systems
 - Deploy with repeatable processes
-- Amplify a feedback loop [@Sharma2017]
+- Amplify a feedback loop 
 
 The four stages - steer, develop, deploy, and operate - also apply for Machine Learning. To adopt existing principles, these stages will be passed through, and necessary adoptions or additions will be made.
 
@@ -540,11 +550,9 @@ The first is in the roles of the people who handle these steps. This profound in
 
 A second difference is a need for a tool to visualize these data. For that, the data scientists or analysts need skills for creating visualized data as quickly as possible. A widespread tool for this is *Jupyter Notebooks*, with which an easy preparation and plotting of the data are possible with the help of Python.
 
-However, most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is split into two stages - data preparation and the building of the model. Also, the code is not the only input the developers have to deal with, but there is data as a second, valuable input. [@Dillon] This leads to several differences in the practices and tools defined for this stage.
+However, most differences are in the **development and testing** stage. While in traditional software development this step consists mainly of coding and testing the single components with unit tests as well as integration tests, in ML development this stage is split into two stages - data preparation and the building of the model. Also, the code is not the only input the developers have to deal with, but there is data as a second, valuable input. [@Dillon] The development of the model itself is also slightly different from traditional development. There are different learning algorithms existing and for every use case other algorithms fit the best. So the developer has to test and compare different algorithms and adjust the belonging parameters to figure out which model fits the best. Also, there are usually already models existing with pretrained weights. They can serve as basic model, on which the developer can build on. However, these models have to be adjsuted, retrained and even the architecture might have to be changed to get the best results. All this leads to several differences in the practices and tools defined for this stage.
 
 Starting with the *Collaborative development* and *Continuous integration*, the main point is to integrate and share not only the code between all participators but also the data. Usual source control software like git sets limitations to the file size and are not designed for handling other data than code. This results in need of another tool to handle big data samples when developing an AI product so that developers can share and integrate all of their work and not only the code. This is also necessary to share the results with the client and keep the product reproducible. 
-
-A solution to this problem could be Quilt or Git \acl{LFS} (\acs{LFS}), which are designed for storing audio samples, graphics, datasets, and videos. 
 
 For Machine Learning, also IDEs, programming languages and paradigms have to be extended, or new ones need to be created to visualize and especially prepare data. This includes, for example, possibilities to label images or videos and preprocess the data. Currently, for this, different tools have to be used. As long as there is no standardized way for labeling data, teams should agree on one tool for guaranteeing the correctness and uniformity.
 
@@ -558,7 +566,7 @@ Additionally, if the output is correct for one input that does not give any info
 
 For this approach, the data needs to be split automatically into a training and a test set before training the model. After the training step is done, the test set is used to compare the predicted outcome with the real value. Applying this approach can give valuable insights into the model, which can be expressed as different indicators. Thore are explained in chapter \ref{sec:aicycle}.
 
-During the modeling stage, another important difference occurs: The urgent need for resources, especially of computing units and memory. In opposite to traditional Software development, this use does not equal the need for resources while running the application in production, but it needs far more resources to train the model. Usually, \acs{GPU}s are used to build models because their design fits the need for model training better. However, \acs{GPU}s are not very common in traditional Software development, so teams would have to purchase one just for this purpose. Additionally, these resources are only needed during the modeling stage, and the rest of the time, they would be unused, which is a waste of resources. This is where the advantages of Cloud Computing can be utilized. With its capability of flexible resource allocation, the resources can be used more efficiently, and money can be saved because of the pay-per-use model of Cloud Computing. This approach of saving cost and resources through training the model within a Cloud can be called *Dynamical resource demand*.
+During the modeling stage, another important difference occurs: The urgent need for resources, especially of computing units and memory. In opposite to traditional Software development, this use does not equal the need for resources while running the application in production, but it needs far more resources to train the model. Usually, \acs{GPU}s or specialized Hardware are used to build models because their design fits the need for model training better. However, these hardware resources are not very common in traditional Software development, so teams would have to purchase one just for this purpose. Additionally, these resources are only needed during the modeling stage, and the rest of the time, they would be unused, which is a waste of resources. This is where the advantages of Cloud Computing can be utilized. With its capability of flexible resource allocation, the resources can be used more efficiently, and money can be saved because of the pay-per-use model of Cloud Computing. This approach of saving cost and resources through training the model within a Cloud can be called *Dynamical resource demand*.
 
 The next stage is the **delivery**, in which the practice *Continuous delivery* applies. This practice deals with the automation of the deployment of the software to different environments. This demand also applies to Machine Learning development. Only the implementation differs slightly. In common Software development, the trigger for starting the building and deployment process is usually a newly committed code in the master repository. In Machine Learning, it could also be necessary or recommended to rebuilt and deploy the model when new or changed data occurs, which forces a second trigger. Additionally, the built of the project requires more steps than just compiling the code like training the model, which takes some time. This is described in more detail below when it comes to delivery pipelines.
 
@@ -572,7 +580,7 @@ Another critical difference is the roles of developing people. While in traditio
 
 An essential part of a solution is to provide an easy-to-use delivery pipeline for the Data Scientists, which combines every step of the development and automates all the operations as far as possible so that the Data Scientist can focus on his main work. 
 
-An example draft of such a pipeline can be seen in figure {fig:devopsaipipeline}.
+An example draft of such a pipeline can be seen in figure \ref{fig:devopsaipipeline}.
 
 ![Example devops pipeline](images/chapter2/devops_ai_pipeline.png){ width=500px #fig:devops_architecture}
 

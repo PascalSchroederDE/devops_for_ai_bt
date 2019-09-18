@@ -25,9 +25,17 @@ In this work, all the progresses that have led to this transformation will be ex
 
 ## Cloud Computing  {#sec:cloud}
 
+\newtheorem{definition}{Definition}
+
 In 2009 the university of Berkeley published a paper, in which the potential of Cloud Computing has been discussed. In doing so Cloud Computing has been defined as both - the applications delivered as services over the Internet, referred to as \acl{SaaS} (\acs{SaaS}), as well as the hardware and the systems software in the datacenters that provide those services. [@ArmbrustA.FoxandR.Griffith2009]
 
-Except for SaaS there are two more service models for Cloud Computing defined by the National Institute of Standards and Technology defined: \acl{PaaS} (\acs{PaaS}) and \acl{IaaS} (\acs{IaaS}). In case of PaaS the provider controls the whole infrastructure including servers, storage and operating system and offers the customer to deploy its applications on this infrastructure. IaaS means the provisioning of storage, networks and all of the resources, so that the customer can deploy its software, including the operating system and application. [@Mell2011]
+In 2011 the National Institute of Standards and Technology delivered a more detailed definition of Cloud computing: [@Mell2011]
+
+\begin{definition}
+Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction. 
+\end{definition}
+
+In progress of the definition, except for SaaS, there were two more service models for Cloud Computing defined: \acl{PaaS} (\acs{PaaS}) and \acl{IaaS} (\acs{IaaS}). In case of PaaS the provider controls the whole infrastructure including servers, storage and operating system and offers the customer to deploy its applications on this infrastructure. IaaS means the provisioning of storage, networks and all of the resources, so that the customer can deploy its software, including the operating system and application. [@Mell2011]
 
 SaaS in general has advantages for both end-users as well as service providers. While the service provider can install, maintain and control their services more easily, the user can access the service anytime, anywhere, collaborate more easily and keep their data inside the infrastructure. [@ArmbrustA.FoxandR.Griffith2009]
 
@@ -47,7 +55,7 @@ For realizing those advantages the different approaches of IaaS with a cloud spe
 
 But this solution still forced the User to manage their environment themselves. Especially for simpler applications, it is desirable to have an easier path to deploy their applications to the Cloud.
 
-Because of these desires a new service model has been established, which is known as \acl{FaaS} (\acs{FaaS}) or serverless computing, has been established. Even though there are still servers being used for the computation tasks the user does not have to care about any tasks on serverside and can focus on writing the code. Serverless services must scale and bill automatically based on usage without any need for explicit provisioning. [@Jonas2019]
+Because of these desires a new service model, which is known as \acl{FaaS} (\acs{FaaS}) or serverless computing, has been established. Even though there are still servers being used for the computation tasks, these are happening intrantransparently on serverside and the user can focus on writing the code to describe what to do instead of defining how to do this. Serverless services must scale and bill automatically based on usage without any need for explicit provisioning. [@Jonas2019]
 
 Amazon provisioned such a solution in 2015 called AWS Lambda. Lambda offered the possibility to simply write the code to be executed and leaves all server provisioning and administration tasks to the cloud provider. [@Amazon]
 
