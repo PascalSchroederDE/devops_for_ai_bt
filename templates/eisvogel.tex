@@ -1,7 +1,7 @@
 %%
 % Copyright (c) 2017, Pascal Wagler;  
 % Copyright (c) 2014--2017, John MacFarlane
-% Modifications by Paul Bauriegel 2018 and Lars Dittert 2019
+% Modifications by Paul Bauriegel 2018, Lars Dittert and Pascal Schroeder 2019
 % 
 % All rights reserved.
 % 
@@ -758,10 +758,13 @@ $endif$
 $if(abstract)$
 \begingroup
 \pagenumbering{gobble}
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-1cm}}
+\renewcommand*{\chapterheadendvskip}{\vspace{0cm}}
 \let\clearpage\relax
 \pagestyle{empty}
 \addchap*{Abstract - English}
 $abstract$
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
 \addchap*{Abstrakt - Deutsch}
 $abstract-de$
 \endgroup

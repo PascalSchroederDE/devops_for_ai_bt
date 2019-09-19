@@ -47,7 +47,19 @@ logo: images/dhbw.png
 logoIBM: images/logo.png
 acs: true
 abstract: |
-   Abstract
+   Since people started manufacturing products on a mass scale, the goal is to increase the efficiency of this manufacturing process. One early concept was *Lean manufacturing*, which tries to reduce the waste of resources and time of a production cycle. [@HOLWEG2007420] With the upcoming use of software as a commercial product in the 1970s [@Pugh:2002:OSB:513126.513131] the desire came on to create best practices for developing and operating those in a similar way - this is now called DevOps.
+   
+   Throughout the last years, other technologies like Cloud and \acl{AI} (\acs{AI}) emerged and forced changes of the existing development and operation paradigms.
+   
+   In this work, DevOps as well as the emerging technologies of Cloud and AI will be explained. Then, existing DevOps principles will be adapted and extended to apply them to AI with the help of Cloud technologies. Two exemplary implementations of a pipeline following those principles to build AI products will be shown
+   
+   In the end of this work, those will be compared, and the adaption of DevOps will be discussed.
 abstract-de: |
-    Abstrakt
+   Seitdem die Menschen mit der massenhaften Herstellung von Produkten  begonnen haben, ist es das Ziel, die Effizienz des Herstellungsprozesses zu steigern. Ein frühes Konzept war *Lean Manufacturing*, das versucht, die Verschwendung von Zeit und Ressourcen bei der Produktion zu reduzieren. [@HOLWEG2007420] Mit dem Einsatz von Software als kommerzielles Produkt in den 1970er Jahren [@Pugh:2002:OSB:513126.513131] entstand der Wunsch, solche auch für Entwicklung und Betrieb von Software Produkten zu entwickeln - dies wird nun DevOps genannt.
+   
+   In den letzten Jahren sind neue Technologien wie Cloud und \acl{AI} (\acs{AI}) entstanden, die zu Veränderungen der Entwicklungs- und Betriebsparadigmen führten.
+   
+   In dieser Arbeit werden DevOps sowie die neuen Technologien Cloud und KI erläutert. Anschließend werden bestehende DevOps-Prinzipien adaptiert und erweitert, um sie mit Hilfe von Cloud-Technologien auf KI anzuwenden. Dann werden zwei exemplarische Implementierungen dieser Prinzipien befolgenden Pipelines zur Entwicklung von KI Produkten gezeigt.
+   
+   Am Ende dieser Arbeit werden diese verglichen und die Adaption von DevOps diskutiert.
 ...

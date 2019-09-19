@@ -4,11 +4,7 @@ In this chapter, the theoretical basis, that is needed for creating DevOps princ
 
 ## DevOps - Development Operations {#sec:devops}
 
-Since people started manufacturing products on a mass scale, the goal is to increase the efficiency of this manufacturing process and reduce waste of time and material. 
-
-One early set of best practices for manufacturing was the concept of *Lean manufacturing*, which tries to reduce the waste of resources and time of a production cycle as much as possible. With the upcoming use of software as a commercial product in the 1970s [@Pugh:2002:OSB:513126.513131] a desire came on to create best practices for developing and operating products the same way as it was already usual in conventional manufacturing. [@HOLWEG2007420]
-
-In 2009 two Flickr employees - John Allspaw and Paul Hammond - presented their way of combining Development and Operations. Inspired by this presentation, a Belgian consultant named Patrick Debois formed a new conference - the "Devopsday" in Ghent. This naming is how the term "DevOps" has been created and prevailed. [@SteveMezak]
+Since the development of software producsts became a commercial field for companies, there has been a continuous effort to improve the quality and efficiency of a product development. One important point of this is to combine the different fields of a products lifecycle for a better coordination. In 2009 two Flickr employees - John Allspaw and Paul Hammond - presented their way of combining Development and Operations. Inspired by this presentation, a Belgian consultant named Patrick Debois formed a new conference - the "Devopsday" in Ghent. This naming is how the term "DevOps" has been created and prevailed. [@SteveMezak]
 
 Since then, DevOps has been established or at least planned in 91% of all companies as an essential way to increase their efficiency of software development. [@SauceLabs] For almost every stage of development, there are principles and practices defined and continuously improved. However, before those practices are explained, further insight into the business need will be given. Among a lot of good literature the book "DevOps for Dummies" by Sanjeev Sharma and Bernie Coyne stood out, which is why this chapter is based to a great extent on knowledge gained from this book. [@Sharma2017]
 
