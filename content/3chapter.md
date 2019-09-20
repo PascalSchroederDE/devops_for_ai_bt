@@ -1,12 +1,12 @@
 # Method - State of the Art {#sec:method}
 
-In chapter \ref{sec:devopsai} DevOps practices have been adopted to the new world of AI development. One essential technology to meet those requirements is a delivery pipeline, which accompanies the entire development and deployment process. In this chapter, first, criteria will be defined to measure the success of a pipeline. Then some exemplary frameworks to create such a pipeline and other basic frameworks necessary for the development process will be introduced before it will be explained how to prepare the necessary environment for such frameworks and how to use them. Last, an exemplary problem will be described, whose solution will be presented in chapter \ref{sec:result}.
+In chapter \ref{sec:devopsai} DevOps practices have been adapted to the new world of AI development. One essential technology to meet those requirements is a delivery pipeline, which accompanies the entire development and deployment process. In this chapter, first, criteria will be defined to measure the success of a pipeline. Then some exemplary frameworks for that purpose and other basic frameworks necessary for the development process will be introduced. Also, it will be explained how to prepare the necessary environment for such frameworks and how to use them. Last, an exemplary problem will be described, whose solution will be presented in chapter \ref{sec:result}.
 
 ## Catalogue of criteria {#sec:catalogue}
 
-For defining the criteria to measure the success of a delivery pipeline framework for AI development, this chapter will be oriented on the adopted and extended practices described in chapter \ref{sec:devopsai}. 
+For defining the criteria to measure the success of a delivery pipeline framework for AI development, this chapter will be oriented on the adapted and extended practices described in chapter \ref{sec:devopsai}. 
 
-First, it is important to mention that people who are dealing with these enormous amounts of data are usually other people with different skills than those who are usually dealing with IT operations. The core responsibilities of data scientists are not focused on the delivery and operation of Software. This is why a framework for building such a pipeline should be easy to use and standardized as far as possible. The Data Scientists should have an easy time to set up the development environment, get familiar to the framework, and learn about the companies culture and working methods. This is why the first criteria to evaluate the different approaches is *simplicity*.
+First, it is important to mention that people who are dealing with these enormous amounts of data are usually other people with different skills than those who are usually dealing with IT operations. The core responsibilities of data scientists are not focused on the delivery and operation of Software. This is why a framework for building such a pipeline should be easy to use and standardized as far as possible. This is why the first criteria to evaluate the different approaches is *simplicity*.
 
 Besides an easy way to use such a delivery pipeline tool, it is also necessary that it is adaptable to other frameworks and technologies. This should be one of the main objectives, because technologies are changing quickly, especially in the field of AI. What is the most common tool nowadays can be completely outdated in a few weeks when an innovation breaks through, because all this is still a new field of research. This is why tools for handling these technologies should be as *adaptable as possible* so that only small adjustments are necessary to change the basic framework or similar.
 
@@ -31,9 +31,9 @@ Last, a concrete use case will be described, which will be implemented in chapte
 
 ### Tensorflow
 
-To perform modern Deep Learning operations, there is no need to program a complete Neural Network on his own. There are several frameworks available; many of them are open-sourced. One of the most popular ones is Tensorflow.
+To perform modern Deep Learning operations, there is no need to program a complete Neural Network from scratch. There are several frameworks available; many of them are open-sourced. One of the most popular ones is Tensorflow.
 
-Developed by Google as the successor of DistBelief, it had been open-sourced in 2015. Tensorflow is a large scale Machine Learning framework. Compared to DistBelief, the first generation of Googles ML frameworks, it offers a more flexible platform with better performance, which also supports a broader range of models and heterogeneous hardware platforms, so that it supports mobile, \acs{GPU}s or clusters among others. This makes Tensorflow to one system for all scales, which leads to significantly fewer maintenance burdens in the operation cycle.
+Developed by Google as the successor of DistBelief, it has been open-sourced in 2015. Tensorflow is a large scale Machine Learning framework. Compared to DistBelief, the first generation of Googles ML frameworks, it offers a more flexible platform with better performance, which also supports a broader range of models and heterogeneous hardware platforms, so that it supports mobile devices, \acs{GPU}s or clusters among others. This makes Tensorflow to one system for all scales, which leads to significantly fewer maintenance burdens in the operation cycle.
 Additionally, TensorFlow achieves parallelism through replication and parallel execution, which raises the performance significantly. [@45166]
 
 TensorFlow supports a very diverse range of tasks, starting with the inference of computer vision models on mobile phones to large-scale training of deep neural networks with hundreds of billions of parameters on hundreds of billions example records using many hundreds of machines. [@45166]
@@ -88,13 +88,13 @@ This development process enables the user to quickly build and train neural netw
 
 As mentioned in chapter \ref{sec:aicycle} Machine Learning development consists of more than just building a model. It also includes preparing and cleaning data, testing, scaling, and deploying the model. Automation of those steps would lead to significant performance growth.
 
-However, the different steps of Machine Learning often require entirely different environments, which complicate the portability. Additionally, the used hardware differs a lot from step to step, which is the reason why scalability is an eminent point of efficient ML. All this makes the automation process much harder.
+The different steps of Machine Learning often require entirely different environments, which complicate the portability. Additionally, the used hardware differs a lot from step to step, which is the reason why scalability is an eminent point of efficient ML. All this makes the automation process much harder.
 
 These problems can be solved by using Kubernetes. The reliability and performance that Kubernetes offers fit Machine Learning development perfectly, so the community started to utilize these benefits. 
 
 In doing so there are several challenges that need to be faced while trying to bring Machine Learning applications to Kubernetes - the creation of the deployments as well as the managing of the services introduced huge barriers of complexity for data scientists, whose main work should be working with the data instead of caring about the delivery process. [@Kubeflow]
 
-For facing these challenged Kubeflow has been created in 2017. Kubeflow is an open-source platform for Machine Learning to enable composable, postable and scalable ML on Kubernetes. The features offered by Kubeflow include a Jupyter Hub for collaborative and interactive training, a TensorFlow training resource and serving deployment as well as delivery pipelines with Argo Workflows. [@Kubeflow]
+For facing these challenges Kubeflow has been created in 2017. Kubeflow is an open-source platform for Machine Learning to enable composable, postable and scalable ML on Kubernetes. The features offered by Kubeflow include a Jupyter Hub for collaborative and interactive training, a TensorFlow training resource and serving deployment as well as delivery pipelines with Argo Workflows. [@Kubeflow]
 
 Argo Workflows is an open-source container-native workflow engine to orchestrate parallel jobs on Kubernetes. With Argo, workflows can be defined. Each step of such a workflow is designed as a container. This way Argo can run CI/CD pipelines on Kubernetes. [@Argoproj]
 
@@ -152,18 +152,18 @@ This extension offers the user to create a team workspace which enables the poss
 
 The Azure Machine Learning service also provides a Python SDK, with which the user can start training his model locally and then scale out to the Cloud. [@MicrosoftDocsa]
 
-With building a pipeline with the Azure ML service, it allows the user to automate the end-to-end ML process in the Cloud and reuse components. Also, the user can use different compute resources in each step, which increases the efficiency and lowers the cost of ML tasks, because not every step in the ML workflow requires the same amount of resources. [@PraneetSinghSolanki]
+With building a pipeline with the Azure ML service, it allows the user to automate the end-to-end ML process in the Cloud and reuse components. Also, the user can use different compute resources in each step, which increases the efficiency and lowers the cost of ML tasks. [@PraneetSinghSolanki]
 
 An example of how this service can be used will be described in chapter \ref{sec:azurepip}.
 
 ## Project objective and conditions {#sec:objective}
 
-In this work, two example pipelines will be built and compared. For this, a sample model will be built, and it will be conducted through every step of the AI development lifecycle will be conducted. The objective is to build a pipeline fulfilling every target and principle described in chapter \ref{sec:devopsai}.
+In this work, two example pipelines will be built and compared. For this, a sample model will be built, and it will be conducted through every step of the AI development lifecycle. The objective is to build a pipeline fulfilling every target and principle described in chapter \ref{sec:devopsai}.
 
 For this, a standard AI dataset for benchmarking will be used. Such datasets can be identified as the *Hello World* for AI. The used dataset in this work is called Fashion-MNIST. The advantage to the default MNIST dataset is the slightly higher complexity.It has been put together by Zalando Research and contains 60.000 training and 10.000 testing images of different garments with a size of 28x28 pixel. [@Research2017]. 
 This version has been used to manipulate the data for preparing a more realistic dataset with noises and faults, which have to be removed. This way, all the steps of AI development can be run through realistically. [@Xiao2017FashionMNISTAN]
 
-For this, first, the training and testing datasets have been read and merged. This an all following code snippets are written in Python.
+For this, first, the training and testing datasets have been read and merged.
 
 \begin{lstlisting}[caption={Python: Load data}, captionpos=b]
 train_data = pd.read_csv('data/fashion-mnist_train.csv')
@@ -211,27 +211,13 @@ This dataset is then stored as a CSV and will be used for the example implementa
 
 ## Creating the necessary environment {#sec:environment}
 
-To use Cloud integrated solutions, the installation and access process can be done quickly by clicking through the Cloud console. However, the local installation of an open-source tool like Kubeflow can be more complicated.
+To use Cloud integrated solutions, the installation and access process can be done quickly by clicking through the Cloud console. The local installation of an open-source tool like Kubeflow can be more complicated.
 
 Another challenge can be to create a local Kubernetes cluster to test the development processes on a local system first.
 
 For the described project the available system was a Linux Ubuntu running on an Intel NUC with 32GB of memory and a 2GHz Quadcore Intel CPU. Additionally an nVidia Titan RTX with 12GB memory has been plugged in to the system and nVidia CUDA has been installed to enable GPU support for the model training.
 
 To compare different approaches, another setup has been created on the Microsoft Azure Cloud. For both approaches the setup of the environments and necessary steps to begin the creation of the pipelines will be described in this chapter.
-
-### Azure Machine Learning service {#sec:azuremlservice}
-
-The Azure Machine Learning service is provided on the Microsoft Azure Cloud. For accessing the Azure Cloud, a confirmed Microsoft account is needed. Then the Cloud can be accessed via [portal.azure.com](https://portal.azure.com).
-
-First, a resource group has to be created. For that the *Resource groups* button has to be selected on the left sidebar. Then a new group can be added by clicking on *Add*. In the upcoming form, a name has to be given as well as a subscription model has to be chosen. For non-paying users, the only possible subscription model is the free model. Additionally, a region can be chosen.
-
-Next, a resource has to be created with the *Create Resource* button on the left side panel. There a Machine Learning workspace has to be created. For that, it can either be navigated to the category *AI + Machine Learning* or directly be searched for *"Machine Learning*" via the search bar. Then the *Machine Learning service workspace* has to be selected.
-
-On the next page, this workspace can then be created by clicking *Create*. Then a name has to be given and the region, as well as a subscription model, has to be chosen the same way as for creating a resource group. Additionally, the newly created resource group has to be selected.
-
-This new resource can then be accessed via the *All resources* page, which can be found on the left side panel. There the service appears with the chosen name. When clicking on the service, a new page with a navigation panel is loaded. To create a visual interface for a Machine Learning pipeline, the *Visual Interface* button has to be clicked, which can be found in the category *Authoring (Preview)*. Then this interface can be launched by pressing *Launch visual interface* on the appearing page.
-
-After that, the project is successfully prepared for creating a pipeline with the Azure visual interface.
 
 ### Minikube {#sec:minikube}
 
@@ -243,7 +229,7 @@ The advantage of a cluster running on the VM is the isolated environment. Additi
 
 An advantage of microk8s compared to Minikube is the easy possibility to configure the cluster for the use of GPU with a single command. In case of Minikube, the Docker environment has to be changed for doing so.
 
-However, microk8s is still in development and unstable, which lead to some trouble with deploying Kubeflow on it during the implementation process of this work. This is the reason why Minikube has been used to realize the local creation of a cluster.
+Microk8s is still in development and unstable, which lead to some trouble with deploying Kubeflow on it during the implementation process of this work. This is the reason why Minikube has been used to realize the local creation of a cluster.
 
 For doing so, first, Minikube has to be downloaded. This can be done on Linux Ubuntu by executing the following commands:
 
@@ -294,7 +280,7 @@ With this setup, Minikube can run on a local system similar to a Kubernetes Clou
 
 ### Kubeflow {#sec:kubeflow}
 
-No matter if using a local Kubernetes cluster or one on Cloud Kubeflow needs to be deployed on the cluster. For the purposes described in chapter \{sec:usecase} only the pipeline part of Kubeflow is needed, which is why in this chapter, only the installation of this part will be explained.
+No matter if using a local Kubernetes cluster or one on Cloud Kubeflow needs to be deployed on the cluster. For the purposes described in chapter \{sec:usecase} only the pipeline part of Kubeflow is needed. In this chapter, only the installation of this part will be explained.
 
 This installation can be done by applying the YAML manifest provided inside the Kubeflow Github repository to the Kubernetes cluster. For that, first, the wished version needs to be defined before it can get applied
 
@@ -309,10 +295,24 @@ Then the namespace is created, and every service and deployment gets installed a
 $ kubectl get pods -n kubeflow
 ```
 
-As soon as every pod is up and running, the port of the pipeline \acs{UI} (\acl{UI}) needs to be forwarded:
+As soon as every pod is up and running, the port \acs{UI} (\acl{UI}) needs to be forwarded:
 
 ```
 $ kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
 ```
 
 Finally, the Kubeflow UI can be accessed by opening `localhost:8080` on the browser. Now pipelines can be uploaded, and experiments with them can be executed on Kubeflow.
+
+### Azure Machine Learning service {#sec:azuremlservice}
+
+The Azure Machine Learning service is provided on the Microsoft Azure Cloud. For accessing the Azure Cloud, a confirmed Microsoft account is needed. Then the Cloud can be accessed via [portal.azure.com](https://portal.azure.com).
+
+First, a resource group has to be created. For that the *Resource groups* button has to be selected on the left sidebar. Then a new group can be added by clicking on *Add*. In the upcoming form, a name has to be given as well as a subscription model has to be chosen. For non-paying users, the only possible subscription model is the free model. Additionally, a region can be chosen.
+
+Next, a resource has to be created with the *Create Resource* button on the left side panel. There a Machine Learning workspace has to be created. For that, it can either be navigated to the category *AI + Machine Learning* or directly be searched for *"Machine Learning*" via the search bar. Then the *Machine Learning service workspace* has to be selected.
+
+On the next page, this workspace can then be created by clicking *Create*. Then a name has to be given and the region, as well as a subscription model, has to be chosen the same way as for creating a resource group. Additionally, the newly created resource group has to be selected.
+
+This new resource can then be accessed via the *All resources* page, which can be found on the left side panel. There the service appears with the chosen name. When clicking on the service, a new page with a navigation panel is loaded. To create a visual interface for a Machine Learning pipeline, the *Visual Interface* button has to be clicked, which can be found in the category *Authoring (Preview)*. Then this interface can be launched by pressing *Launch visual interface* on the appearing page.
+
+After that, the project is successfully prepared for creating a pipeline with the Azure visual interface.

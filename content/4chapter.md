@@ -27,15 +27,15 @@ First, the columns, with which the work will be done, has to be chosen. With the
 
 ![Microsoft Azure Machine Learning Service column selection](images/chapter4/azure_column_select.png){ width=500px #fig:selcols}
 
-In this case, this is the cleaning of the data. For this, there is a corresponding component in the category `Data Transformation / Manipulation`. After dragging it to the workspace, it has to be chosen, which columns should be tested for missing data. Because in the used dataset, every single cell is required to have a value, every column is being selected. Then it has to be set, what should happen with faulty rows. There are six options that can be performed: Removing the entire row when a missing value occurs within this row; Removing the entire column when a missing value occurs within this column; Replacing it with the mean, median or mode value or replacing it with a user-specified value.
+In this case, this is the cleaning of the data. For this, there is a corresponding component in the category `Data Transformation / Manipulation`. After dragging it to the workspace, it has to be chosen, which columns should be tested for missing data. Because in the used dataset, every single cell is required to have a value, every column is being selected. Then it has to be configured, what should happen with faulty rows. There are six options that can be performed: Removing the entire row when a missing value occurs within this row; Removing the entire column when a missing value occurs within this column; Replacing it with the mean, median or mode value or replacing it with a user-specified value.
 
-There are not many missing values within this huge dataset so that the removing rows influence the overall performance of the creating model noticeably. Because of this and for simplicity reasons, the method to remove rows with missing values has been chosen.
+There are not many missing values within this huge dataset so that the removing rows do not influence the overall performance of the creating model noticeably. Because of this and for simplicity reasons, the method to remove rows with missing values has been chosen.
 
 Next, the data need to be normalized, which means that the values of the single pixels, which lay between 0 and 255, should be transformed into a value between 0 and 1. This can be done with the `Normalize Data` component. There the *MinMax*  transformation method has been chosen, which has been described in chapter \ref{sec:aicycle}.
 
 Other possibilities would have been Zscore, Logistic, LogNormal, or TanH. These methods are explained in the according Microsoft Documentation. [@MicrosoftDocsb]
 
-After that, the data has been prepared. However, the features can be improved with Feature Engineering. One example is to encode the categories so that they are given as numbers instead of strings. For that, there is no specific component existing, so it can only be done by writing and adding a Python script. The Python Script component can get three inputs - two datasets and a script bundle as *zip*  for providing necessary methods. The script to encode the data can look as follows:
+After that, the data has been prepared. The features can be improved with Feature Engineering. One example is to encode the categories so that they are given as numbers instead of strings. For that, there is no specific component existing, so it can only be done by writing and adding a Python script. The Python Script component can get three inputs - two datasets and a script bundle as *zip*  for providing necessary methods. The script to encode the data can look as follows:
 
 \begin{lstlisting}[caption={Python: Label encoder for Azure ML service}, captionpos=b]
 import pandas as pd
@@ -43,10 +43,8 @@ from sklearn import preprocessing
 
 def azureml_main(df = None, df2 = None):
     label_encoder = preprocessing.LabelEncoder() 
-
     df['label']=label_encoder.fit_transform(df['label']) 
-    df['label'].unique() 
-        
+    df['label'].unique()   
     return df
 \end{lstlisting}
 
@@ -54,7 +52,7 @@ The encoding is being done with the help of Scikit-Learn and assigns every categ
 
 Now the data needs to be split to a training dataset and a testing dataset. The `Split Data` component provides this functionality and only needs to be connected to a data frame as input. Then the size of the training set can be configured, and it gives both datasets as output - training as well as testing.
 
-After that, every necessary step has been completed to start the training of the model. However, for this, a model needs to be built before. Because this model-building needs no input, it can be done parallel to preparing the data. For the model building, there are several components with different models. For this image classification task, a `Multiclass Neural Network` is the component to use. The reason for this are the ten different image categories the pictures should be assigned to. However, the use of such a predefined model restricts the user to one specific architecure, used framework and pretrained weights and limits the user in his flexibility.
+After that, every necessary step has been completed to start the training of the model. For this, a model needs to be built before. Because this model-building needs no input, it can be done parallel to preparing the data. For the model building, there are several components with different models. For this image classification task, a `Multiclass Neural Network` is the component to use. The reason for this are the ten different image categories the pictures should be assigned to. The use of such a predefined model restricts the user to one specific architecure, used framework and pretrained weights and limits the user in his flexibility.
 
 There, the number of hidden nodes, the learning rate, the number of learning iterations, and the momentum can be configured. For this example, 128 hidden layers have been used, and 100 iterations have been made. The learning rate, so the size of the step taken at each iteration, has been set to 0.1. The momentum, which is a weight to apply to nodes, has been set to 0 because there are no previous iterations to take this information from.
 
@@ -100,17 +98,12 @@ def main():
     parser = argparse.ArgumentParser(description="Preprocessing")
     [...]
     args = parser.parse_args()
-
+    
     df = load_data(args.dataset_location)
-    
     df = unify_datatypes(df)
-    
     df = remove_mis_values(df)
-    
     df = remove_faulty_values(df)
-    
     df = normalize_values(df)
-    
     df.to_csv(args.output, index=False)
     
     write_file("/prepdf_output.txt", args.output)
@@ -139,7 +132,7 @@ def remove_mis_values(dataset):
     return dataset
 \end{lstlisting}
 
-Also, rows with faulty values have to be removed. For this, the rows have to be removed, in which the label does not equal one of the valid categories. These have been defined in the `CATEGORIES` array. This is done by only keeping the rows which label is included in this array::
+Also, rows with faulty values have to be removed. Faulty values can be recofnized as those label cells that does not equal one of the valid categories. These have been defined in the `CATEGORIES` array. This is done by only keeping the rows which label is included in this array::
 
 \begin{lstlisting}[caption={Python: Remove rows with faulty values}, captionpos=b]
 CATEGORIES = ['top', 'trouser', 'pullover', 'dress', 'coat', 'sandal', 'shirt', 'sneaker', 'bag', 'ankle_boot']
@@ -149,7 +142,7 @@ def remove_faulty_values(dataset):
     return dataset
 \end{lstlisting}
 
-The last step is to normalize the data. For this over every cell excluding the label cell is being iterrated and every value is divided by 255.0:
+The last step is to normalize the data. For this it is iterated over every cell excluding the label cell every value is divided by 255.0:
 
 \begin{lstlisting}[caption={Python: Normalize values}, captionpos=b]
 def normalize_values(dataset):
@@ -184,9 +177,7 @@ def main():
     args = parser.parse_args()
 
     df = load_data(args.dataset_location)
-    
     df = one_hot_encoding(df)    
-    
     df.to_csv(args.output, index=False)
     
     write_file("/findf_output.txt", args.output)
@@ -215,9 +206,7 @@ def main():
     args = parser.parse_args()
 
     df = load_data(args.dataset_location)
-    
     image_df, label_df = split_label_and_img(df)
-    
     images_train, images_test, labels_train, labels_test = train_test_split(image_df, label_df, test_size=args.test_size, random_state=args.random_state)
     
     images_train.to_csv(args.output_train_img, index=False)
@@ -239,7 +228,6 @@ Then the dataset is being loaded as described above, before the labels and the i
 def split_label_and_img(df):
     images = df.drop([col for col in df.columns if 'pixel' not in col ], axis='columns')
     labels = df.drop([col for col in df.columns if 'pixel' in col ], axis='columns')
-
     return images, labels
 \end{lstlisting}
 
@@ -258,7 +246,6 @@ def main():
     model.compile(optimizer=args.optimizer,
         loss=args.loss,
         metrics=[args.metrics])
-    
     model.save(args.output)
     
     write_file("/model.txt", args.output)
@@ -286,7 +273,6 @@ def main():
     args = parser.parse_args()
 
     model = download_model((args.input_shape_height, args.input_shape_width))
-    
     model.save(args.output)
     
     write_file("/model.txt", args.output)
@@ -304,12 +290,9 @@ def main():
 
     train_img_raw = load_data(args.input_train_img)
     train_label = load_data(args.input_train_label)
-    
     train_img = prepare_image_shape(train_img_raw, args.input_shape_height, args.input_shape_width)
-    
     model = load_model(args.model_location)
     model.fit(train_img, train_label, epochs=args.epochs)
-    
     model.save(args.output)
     
     write_file("/trained_model.txt", args.output)
@@ -334,13 +317,9 @@ def main():
 
     test_img = load_data(args.input_test_img)
     test_label = load_data(args.input_test_label)
-    
     test_img = prepare_image_shape(test_img.values, args.input_shape_height, args.input_shape_width)
-    
     model = load_model(args.model_location)
-    
     loss, acc = model.evaluate(test_img, test_label)
-    
     store_loss_acc(args.output, loss, acc)
     
     write_file("/result.txt", args.output)
@@ -368,17 +347,13 @@ With all these components being created, these need to be packed into a Docker c
 
 \begin{lstlisting}[caption={Dockerfile: Example Dockerfile for components}, captionpos=b]
 FROM Python:3
-
 COPY ./requirements.txt .
-
 RUN pip install -r requirements.txt
-
 COPY ./data_preparation.py .
-
 ENTRYPOINT ["python", "/data_preparation.py"]
 \end{lstlisting}
 
-The base image of the Docker containers is a plain Python image. On top of it, the requirements are getting installed, which includes every necessary library and framework, and then the script itself is being loaded into the Docker container. This file then represents the entrypoint of the container with the possibility to pass additional arguments to it, so that every necessary information can be provided.
+The base image of the Docker containers is a plain Python image, which offers all necessary binaries and libraries to run python scripts. On top of it, the requirements are getting installed, which includes every necessary library and framework, and then the script itself is being loaded into the Docker container. This file then represents the entrypoint of the container with the possibility to pass additional arguments to it, so that every necessary information can be provided.
 
 The Docker container of every component looks similar with the only difference that the components using Tensorflow are not built on a plain Python image, but on the latest Tensorflow image.
 
@@ -439,7 +414,7 @@ After this have been done the created pipeline looks like can be seen in Appendi
 
 The user can then start this pipeline. When starting it, the user can enter or change all the parameters defined above, as can be seen in Appendix \ref{sec:kfparameter}.
 
-Finally, the pipeline gets started, and every single step will be gone through automatically. With the manipulated *Fashion-MNIST* dataset created in chapter \ref{sec:objective} the accuracy can be measured and lays at about 98% while a loss of about 5%. This result can be visualized with an artifact. This artifact file replaces the `file_outputs` field of the defined operation:
+Finally, the pipeline gets started, and every single step will be gone through automatically. With the manipulated *Fashion-MNIST* dataset created in chapter \ref{sec:objective} the accuracy can be measured and lays at about 98% with a loss of about 5%. This result can be visualized with an artifact. This artifact file replaces the `file_outputs` field of the defined operation:
 
 \begin{lstlisting}[caption={Python: Define artifact in pipeline operation}, captionpos=b]
 output_artifact_paths={

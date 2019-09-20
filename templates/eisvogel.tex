@@ -586,11 +586,11 @@ $if(listings)$
   language         = python,
   numbers          = left,
   backgroundcolor  = \color{listing-background},
-  basicstyle       = \color{listing-text-color}\small\ttfamily{}\linespread{1.15}, % print whole listing small
+  basicstyle       = \color{listing-text-color}\small\ttfamily{}\linespread{1.0}, % print whole listing small
   xleftmargin      = 2.7em,
   breaklines       = true,
   frame            = single,
-  framesep         = 0.6mm,
+  framesep         = 0.3mm,
   rulecolor        = \color{listing-rule},
   frameround       = ffff,
   framexleftmargin = 2.5em,
@@ -605,6 +605,7 @@ $if(listings)$
   morecomment      = [s][\color{listing-javadoc-comment}]{/**}{*/},
   stringstyle      = \color{listing-string},
   showstringspaces = false,
+  lineskip		   = 1.25pt,
   escapeinside     = {/*@}{@*/}, % Allow LaTeX inside these special comments
   literate         =
   {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
@@ -797,6 +798,7 @@ $endif$
 $endif$
 % Abbildungsverzeichnis
 $if(graphics)$
+	\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
 	\cleardoublepage
 	\listoffigures
 $endif$
@@ -809,10 +811,14 @@ $endif$
 
 % Quellcodeverzeichnis
 $if(listings)$
+	\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
 	\cleardoublepage
 	\lstlistoflistings
 $endif$
 $if(acs)$
+\begingroup
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
+\renewcommand*{\chapterheadendvskip}{\vspace{0.5cm}}
 \addchap*{Abbreviations}
 \begin{acronym}
 	\acro{AI}[AI]{Artificial Intelligence}
@@ -836,10 +842,13 @@ $if(acs)$
 	\acro{SDK}[SDK]{Software Development Kit}
 	\acro{UI}[UI]{User Interface}
 	\acro{VM}[VM]{Virtual Machine}
+	\acro{YOLO}[YOLO]{You Only Look Once}
 \end{acronym}
+\endgroup
 $endif$
 
 \newpage
+\renewcommand*{\chapterheadstartvskip}{\vspace*{2cm}}
 \pagestyle{fancy}
 \pagenumbering{arabic}
 \setcounter{page}{1}
